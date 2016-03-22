@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.countryclicker.managers.GameManager;
+import com.countryclicker.utils.Constants;
 
 /**
  * Created by Илья on 29.02.2016.
@@ -24,8 +25,9 @@ public class Human extends Actor {
         gameManager = GameManager.getInstance();
         region = new TextureRegion(new Texture(Gdx.files.internal("human.png")), 0, 0, 128, 128);
 
-        setPosition(100, 100);
-        setSize(128, 128);
+        setPosition(Constants.HUMAN_X, Constants.HUMAN_Y);
+        setSize(Constants.HUMAN_WIDTH, Constants.HUMAN_HEIGHT);
+
         moneyPerClick = 1;
 
         setTouchable(Touchable.enabled);
@@ -45,7 +47,7 @@ public class Human extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-       batch.setColor(1, 1, 1, parentAlpha);
+     //  batch.setColor(1, 1, 1, parentAlpha);
        batch.draw(region, getX(), getY(), getWidth(), getHeight());
 
     }

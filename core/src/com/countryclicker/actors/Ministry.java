@@ -1,31 +1,43 @@
 package com.countryclicker.actors;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.managers.GameManager;
 import com.countryclicker.utils.Constants;
+
+import java.awt.Rectangle;
 
 /**
  * Created by Илья on 29.02.2016.
  */
 public class Ministry extends Actor {
-
+//Mechanics part
     private int upgradeCost;
     private int level;
 
-    private int moneyPerMonth;
-    private int firstLevelMoneyPerMonth;
+    private float moneyPerMonth;
+    private int moneyPerMonthOnFirstLevel;
 
     private String name;
 
     private GameManager gameManager;
 
+//Drawable part
+    TextureRegion region;
+    BitmapFont font;
 
-    public Ministry(String name, int firstLevelMoneyPerMonth, int upgradeCost) {
+    public Ministry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, int x, int y) {
         this.name = name;
         this.upgradeCost = upgradeCost;
-        this.firstLevelMoneyPerMonth = firstLevelMoneyPerMonth;
+        this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
         level = 0;
 
         gameManager = GameManager.getInstance();
@@ -39,22 +51,33 @@ public class Ministry extends Actor {
             }
         });
 
+        setUpBounds(x, y);
+        setUpView();
     }
 
+    private void setUpBounds(int x, int y){
+        setPosition(x, y);
+        setSize(Constants.MINISTRY_WIDTH, Constants.MINISTRY_HEIGHT);
+    }
+
+    private void setUpView(){
+        region = new TextureRegion(new Texture(Gdx.files.internal("ministry_background.png")), 0, 0, 50, 50);
+        font = AssetsManager.getInstance().getSkin().getFont(Constants.NAME_OF_MAIN_FONT);
+    }
 
     private void upgrade() {
         level++;
 
-        int oldMoneyPerMonth = moneyPerMonth;
+        float oldMoneyPerMonth = moneyPerMonth;
 
         if (level == 1){
-            moneyPerMonth = firstLevelMoneyPerMonth;
+            moneyPerMonth = moneyPerMonthOnFirstLevel;
+            gameManager.updateMoneyForMonth(moneyPerMonthOnFirstLevel);
         } else {
-            moneyPerMonth *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
-            upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
+            moneyPerMonth *= Constants.MONEY_PER_MONTH_FOR_NEXT_LEVEL_COEF;
+            gameManager.updateMoneyForMonth((int) (moneyPerMonth - oldMoneyPerMonth));
         }
-
-        gameManager.updateMoneyForMonth(moneyPerMonth - oldMoneyPerMonth);
+        upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }
 
     public void onClick() {
@@ -63,8 +86,8 @@ public class Ministry extends Actor {
 
     private void tryUpgrade() {
         if (gameManager.getMoney() >= upgradeCost) {
-            upgrade();
             gameManager.updateMoney(-upgradeCost);
+            upgrade();
         }
     }
 
@@ -73,6 +96,13 @@ public class Ministry extends Actor {
     }
 
     public int getFirstLevelMoneyPerMonth() {
-        return firstLevelMoneyPerMonth;
+        return moneyPerMonthOnFirstLevel;
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        batch.draw(region, getX(), getY(), getWidth(), getHeight());
+        font.draw(batch, "kek", getX() + 15, getY() + 30);
+
     }
 }

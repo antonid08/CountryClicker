@@ -10,7 +10,7 @@ public class GameManager {
     private static GameManager instance;
 
     private int moneyForMonth = 0;
-    private int money = 0;
+    private int money = 10;
 
     public static GameManager getInstance(){
         if (instance == null){
@@ -25,7 +25,7 @@ public class GameManager {
 
     public void updateMoney(int delta){
         money += delta;
-        Gdx.app.log("money", money+"");
+        Gdx.app.log("money", money + "");
     }
 
     public int getMoneyForMonth(){

@@ -39,13 +39,16 @@ public class GameStage extends Stage {
         "Министерство контроля за налогами", "Министерство земли", "Министерство воды",
         "Министерство зла"};
 
-        ministries[0] = new Ministry(names[0],  Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH, Constants.FIRST_MINISTRY_COST);
+        //here we create first ministry with const parameters, then create 5 more and configure their params like "previous min value * coef"
+        ministries[0] = new Ministry(names[0],  Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH, Constants.FIRST_MINISTRY_COST,
+                Constants.FIRST_MINISTRY_X, Constants.FIRST_MINISTRY_Y);
         addActor(ministries[0]);
 
         for (int i = 1; i < ministries.length; i++){
             ministries[i] = new Ministry(names[i], ministries[i - 1].getFirstLevelMoneyPerMonth() *
-                    (int) Constants.MONEY_PER_MONTH_FOR_NEXT_MINISTRY, ministries[i-1].getUpgradeCost()
-                    * (int) Constants.COST_OF_NEXT_MINISTRY_COEF);
+                    (int) Constants.MONEY_PER_MONTH_FOR_NEXT_MINISTRY_COEF, ministries[i-1].getUpgradeCost()
+                    * (int) Constants.COST_OF_NEXT_MINISTRY_COEF, Constants.FIRST_MINISTRY_X,
+                    Constants.FIRST_MINISTRY_Y - i * Constants.MINISTRY_HEIGHT - Constants.DISTANCE_BETWEEN_MINISTRIES * i);
             addActor(ministries[i]);
         }
 
