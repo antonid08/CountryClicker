@@ -41,19 +41,18 @@ public class Constants {
 
     //------------------------------------------------------------End of positions and sizes------------------------------------------------------------//
 
-    public static final float COST_OF_NEXT_MINISTRY_COEF = 11;
-    public static final float MONEY_PER_MONTH_FOR_NEXT_MINISTRY_COEF = 10;
 
     public static final float COST_OF_UPGRADE_MINISTRY_COEF = 1.2f;
 
-    public static final int FIRST_MINISTRY_COST = 10;
-    public static final int FIRST_MINISTRY_MONEY_PER_FIRST_MONTH = 2;
-    public static final int FIRST_MINISTRY_MONEY_FOR_CLICK = 2;
+    public static final int FIRST_MINISTRY_MONEY_PER_FIRST_MONTH = 5;
+    public static final int FIRST_MINISTRY_MONEY_FOR_CLICK = 1;
 
     public static final int START_LENGTH_OF_MONTH = 4; //in seconds
 
+    public static final float MONEY_PER_MONTH_NEXT_MINISTRY_COEF = 8;
+
     public static final String[] NAMES_OF_MINISTRIES = {"MVD", "JKH", "MinZdrav", "Ministerstvo kulturi",
-    "Ministerstvo oboroni", "Ministerstvo obrazovaniya", "Ministerstvo po nalogam",
+    "Ministerstvo oboroni", "Ministerstvo obrazovaniya", "Ministerstvo po nalogam"
     };
 
     public static final int[] COSTS_OF_MINISTRIES = {16, 180, 2000, 22000, 250000, 2750000, 30250000,

@@ -41,7 +41,7 @@ public class GameStage extends Stage {
 
     private void seUpMinistries() {
         clickMinistry = new ClickMinistry(Constants.NAMES_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_MONEY_FOR_CLICK,
-                Constants.FIRST_MINISTRY_COST, Constants.FIRST_MINISTRY_X, Constants.FIRST_MINISTRY_Y);
+                Constants.COSTS_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_X, Constants.FIRST_MINISTRY_Y);
 
         addActor(clickMinistry);
 
@@ -50,11 +50,12 @@ public class GameStage extends Stage {
         ministries[0] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH,
                 Constants.COSTS_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_X,
                 Constants.FIRST_MINISTRY_Y - Constants.MINISTRY_HEIGHT - Constants.DISTANCE_BETWEEN_MINISTRIES);
+        addActor(ministries[0]);
 
         for (int i = 1; i < ministries.length - 1; i++){
-            ministries[i] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i + 1], Constants.COSTS_OF_MINISTRIES[i + 1], ministries[i-1].getUpgradeCost()
-                    * (int) Constants.COST_OF_NEXT_MINISTRY_COEF, Constants.FIRST_MINISTRY_X,
-                    Constants.FIRST_MINISTRY_Y - i * Constants.MINISTRY_HEIGHT - Constants.DISTANCE_BETWEEN_MINISTRIES * i);
+            ministries[i] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i + 1], ministries[i - 1].getFirstLevelMoneyPerMonth()
+                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i + 1], Constants.FIRST_MINISTRY_X,
+                    Constants.FIRST_MINISTRY_Y - (i + 1) * Constants.MINISTRY_HEIGHT - Constants.DISTANCE_BETWEEN_MINISTRIES * (i + 1));
             addActor(ministries[i]);
         }
 

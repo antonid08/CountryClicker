@@ -12,7 +12,7 @@ public class GameManager {
 
     private int moneyForMonth = 0;
     private int moneyPerClick = 1;
-    private int money = 10;
+    private int money = 100000;
 
     private int lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
     private float timeFromPreviousMonth = 0;
@@ -58,8 +58,8 @@ public class GameManager {
         return money;
     }
 
-    public void updateMoneyPerClick(int delta){
-        moneyPerClick += delta;
+    public void setMoneyPerClick(int value){
+        moneyPerClick = value;
     }
 
     public int getMoneyPerClick(){

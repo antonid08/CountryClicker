@@ -25,15 +25,9 @@ public class ClickMinistry extends Ministry{
     void upgrade() {
         level++;
 
-        float oldMoneyPerClick = moneyPerClickOnFirstLevel;
+        moneyPerClick = level * moneyPerClickOnFirstLevel;
 
-        if (level == 1){
-            moneyPerClick = moneyPerClickOnFirstLevel;
-            gameManager.updateMoneyPerClick((int) moneyPerClick);
-        } else {
-            moneyPerClick = level * moneyPerClickOnFirstLevel;
-            gameManager.updateMoneyPerClick((int) (moneyPerClick - oldMoneyPerClick));
-        }
+        gameManager.setMoneyPerClick((int) moneyPerClick);
         upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }
 
