@@ -4,8 +4,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.countryclicker.actors.ClickMinistry;
 import com.countryclicker.actors.Human;
-import com.countryclicker.actors.Ministry;
+import com.countryclicker.actors.MonthMinistry;
 import com.countryclicker.actors.hud.Money;
 import com.countryclicker.actors.hud.MonthProgress;
 import com.countryclicker.utils.Constants;
@@ -23,7 +24,8 @@ public class GameStage extends Stage {
 
     private Human human;
 
-    private Ministry[] ministries;
+    private MonthMinistry[] ministries;
+    private ClickMinistry clickMinistry;
 
     public GameStage(){
         super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
@@ -38,20 +40,19 @@ public class GameStage extends Stage {
 
 
     private void seUpMinistries() {
-        ministries = new Ministry[6];
+        clickMinistry = new ClickMinistry(Constants.NAMES_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_MONEY_FOR_CLICK,
+                Constants.FIRST_MINISTRY_COST, Constants.FIRST_MINISTRY_X, Constants.FIRST_MINISTRY_Y);
 
-        String[] names = {"Ministerstvo vozduha", "Ministerstvo nalogov",
-        "Ministerstvo neba", "Ministerstvo Allaha", "Ministerstvo usov",
-        "Ministerstvo zla"};
+        addActor(clickMinistry);
 
-        //here we create first ministry with const parameters, then create 5 more and configure their params like "previous min value * coef"
-        ministries[0] = new Ministry(names[0],  Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH, Constants.FIRST_MINISTRY_COST,
-                Constants.FIRST_MINISTRY_X, Constants.FIRST_MINISTRY_Y);
-        addActor(ministries[0]);
+        ministries = new MonthMinistry[7];
 
-        for (int i = 1; i < ministries.length; i++){
-            ministries[i] = new Ministry(names[i], ministries[i - 1].getFirstLevelMoneyPerMonth() *
-                    (int) Constants.MONEY_PER_MONTH_FOR_NEXT_MINISTRY_COEF, ministries[i-1].getUpgradeCost()
+        ministries[0] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH,
+                Constants.COSTS_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_X,
+                Constants.FIRST_MINISTRY_Y - Constants.MINISTRY_HEIGHT - Constants.DISTANCE_BETWEEN_MINISTRIES);
+
+        for (int i = 1; i < ministries.length - 1; i++){
+            ministries[i] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i + 1], Constants.COSTS_OF_MINISTRIES[i + 1], ministries[i-1].getUpgradeCost()
                     * (int) Constants.COST_OF_NEXT_MINISTRY_COEF, Constants.FIRST_MINISTRY_X,
                     Constants.FIRST_MINISTRY_Y - i * Constants.MINISTRY_HEIGHT - Constants.DISTANCE_BETWEEN_MINISTRIES * i);
             addActor(ministries[i]);

@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -14,22 +13,18 @@ import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.managers.GameManager;
 import com.countryclicker.utils.Constants;
 
-import java.awt.Rectangle;
-
 /**
- * Created by Илья on 29.02.2016.
+ * Created by Илья on 23.03.2016.
  */
-public class Ministry extends Actor {
+abstract class Ministry extends Actor{
 //Mechanics part
-    private int upgradeCost;
-    private int level;
+    int upgradeCost;
+    int level;
 
-    private float moneyPerMonth;
-    private int moneyPerMonthOnFirstLevel;
+    String name;
+    String description;
 
-    private String name;
-
-    private GameManager gameManager;
+    GameManager gameManager;
 
 //Drawable part
     TextureRegion region;
@@ -39,10 +34,11 @@ public class Ministry extends Actor {
     int infoPartX;
     int infoPartWidth;
 
-    public Ministry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, int x, int y) {
+
+
+    public Ministry(String name, int upgradeCost, int x, int y) {
         this.name = name;
         this.upgradeCost = upgradeCost;
-        this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
         level = 0;
 
         gameManager = GameManager.getInstance();
@@ -75,69 +71,41 @@ public class Ministry extends Actor {
         infoPartX = Constants.INFO_MINISTRY_PART_X;
     }
 
-    private void upgrade() {
-        level++;
-
-        float oldMoneyPerMonth = moneyPerMonth;
-
-        if (level == 1){
-            moneyPerMonth = moneyPerMonthOnFirstLevel;
-            gameManager.updateMoneyForMonth(moneyPerMonthOnFirstLevel);
-        } else {
-            moneyPerMonth *= Constants.MONEY_PER_MONTH_FOR_NEXT_LEVEL_COEF;
-            gameManager.updateMoneyForMonth((int) (moneyPerMonth - oldMoneyPerMonth));
-        }
-        upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
-    }
 
     public void onClick() {
-        tryUpgrade();
-    }
-
-    private void tryUpgrade() {
-        if (gameManager.getMoney() >= upgradeCost) {
+        if (canUpgrade()){
             gameManager.updateMoney(-upgradeCost);
             upgrade();
         }
     }
 
-    public int getUpgradeCost() {
-        return upgradeCost;
+    boolean canUpgrade(){
+        return gameManager.getMoney() >= upgradeCost;
     }
 
-    public int getFirstLevelMoneyPerMonth() {
-        return moneyPerMonthOnFirstLevel;
-    }
+    abstract void upgrade();
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
+        //Main part
         if (level == 0) {
             batch.setColor(Color.GRAY);
-
-            //Main part
-            batch.draw(region, getX(), getY(), getWidth(), getHeight());
-            font.draw(batch, name, getX() + 15, getY() + 30);
-
-            //Info part
-            batch.draw(region, infoPartX, getY(), infoPartWidth, getHeight());
-            batch.draw(update_icon_region, infoPartX + 10, getY() + 15, 20, 20);
-            font.draw(batch, upgradeCost + "$", infoPartX + 60, getY() + 30);
-
-            batch.setColor(1, 1, 1, 1);
-
-            return;
         }
-        //Main part
         batch.draw(region, getX(), getY(), getWidth(), getHeight());
-        font.draw(batch, name, getX() + 15, getY() + 30);
-        font.draw(batch, (int) moneyPerMonth + "$", getX() + 200, getY() + 30);
+        font.draw(batch, name, getX() + 20, getY() + 60);
+        font.draw(batch, description, getX() + 20, getY() + 30);
+
+        batch.setColor(1, 1, 1, 1);
 
         //Info part
+        if (!canUpgrade()){
+            batch.setColor(Color.GRAY);
+        }
+
         batch.draw(region, infoPartX, getY(), infoPartWidth, getHeight());
         batch.draw(update_icon_region, infoPartX + 10, getY() + 15, 20, 20);
         font.draw(batch, upgradeCost + "$", infoPartX + 60, getY() + 30);
-        font.draw(batch, "Lvl " + level, infoPartX + 100, getY() + 40);
+
         batch.setColor(1, 1, 1, 1);
     }
 }

@@ -17,7 +17,6 @@ public class Human extends Actor {
 
     TextureRegion region;
 
-    int moneyPerClick;
 
     GameManager gameManager;
 
@@ -27,8 +26,6 @@ public class Human extends Actor {
 
         setPosition(Constants.HUMAN_X, Constants.HUMAN_Y);
         setSize(Constants.HUMAN_WIDTH, Constants.HUMAN_HEIGHT);
-
-        moneyPerClick = 1;
 
         setTouchable(Touchable.enabled);
         addListener(new InputListener() {
@@ -42,14 +39,13 @@ public class Human extends Actor {
     }
 
     public void onClick(){
-        gameManager.updateMoney(moneyPerClick);
+        gameManager.updateMoney(gameManager.getMoneyPerClick());
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
      //  batch.setColor(1, 1, 1, parentAlpha);
        batch.draw(region, getX(), getY(), getWidth(), getHeight());
-
     }
 
  /*   public Actor hit (float x, float y) {
