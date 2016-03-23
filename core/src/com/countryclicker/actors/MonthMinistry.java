@@ -13,8 +13,8 @@ public class MonthMinistry extends Ministry {
 
     private final int moneyPerMonthOnFirstLevel;
 
-    public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, int x, int y) {
-        super(name, upgradeCost, x, y);
+    public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost) {
+        super(name, upgradeCost);
 
         this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
 

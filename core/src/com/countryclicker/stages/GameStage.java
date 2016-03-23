@@ -1,7 +1,13 @@
 package com.countryclicker.stages;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.countryclicker.actors.ClickMinistry;
@@ -27,38 +33,69 @@ public class GameStage extends Stage {
     private MonthMinistry[] ministries;
     private ClickMinistry clickMinistry;
 
+    private ScrollPane scroller;
+    private Table ministriesTable;
+
     public GameStage(){
         super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
                 new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
+
+        seUpMinistries();
+        setUpScroller();
 
         setUpMoney();
         setUpMonthProgress();
 
         setUpHuman();
-        seUpMinistries();
     }
 
 
     private void seUpMinistries() {
         clickMinistry = new ClickMinistry(Constants.NAMES_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_MONEY_FOR_CLICK,
-                Constants.COSTS_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_X, Constants.FIRST_MINISTRY_Y);
+                Constants.COSTS_OF_MINISTRIES[0]);
 
-        addActor(clickMinistry);
+ //       addActor(clickMinistry);
 
         ministries = new MonthMinistry[7];
 
         ministries[0] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH,
-                Constants.COSTS_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_X,
-                Constants.FIRST_MINISTRY_Y - Constants.MINISTRY_HEIGHT - Constants.DISTANCE_BETWEEN_MINISTRIES);
-        addActor(ministries[0]);
+                Constants.COSTS_OF_MINISTRIES[1]);
+  //      addActor(ministries[0]);
 
         for (int i = 1; i < ministries.length - 1; i++){
             ministries[i] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i + 1], ministries[i - 1].getFirstLevelMoneyPerMonth()
-                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i + 1], Constants.FIRST_MINISTRY_X,
-                    Constants.FIRST_MINISTRY_Y - (i + 1) * Constants.MINISTRY_HEIGHT - Constants.DISTANCE_BETWEEN_MINISTRIES * (i + 1));
-            addActor(ministries[i]);
+                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i + 1]);
+//            addActor(ministries[i]);
         }
 
+
+    }
+
+    public void setUpScroller(){
+        ministriesTable = new Table();
+
+        ministriesTable.add(clickMinistry);
+        ministriesTable.row().pad(15);
+
+        for (int i = 0; i <ministries.length; i++){
+            ministriesTable.add(ministries[i]);
+            ministriesTable.row().pad(15);
+        }
+
+        ministriesTable.setSize(500, 500);
+
+
+       // ministriesTable.setDebug(true);
+
+        scroller = new ScrollPane(ministriesTable);
+
+        final Table table = new Table();
+        table.setFillParent(true);
+        table.add(scroller).width(500).height(500);
+        table.setSize(500, 500);
+
+table.setDebug(true);
+        addActor(table);
     }
 
     private void setUpHuman(){

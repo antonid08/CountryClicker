@@ -36,7 +36,7 @@ abstract class Ministry extends Actor{
 
 
 
-    public Ministry(String name, int upgradeCost, int x, int y) {
+    public Ministry(String name, int upgradeCost) {
         this.name = name;
         this.upgradeCost = upgradeCost;
         level = 0;
@@ -52,12 +52,11 @@ abstract class Ministry extends Actor{
             }
         });
 
-        setUpBounds(x, y);
+        setUpBounds();
         setUpView();
     }
 
-    private void setUpBounds(int x, int y){
-        setPosition(x, y);
+    private void setUpBounds(){
         setSize(Constants.MINISTRY_WIDTH, Constants.MINISTRY_HEIGHT);
     }
 
@@ -91,7 +90,7 @@ abstract class Ministry extends Actor{
         if (level == 0) {
             batch.setColor(Color.GRAY);
         }
-        batch.draw(region, getX(), getY(), getWidth(), getHeight());
+        batch.draw(region, getX(), getY(), getWidth() - Constants.INFO_MINISTRY_PART_WIDTH - Constants.DISTANCE_BETWEEN_MAIN_AND_INFO_MINISTRY_PART, getHeight());
         font.draw(batch, name, getX() + 20, getY() + 60);
         font.draw(batch, description, getX() + 20, getY() + 30);
 

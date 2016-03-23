@@ -12,8 +12,8 @@ public class ClickMinistry extends Ministry{
     private float moneyPerClick;
     private final int moneyPerClickOnFirstLevel;
 
-    public ClickMinistry(String name, int moneyPerClickOnFirstLevel, int upgradeCost, int x, int y) {
-        super(name, upgradeCost, x, y);
+    public ClickMinistry(String name, int moneyPerClickOnFirstLevel, int upgradeCost) {
+        super(name, upgradeCost);
 
         this.moneyPerClickOnFirstLevel = moneyPerClickOnFirstLevel;
         moneyPerClick = 0;
