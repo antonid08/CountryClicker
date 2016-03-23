@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -32,7 +33,11 @@ public class Ministry extends Actor {
 
 //Drawable part
     TextureRegion region;
+    TextureRegion update_icon_region;
     BitmapFont font;
+
+    int infoPartX;
+    int infoPartWidth;
 
     public Ministry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, int x, int y) {
         this.name = name;
@@ -62,7 +67,12 @@ public class Ministry extends Actor {
 
     private void setUpView(){
         region = new TextureRegion(new Texture(Gdx.files.internal("ministry_background.png")), 0, 0, 50, 50);
+        update_icon_region = new TextureRegion(new Texture(Gdx.files.internal("upgrade_icon.png")), 0, 0, 50, 50);
+
         font = AssetsManager.getInstance().getSkin().getFont(Constants.NAME_OF_MAIN_FONT);
+
+        infoPartWidth = Constants.INFO_MINISTRY_PART_WIDTH;
+        infoPartX = Constants.INFO_MINISTRY_PART_X;
     }
 
     private void upgrade() {
@@ -101,8 +111,33 @@ public class Ministry extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(region, getX(), getY(), getWidth(), getHeight());
-        font.draw(batch, "kek", getX() + 15, getY() + 30);
 
+        if (level == 0) {
+            batch.setColor(Color.GRAY);
+
+            //Main part
+            batch.draw(region, getX(), getY(), getWidth(), getHeight());
+            font.draw(batch, name, getX() + 15, getY() + 30);
+
+            //Info part
+            batch.draw(region, infoPartX, getY(), infoPartWidth, getHeight());
+            batch.draw(update_icon_region, infoPartX + 10, getY() + 15, 20, 20);
+            font.draw(batch, upgradeCost + "$", infoPartX + 60, getY() + 30);
+
+            batch.setColor(1, 1, 1, 1);
+
+            return;
+        }
+        //Main part
+        batch.draw(region, getX(), getY(), getWidth(), getHeight());
+        font.draw(batch, name, getX() + 15, getY() + 30);
+        font.draw(batch, (int) moneyPerMonth + "$", getX() + 200, getY() + 30);
+
+        //Info part
+        batch.draw(region, infoPartX, getY(), infoPartWidth, getHeight());
+        batch.draw(update_icon_region, infoPartX + 10, getY() + 15, 20, 20);
+        font.draw(batch, upgradeCost + "$", infoPartX + 60, getY() + 30);
+        font.draw(batch, "Lvl " + level, infoPartX + 100, getY() + 40);
+        batch.setColor(1, 1, 1, 1);
     }
 }

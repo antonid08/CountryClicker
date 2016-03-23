@@ -40,9 +40,9 @@ public class GameStage extends Stage {
     private void seUpMinistries() {
         ministries = new Ministry[6];
 
-        String[] names = {"Министерство воздуха", "Министерство налогов",
-        "Министерство контроля за налогами", "Министерство земли", "Министерство воды",
-        "Министерство зла"};
+        String[] names = {"Ministerstvo vozduha", "Ministerstvo nalogov",
+        "Ministerstvo neba", "Ministerstvo Allaha", "Ministerstvo usov",
+        "Ministerstvo zla"};
 
         //here we create first ministry with const parameters, then create 5 more and configure their params like "previous min value * coef"
         ministries[0] = new Ministry(names[0],  Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH, Constants.FIRST_MINISTRY_COST,

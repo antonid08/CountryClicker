@@ -6,7 +6,7 @@ package com.countryclicker.utils;
 public class Constants {
 
     //-------------------------------------------------------Positions and sizes----------------------------------------------------------------------//
-    public static final int APP_WIDTH = 800;
+    public static final int APP_WIDTH = 1000;
     public static final int APP_HEIGHT = 600;
 
     public static final int HUMAN_WIDTH = 128;
@@ -33,6 +33,9 @@ public class Constants {
     public static final int FIRST_MINISTRY_X = 200;
     public static final int FIRST_MINISTRY_Y = 500;
     public static final int DISTANCE_BETWEEN_MINISTRIES = 30;
+    public static final int DISTANCE_BETWEEN_MAIN_AND_INFO_MINISTRY_PART = 50;
+    public static final int INFO_MINISTRY_PART_WIDTH = 150;
+    public static final int INFO_MINISTRY_PART_X = FIRST_MINISTRY_X + MINISTRY_WIDTH + DISTANCE_BETWEEN_MAIN_AND_INFO_MINISTRY_PART;
 
     public static final String NAME_OF_MAIN_FONT = "default-font";
 
