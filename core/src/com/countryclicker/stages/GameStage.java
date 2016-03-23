@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.countryclicker.actors.Human;
 import com.countryclicker.actors.Ministry;
 import com.countryclicker.actors.hud.Money;
+import com.countryclicker.actors.hud.MonthProgress;
 import com.countryclicker.utils.Constants;
 
 
@@ -18,6 +19,7 @@ public class GameStage extends Stage {
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
 
     private Money money;
+    private MonthProgress monthProgress;
 
     private Human human;
 
@@ -28,9 +30,12 @@ public class GameStage extends Stage {
                 new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
 
         setUpMoney();
+        setUpMonthProgress();
+
         setUpHuman();
         seUpMinistries();
     }
+
 
     private void seUpMinistries() {
         ministries = new Ministry[6];
@@ -63,4 +68,10 @@ public class GameStage extends Stage {
         money = new Money();
         addActor(money);
     }
+
+    private void setUpMonthProgress() {
+        monthProgress = new MonthProgress();
+        addActor(monthProgress);
+    }
+
 }

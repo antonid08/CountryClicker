@@ -15,8 +15,6 @@ import javafx.scene.text.Font;
  * Created by Илья on 22.03.2016.
  */
 public class Money extends Actor {
-    private int lengthOfMonth;
-    private float timeFromPreviousMonth;
 
     private GameManager gameManager;
 
@@ -24,10 +22,6 @@ public class Money extends Actor {
 
     public Money(){
         gameManager = GameManager.getInstance();
-
-        timeFromPreviousMonth = 0;
-
-        lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
 
         font = AssetsManager.getInstance().getSkin().getFont(Constants.NAME_OF_MAIN_FONT);
     }
@@ -40,9 +34,9 @@ public class Money extends Actor {
 
     @Override
     public void act(float delta) {
-        timeFromPreviousMonth += delta;
-        if (timeFromPreviousMonth >= lengthOfMonth){
-            timeFromPreviousMonth = 0;
+        gameManager.updateTimeFromPreviousMonth(delta);
+        if (gameManager.getTimeFromPreviousMonth() >= gameManager.getLengthOfMonth()){
+            gameManager.setTimeFromPreviousMonth(0);
             gameManager.updateMoney(gameManager.getMoneyForMonth());
         }
     }

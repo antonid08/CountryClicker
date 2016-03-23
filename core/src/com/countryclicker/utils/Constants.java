@@ -18,6 +18,16 @@ public class Constants {
     public static final int MONEY_LABEL_X = 50;
     public static final int MONEY_LABEL_Y = 550;
 
+    public static final int MONTH_PROGRESS_X = 240;
+    public static final int MONTH_PROGRESS_Y = 560;
+    public static final int MONTH_PROGRESS_WIDTH = 150;
+    public static final int MONTH_PROGRESS_HEIGHT = 30;
+    public static final int MONTH_PROGRESS_RECTANGLE_BORDER = 3;
+    public static final int MONTH_PROGRESS_RECTANGLE_HEIGHT = MONTH_PROGRESS_HEIGHT - MONTH_PROGRESS_RECTANGLE_BORDER * 2;
+    public static final int MONTH_PROGRESS_RECTANGLE_WIDTH_MAX = MONTH_PROGRESS_WIDTH - MONTH_PROGRESS_RECTANGLE_BORDER * 2;
+    public static final int MONTH_PROGRESS_RECTANGLE_X = MONTH_PROGRESS_X + MONTH_PROGRESS_RECTANGLE_BORDER;
+    public static final int MONTH_PROGRESS_RECTANGLE_Y = MONTH_PROGRESS_Y + MONTH_PROGRESS_RECTANGLE_BORDER;
+
     public static final int MINISTRY_WIDTH = 300;
     public static final int MINISTRY_HEIGHT = 50;
     public static final int FIRST_MINISTRY_X = 200;
@@ -37,6 +47,6 @@ public class Constants {
     public static final int FIRST_MINISTRY_COST = 10;
     public static final int FIRST_MINISTRY_MONEY_PER_FIRST_MONTH = 2;
 
-    public static final int START_LENGTH_OF_MONTH = 5; //in seconds
+    public static final int START_LENGTH_OF_MONTH = 4; //in seconds
 
 }
