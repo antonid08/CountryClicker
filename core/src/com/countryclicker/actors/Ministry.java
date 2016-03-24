@@ -104,6 +104,7 @@ abstract class Ministry extends Actor{
         batch.draw(region, INFO_PART_X, getY(), INFO_PART_WIDTH, getHeight());
         batch.draw(update_icon_region, INFO_PART_X + 10, getY() + 15, 20, 20);
         font.draw(batch, upgradeCost + "$", INFO_PART_X + 60, getY() + 30);
+        font.draw(batch, "Level: " + level, INFO_PART_X + 80, getY() + 60);
 
         batch.setColor(1, 1, 1, 1);
     }
