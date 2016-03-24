@@ -82,19 +82,16 @@ public class GameStage extends Stage {
             ministriesTable.row().pad(15);
         }
 
-        ministriesTable.setSize(500, 500);
-
-
-       // ministriesTable.setDebug(true);
 
         scroller = new ScrollPane(ministriesTable);
 
-        final Table table = new Table();
-        table.setFillParent(true);
-        table.add(scroller).width(500).height(500);
-        table.setSize(500, 500);
+        scroller.setFadeScrollBars(false);
+        scroller.setOverscroll(false, false);
 
-table.setDebug(true);
+        Table table = new Table();
+        table.add(scroller).padTop(90).padLeft(180);
+        table.setFillParent(true);
+
         addActor(table);
     }
 

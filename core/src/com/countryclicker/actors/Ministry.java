@@ -17,6 +17,14 @@ import com.countryclicker.utils.Constants;
  * Created by Илья on 23.03.2016.
  */
 abstract class Ministry extends Actor{
+//View Constants
+    final int WIDTH = 750;
+    final int HEIGHT = 80;
+    final int MAIN_PART_WIDTH = 550;
+    final int DISTANCE_BETWEEN_MAIN_AND_INFO_PART = 50;
+    final int INFO_PART_WIDTH = 150;
+    final int INFO_PART_X = (int) getX() + MAIN_PART_WIDTH  + DISTANCE_BETWEEN_MAIN_AND_INFO_PART;
+
 //Mechanics part
     int upgradeCost;
     int level;
@@ -30,11 +38,6 @@ abstract class Ministry extends Actor{
     TextureRegion region;
     TextureRegion update_icon_region;
     BitmapFont font;
-
-    int infoPartX;
-    int infoPartWidth;
-
-
 
     public Ministry(String name, int upgradeCost) {
         this.name = name;
@@ -57,7 +60,7 @@ abstract class Ministry extends Actor{
     }
 
     private void setUpBounds(){
-        setSize(Constants.MINISTRY_WIDTH, Constants.MINISTRY_HEIGHT);
+        setSize(WIDTH, HEIGHT);
     }
 
     private void setUpView(){
@@ -65,9 +68,6 @@ abstract class Ministry extends Actor{
         update_icon_region = new TextureRegion(new Texture(Gdx.files.internal("upgrade_icon.png")), 0, 0, 50, 50);
 
         font = AssetsManager.getInstance().getSkin().getFont(Constants.NAME_OF_MAIN_FONT);
-
-        infoPartWidth = Constants.INFO_MINISTRY_PART_WIDTH;
-        infoPartX = Constants.INFO_MINISTRY_PART_X;
     }
 
 
@@ -90,7 +90,7 @@ abstract class Ministry extends Actor{
         if (level == 0) {
             batch.setColor(Color.GRAY);
         }
-        batch.draw(region, getX(), getY(), getWidth() - Constants.INFO_MINISTRY_PART_WIDTH - Constants.DISTANCE_BETWEEN_MAIN_AND_INFO_MINISTRY_PART, getHeight());
+        batch.draw(region, getX(), getY(), MAIN_PART_WIDTH, getHeight());
         font.draw(batch, name, getX() + 20, getY() + 60);
         font.draw(batch, description, getX() + 20, getY() + 30);
 
@@ -101,9 +101,9 @@ abstract class Ministry extends Actor{
             batch.setColor(Color.GRAY);
         }
 
-        batch.draw(region, infoPartX, getY(), infoPartWidth, getHeight());
-        batch.draw(update_icon_region, infoPartX + 10, getY() + 15, 20, 20);
-        font.draw(batch, upgradeCost + "$", infoPartX + 60, getY() + 30);
+        batch.draw(region, INFO_PART_X, getY(), INFO_PART_WIDTH, getHeight());
+        batch.draw(update_icon_region, INFO_PART_X + 10, getY() + 15, 20, 20);
+        font.draw(batch, upgradeCost + "$", INFO_PART_X + 60, getY() + 30);
 
         batch.setColor(1, 1, 1, 1);
     }

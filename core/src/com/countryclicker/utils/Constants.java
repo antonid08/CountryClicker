@@ -28,13 +28,7 @@ public class Constants {
     public static final int MONTH_PROGRESS_RECTANGLE_X = MONTH_PROGRESS_X + MONTH_PROGRESS_RECTANGLE_BORDER;
     public static final int MONTH_PROGRESS_RECTANGLE_Y = MONTH_PROGRESS_Y + MONTH_PROGRESS_RECTANGLE_BORDER;
 
-    public static final int MINISTRY_WIDTH = 750;
-    public static final int MINISTRY_HEIGHT = 80;
-    public static final int FIRST_MINISTRY_X = 250;
-    public static final int DISTANCE_BETWEEN_MAIN_AND_INFO_MINISTRY_PART = 50;
-    public static final int INFO_MINISTRY_PART_WIDTH = 150;
-    public static final int INFO_MINISTRY_PART_X = FIRST_MINISTRY_X + MINISTRY_WIDTH - DISTANCE_BETWEEN_MAIN_AND_INFO_MINISTRY_PART -
-            INFO_MINISTRY_PART_WIDTH;
+
 
     public static final String NAME_OF_MAIN_FONT = "default-font";
 
