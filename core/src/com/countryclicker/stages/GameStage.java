@@ -12,6 +12,7 @@ import com.countryclicker.actors.Human;
 import com.countryclicker.actors.ministries.MonthMinistry;
 import com.countryclicker.actors.hud.Money;
 import com.countryclicker.actors.hud.MonthProgress;
+import com.countryclicker.actors.upgrades.Upgrades;
 import com.countryclicker.utils.Constants;
 
 
@@ -32,6 +33,8 @@ public class GameStage extends Stage {
     private MonthMinistry[] ministries;
     private ClickMinistry clickMinistry;
 
+    private Upgrades upgrades;
+
     private ScrollPane scroller;
     private Table ministriesTable;
 
@@ -48,6 +51,7 @@ public class GameStage extends Stage {
         setUpHuman();
 
         setUpUpgradesButton();
+        setUpUpgrades();
     }
 
 
@@ -110,5 +114,10 @@ public class GameStage extends Stage {
     private void setUpUpgradesButton(){
         upgradesButton = new UpgradesButton("Upgrades");
         addActor(upgradesButton);
+    }
+
+    private void setUpUpgrades(){
+        upgrades = new Upgrades();
+        addActor(upgrades);
     }
 }
