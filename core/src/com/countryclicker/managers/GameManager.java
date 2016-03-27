@@ -2,6 +2,7 @@ package com.countryclicker.managers;
 
 
 import com.badlogic.gdx.Gdx;
+import com.countryclicker.emuns.GameState;
 import com.countryclicker.utils.Constants;
 
 /**
@@ -17,12 +18,17 @@ public class GameManager {
     private int lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
     private float timeFromPreviousMonth = 0;
 
+    private GameState gameState;
 
     public static GameManager getInstance(){
         if (instance == null){
             instance = new GameManager();
         }
         return instance;
+    }
+
+    public GameManager(){
+        gameState = GameState.RUNNING;
     }
 
     public void updateMoneyForMonth(int delta){
@@ -64,5 +70,13 @@ public class GameManager {
 
     public int getMoneyPerClick(){
         return moneyPerClick;
+    }
+
+    public void setGameState(GameState value){
+        gameState = value;
+    }
+
+    public GameState getGameState(){
+        return gameState;
     }
 }

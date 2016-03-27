@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.countryclicker.actors.hud.UpgradesButton;
 import com.countryclicker.actors.ministries.ClickMinistry;
 import com.countryclicker.actors.Human;
 import com.countryclicker.actors.ministries.MonthMinistry;
@@ -23,6 +24,8 @@ public class GameStage extends Stage {
 
     private Money money;
     private MonthProgress monthProgress;
+
+    private UpgradesButton upgradesButton;
 
     private Human human;
 
@@ -43,6 +46,8 @@ public class GameStage extends Stage {
         setUpMonthProgress();
 
         setUpHuman();
+
+        setUpUpgradesButton();
     }
 
 
@@ -102,4 +107,8 @@ public class GameStage extends Stage {
         addActor(monthProgress);
     }
 
+    private void setUpUpgradesButton(){
+        upgradesButton = new UpgradesButton("Upgrades");
+        addActor(upgradesButton);
+    }
 }

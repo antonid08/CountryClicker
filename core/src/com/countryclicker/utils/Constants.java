@@ -18,6 +18,9 @@ public class Constants {
     public static final int MONEY_LABEL_X = 50;
     public static final int MONEY_LABEL_Y = 730;
 
+    public static final int UPGRADES_BUTTON_X = 20;
+    public static final int UPGRADES_BUTTON_Y = 470;
+
     public static final int MONTH_PROGRESS_X = 240;
     public static final int MONTH_PROGRESS_Y = 710;
     public static final int MONTH_PROGRESS_WIDTH = 150;
