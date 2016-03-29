@@ -1,6 +1,7 @@
 package com.countryclicker.actors.ministries;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.countryclicker.actors.upgrades.Upgrade;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
@@ -12,13 +13,15 @@ public class MonthMinistry extends Ministry {
 //Mechanics part
     private float moneyPerMonth;
 
-    private final int moneyPerMonthOnFirstLevel;
+    private int moneyPerMonthOnFirstLevel;
 
 
-    public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, GameStage stage) {
+    public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, GameStage stage){
         super(name, upgradeCost, stage);
 
+
         this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
+
 
         description = "Adds money every month";
     }
@@ -27,20 +30,16 @@ public class MonthMinistry extends Ministry {
     void upgrade() {
         level++;
 
-        float oldMoneyPerMonth = moneyPerMonth;
+        calculateMoneyPerMonth();
 
-        if (level == 1){
-            moneyPerMonth = moneyPerMonthOnFirstLevel;
-            stage.updateMoneyForMonth(moneyPerMonthOnFirstLevel);
-        } else {
-            moneyPerMonth = level * moneyPerMonthOnFirstLevel;
-            stage.updateMoneyForMonth((int) (moneyPerMonth - oldMoneyPerMonth));
-        }
         upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }
 
-    public int getUpgradeCost() {
-        return upgradeCost;
+    private void calculateMoneyPerMonth(){
+        float oldMoneyPerMonth = moneyPerMonth;
+
+        moneyPerMonth = level * moneyPerMonthOnFirstLevel * upgradeCoefficient;
+        stage.updateMoneyForMonth((int) (moneyPerMonth - oldMoneyPerMonth));
     }
 
     public int getFirstLevelMoneyPerMonth() {
@@ -55,5 +54,11 @@ public class MonthMinistry extends Ministry {
             font.draw(batch, (int) moneyPerMonth + "$", getX() + 500, getY() + 60);
         }
 
+    }
+
+    @Override
+    public void updateCoefficient(float value) {
+        super.updateCoefficient(value);
+        calculateMoneyPerMonth();
     }
 }

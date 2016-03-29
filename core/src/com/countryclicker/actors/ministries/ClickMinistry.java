@@ -1,6 +1,7 @@
 package com.countryclicker.actors.ministries;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.countryclicker.actors.upgrades.Upgrade;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
@@ -25,10 +26,13 @@ public class ClickMinistry extends Ministry{
     void upgrade() {
         level++;
 
-        moneyPerClick = level * moneyPerClickOnFirstLevel;
-
-        stage.setMoneyPerClick((int) moneyPerClick);
+        calculateMoneyPerClick();
         upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
+    }
+
+    private void calculateMoneyPerClick(){
+        moneyPerClick = level * moneyPerClickOnFirstLevel * upgradeCoefficient;
+        stage.setMoneyPerClick((int) moneyPerClick);
     }
 
     @Override
@@ -39,5 +43,11 @@ public class ClickMinistry extends Ministry{
             font.draw(batch, (int) moneyPerClick  + "$", getX() + 500, getY() + 60);
         }
 
+    }
+
+    @Override
+    public void updateCoefficient(float value) {
+        super.updateCoefficient(value);
+        calculateMoneyPerClick();
     }
 }

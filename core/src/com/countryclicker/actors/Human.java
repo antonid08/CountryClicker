@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.countryclicker.managers.GameManager;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
@@ -55,6 +54,4 @@ public class Human extends Actor {
  /*   public Actor hit (float x, float y) {
         return x > 0 && x < getWidth() && y > 0 && y < getHeight() ? this : null;
     }*/
-
-
 }

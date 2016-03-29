@@ -10,14 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.countryclicker.managers.AssetsManager;
-import com.countryclicker.managers.GameManager;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
+import com.countryclicker.utils.Observer;
 
 /**
  * Created by Илья on 23.03.2016.
  */
-abstract class Ministry extends Actor{
+abstract class Ministry extends Actor implements Observer{
 //View Constants
     final int WIDTH = 750;
     final int HEIGHT = 80;
@@ -29,6 +29,8 @@ abstract class Ministry extends Actor{
 //Mechanics part
     int upgradeCost;
     int level;
+
+    float upgradeCoefficient; //if we buy upgrades, we increment upgrade coefficient and mult profit on this coef
 
     String name;
     String description;
@@ -44,6 +46,7 @@ abstract class Ministry extends Actor{
         this.name = name;
         this.upgradeCost = upgradeCost;
         level = 0;
+        upgradeCoefficient = 1;
 
         this.stage = stage;
 
@@ -58,6 +61,7 @@ abstract class Ministry extends Actor{
 
         setUpBounds();
         setUpView();
+
     }
 
     private void setUpBounds(){
@@ -108,5 +112,14 @@ abstract class Ministry extends Actor{
         font.draw(batch, "Level: " + level, INFO_PART_X + 80, getY() + 60);
 
         batch.setColor(1, 1, 1, 1);
+    }
+
+    @Override
+    public void updateCoefficient(float value) {
+        upgradeCoefficient *= value;
+    }
+
+    public void registerObserverToUpgrade(int numberOfUpgrade){
+        stage.getUpgrade(numberOfUpgrade).registerObserver(this);
     }
 }

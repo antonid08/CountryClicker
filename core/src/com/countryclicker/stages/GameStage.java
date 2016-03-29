@@ -13,6 +13,7 @@ import com.countryclicker.actors.Human;
 import com.countryclicker.actors.ministries.MonthMinistry;
 import com.countryclicker.actors.hud.Money;
 import com.countryclicker.actors.hud.MonthProgress;
+import com.countryclicker.actors.upgrades.Upgrade;
 import com.countryclicker.actors.upgrades.Upgrades;
 import com.countryclicker.utils.Constants;
 
@@ -59,8 +60,8 @@ public class GameStage extends Stage {
 
         setUpHuman();
 
-        setUpUpgradesButton();
         setUpUpgrades();
+        setUpUpgradesButton();
     }
 
 
@@ -126,12 +127,15 @@ public class GameStage extends Stage {
     }
 
     private void setUpUpgrades(){
-        upgrades = new Upgrades();
+        upgrades = new Upgrades(this);
         addActor(upgrades);
+
+        clickMinistry.registerObserverToUpgrade(0);
+        ministries[0].registerObserverToUpgrade(1);
     }
 
 
-      public void updateMoneyForMonth(int delta){
+    public void updateMoneyForMonth(int delta){
         moneyForMonth += delta;
     }
 
@@ -168,7 +172,12 @@ public class GameStage extends Stage {
         moneyPerClick = value;
     }
 
-    public int getMoneyPerClick(){
+    public int getMoneyPerClick()
+    {
         return moneyPerClick;
+    }
+
+    public Upgrade getUpgrade(int number){
+        return upgrades.getUpgrades().get(number);
     }
 }

@@ -9,6 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.countryclicker.emuns.GameState;
 import com.countryclicker.managers.GameManager;
+import com.countryclicker.stages.GameStage;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 /**
@@ -16,19 +20,18 @@ import com.countryclicker.managers.GameManager;
  */
 public class Upgrades extends Table{
 
-    Upgrade mvdUpgrade;
-    Upgrade midUpgrade;
+    private ArrayList<Upgrade> upgrades;
 
-    GameManager gameManager;
+    private GameManager gameManager;
 
-    TextureRegion region;
+    private TextureRegion region;
 
-    public Upgrades() {
+    public Upgrades(GameStage stage) {
         gameManager = GameManager.getInstance();
 
         region = new TextureRegion(new Texture(Gdx.files.internal("ministry_background.png")), 0, 0, 50, 50);
 
-        setUpUpgrades();
+        setUpUpgrades(stage);
         setUpScroller();
     }
 
@@ -42,18 +45,20 @@ public class Upgrades extends Table{
         super.draw(batch, parentAlpha);
     }
 
-    private void setUpUpgrades(){
-        mvdUpgrade = new Upgrade("Pizdit silnee", 10000, 3);
-        midUpgrade = new Upgrade("kek", 1000, 5);
+    private void setUpUpgrades(GameStage stage){
+        upgrades = new ArrayList<Upgrade>();
+
+        upgrades.add(new Upgrade("Pizdit silnee", 1000, 3, stage));
+        upgrades.add(new Upgrade("Vvesti nalog na musor", 2000, 5, stage));
     }
 
     private void setUpScroller(){
         Table upgradesTable = new Table();
 
-        upgradesTable.add(mvdUpgrade);
+        upgradesTable.add(upgrades.get(0));
         upgradesTable.row().pad(15);
 
-        upgradesTable.add(midUpgrade);
+        upgradesTable.add(upgrades.get(1));
         upgradesTable.row().pad(15);
 
         ScrollPane scroller = new ScrollPane(upgradesTable);
@@ -61,7 +66,14 @@ public class Upgrades extends Table{
         scroller.setFadeScrollBars(false);
         scroller.setOverscroll(false, false);
 
-        add(scroller);
+        add(scroller)/*.size(100, 50)*/;
         setFillParent(true);
+
+        //upgradesTable.setDebug(true);
+       // setDebug(true);
+    }
+
+    public ArrayList<Upgrade> getUpgrades(){
+        return upgrades;
     }
 }
