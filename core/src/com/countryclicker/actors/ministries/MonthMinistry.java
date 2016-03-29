@@ -1,6 +1,7 @@
 package com.countryclicker.actors.ministries;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
 
@@ -13,8 +14,9 @@ public class MonthMinistry extends Ministry {
 
     private final int moneyPerMonthOnFirstLevel;
 
-    public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost) {
-        super(name, upgradeCost);
+
+    public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, GameStage stage) {
+        super(name, upgradeCost, stage);
 
         this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
 
@@ -29,10 +31,10 @@ public class MonthMinistry extends Ministry {
 
         if (level == 1){
             moneyPerMonth = moneyPerMonthOnFirstLevel;
-            gameManager.updateMoneyForMonth(moneyPerMonthOnFirstLevel);
+            stage.updateMoneyForMonth(moneyPerMonthOnFirstLevel);
         } else {
             moneyPerMonth = level * moneyPerMonthOnFirstLevel;
-            gameManager.updateMoneyForMonth((int) (moneyPerMonth - oldMoneyPerMonth));
+            stage.updateMoneyForMonth((int) (moneyPerMonth - oldMoneyPerMonth));
         }
         upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }

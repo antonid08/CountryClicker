@@ -1,5 +1,6 @@
 package com.countryclicker.stages;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -23,7 +24,15 @@ public class GameStage extends Stage {
     private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
 
-    private Money money;
+    private int moneyForMonth = 0;
+    private int moneyPerClick = 1;
+    private int money = 100000;
+
+    private int lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
+    private float timeFromPreviousMonth = 0;
+
+
+    private Money moneyLabel;
     private MonthProgress monthProgress;
 
     private UpgradesButton upgradesButton;
@@ -57,16 +66,16 @@ public class GameStage extends Stage {
 
     private void seUpMinistries() {
         clickMinistry = new ClickMinistry(Constants.NAMES_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_MONEY_FOR_CLICK,
-                Constants.COSTS_OF_MINISTRIES[0]);
+                Constants.COSTS_OF_MINISTRIES[0], this);
 
         ministries = new MonthMinistry[7];
 
         ministries[0] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH,
-                Constants.COSTS_OF_MINISTRIES[1]);
+                Constants.COSTS_OF_MINISTRIES[1], this);
 
         for (int i = 1; i < ministries.length - 1; i++){
             ministries[i] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i + 1], ministries[i - 1].getFirstLevelMoneyPerMonth()
-                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i + 1]);
+                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i + 1], this);
         }
 
 
@@ -97,17 +106,17 @@ public class GameStage extends Stage {
     }
 
     private void setUpHuman(){
-        human = new Human();
+        human = new Human(this);
         addActor(human);
     }
 
     private void setUpMoney(){
-        money = new Money();
-        addActor(money);
+        moneyLabel = new Money(this);
+        addActor(moneyLabel);
     }
 
     private void setUpMonthProgress() {
-        monthProgress = new MonthProgress();
+        monthProgress = new MonthProgress(this);
         addActor(monthProgress);
     }
 
@@ -119,5 +128,47 @@ public class GameStage extends Stage {
     private void setUpUpgrades(){
         upgrades = new Upgrades();
         addActor(upgrades);
+    }
+
+
+      public void updateMoneyForMonth(int delta){
+        moneyForMonth += delta;
+    }
+
+    public void updateMoney(int delta){
+        money += delta;
+        Gdx.app.log("money", money + "");
+    }
+
+    public void updateTimeFromPreviousMonth(float delta){
+        timeFromPreviousMonth += delta;
+    }
+
+    public void setTimeFromPreviousMonth(float value){
+        timeFromPreviousMonth = value;
+    }
+
+    public float getTimeFromPreviousMonth(){
+        return timeFromPreviousMonth;
+    }
+
+    public int getLengthOfMonth(){
+        return lengthOfMonth;
+    }
+
+    public int getMoneyForMonth(){
+        return moneyForMonth;
+    }
+
+    public int getMoney(){
+        return money;
+    }
+
+    public void setMoneyPerClick(int value){
+        moneyPerClick = value;
+    }
+
+    public int getMoneyPerClick(){
+        return moneyPerClick;
     }
 }

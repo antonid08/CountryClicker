@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.managers.GameManager;
+import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
 /**
@@ -32,19 +33,19 @@ abstract class Ministry extends Actor{
     String name;
     String description;
 
-    GameManager gameManager;
+    GameStage stage;
 
 //Drawable part
     TextureRegion region;
     TextureRegion update_icon_region;
     BitmapFont font;
 
-    public Ministry(String name, int upgradeCost) {
+    public Ministry(String name, int upgradeCost, GameStage stage) {
         this.name = name;
         this.upgradeCost = upgradeCost;
         level = 0;
 
-        gameManager = GameManager.getInstance();
+        this.stage = stage;
 
         setTouchable(Touchable.enabled);
         addListener(new InputListener() {
@@ -73,13 +74,13 @@ abstract class Ministry extends Actor{
 
     public void onClick() {
         if (canUpgrade()){
-            gameManager.updateMoney(-upgradeCost);
+            stage.updateMoney(-upgradeCost);
             upgrade();
         }
     }
 
     boolean canUpgrade(){
-        return gameManager.getMoney() >= upgradeCost;
+        return stage.getMoney() >= upgradeCost;
     }
 
     abstract void upgrade();

@@ -9,8 +9,6 @@ public class Constants {
     public static final int APP_WIDTH = 1024;
     public static final int APP_HEIGHT = 768;
 
-    public static final int HUMAN_WIDTH = 150;
-    public static final int HUMAN_HEIGHT = 150;
 
     public static final int HUMAN_X = 50;
     public static final int HUMAN_Y = 550;
@@ -23,13 +21,6 @@ public class Constants {
 
     public static final int MONTH_PROGRESS_X = 240;
     public static final int MONTH_PROGRESS_Y = 710;
-    public static final int MONTH_PROGRESS_WIDTH = 150;
-    public static final int MONTH_PROGRESS_HEIGHT = 30;
-    public static final int MONTH_PROGRESS_RECTANGLE_BORDER = 3;
-    public static final int MONTH_PROGRESS_RECTANGLE_HEIGHT = MONTH_PROGRESS_HEIGHT - MONTH_PROGRESS_RECTANGLE_BORDER * 2;
-    public static final int MONTH_PROGRESS_RECTANGLE_WIDTH_MAX = MONTH_PROGRESS_WIDTH - MONTH_PROGRESS_RECTANGLE_BORDER * 2;
-    public static final int MONTH_PROGRESS_RECTANGLE_X = MONTH_PROGRESS_X + MONTH_PROGRESS_RECTANGLE_BORDER;
-    public static final int MONTH_PROGRESS_RECTANGLE_Y = MONTH_PROGRESS_Y + MONTH_PROGRESS_RECTANGLE_BORDER;
 
 
 

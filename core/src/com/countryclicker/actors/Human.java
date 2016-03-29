@@ -8,24 +8,28 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.countryclicker.managers.GameManager;
+import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
 /**
  * Created by Илья on 29.02.2016.
  */
 public class Human extends Actor {
+    public static final int WIDTH = 150;
+    public static final int HEIGHT = 150;
+
 
     TextureRegion region;
 
+    GameStage stage;
 
-    GameManager gameManager;
+    public Human (GameStage stage){
+        this.stage = stage;
 
-    public Human (){
-        gameManager = GameManager.getInstance();
         region = new TextureRegion(new Texture(Gdx.files.internal("human.png")), 0, 0, 128, 128);
 
         setPosition(Constants.HUMAN_X, Constants.HUMAN_Y);
-        setSize(Constants.HUMAN_WIDTH, Constants.HUMAN_HEIGHT);
+        setSize(WIDTH, HEIGHT);
 
         setTouchable(Touchable.enabled);
         addListener(new InputListener() {
@@ -39,7 +43,7 @@ public class Human extends Actor {
     }
 
     public void onClick(){
-        gameManager.updateMoney(gameManager.getMoneyPerClick());
+        stage.updateMoney(stage.getMoneyPerClick());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.countryclicker.actors.ministries;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
 /**
@@ -11,8 +12,8 @@ public class ClickMinistry extends Ministry{
     private float moneyPerClick;
     private final int moneyPerClickOnFirstLevel;
 
-    public ClickMinistry(String name, int moneyPerClickOnFirstLevel, int upgradeCost) {
-        super(name, upgradeCost);
+    public ClickMinistry(String name, int moneyPerClickOnFirstLevel, int upgradeCost, GameStage stage) {
+        super(name, upgradeCost, stage);
 
         this.moneyPerClickOnFirstLevel = moneyPerClickOnFirstLevel;
         moneyPerClick = 0;
@@ -26,7 +27,7 @@ public class ClickMinistry extends Ministry{
 
         moneyPerClick = level * moneyPerClickOnFirstLevel;
 
-        gameManager.setMoneyPerClick((int) moneyPerClick);
+        stage.setMoneyPerClick((int) moneyPerClick);
         upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }
 
