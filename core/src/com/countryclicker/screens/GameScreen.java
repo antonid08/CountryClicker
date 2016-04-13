@@ -1,12 +1,19 @@
 package com.countryclicker.screens;
 
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.countryclicker.stages.GameStage;
+import com.countryclicker.utils.Constants;
 
-import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 
 /**
@@ -18,7 +25,20 @@ public class GameScreen implements Screen {
 
     public GameScreen() {
         Gdx.app.log("GameScreen", "Attached");
-
+ /*       try {
+            File saveFile = new File(Constants.SAVE_FILE_NAME);
+            if (saveFile.exists()) {
+                FileInputStream fis = new FileInputStream(Constants.SAVE_FILE_NAME);
+                ObjectInputStream oin = new ObjectInputStream(fis);
+                gameStage = (GameStage) oin.readObject();
+            } else {
+                gameStage = new GameStage();
+            }
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }*/
         gameStage = new GameStage();
         Gdx.input.setInputProcessor(gameStage);
 
@@ -34,6 +54,7 @@ public class GameScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         Gdx.app.log("GameScreen", "resizing");
+        gameStage.getViewport().update(Constants.APP_WIDTH, Constants.APP_HEIGHT, false);
     }
 
     @Override
@@ -44,6 +65,21 @@ public class GameScreen implements Screen {
     @Override
     public void hide() {
         Gdx.app.log("GameScreen", "hide called");
+        try {
+            File saveFile = new File(Constants.SAVE_FILE_NAME);
+            if (!saveFile.exists()) {
+                saveFile.createNewFile();
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(Constants.SAVE_FILE_NAME);
+            ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+
+            oos.writeObject(gameStage);
+            oos.flush();
+            oos.close();
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -59,6 +95,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         // Leave blank
+        Gdx.app.log("GameScreen", "exit");
     }
 
 }

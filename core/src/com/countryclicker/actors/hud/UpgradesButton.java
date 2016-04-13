@@ -8,10 +8,12 @@ import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.managers.GameManager;
 import com.countryclicker.utils.Constants;
 
+import java.io.Serializable;
+
 /**
  * Created by Илья on 27.03.2016.
  */
-public class UpgradesButton extends TextButton{
+public class UpgradesButton extends TextButton implements Serializable{
     private int HEIGHT = 50;
     private int WIDTH = 200;
 

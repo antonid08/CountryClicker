@@ -9,10 +9,12 @@ import com.countryclicker.managers.GameManager;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
+import java.io.Serializable;
+
 /**
  * Created by Илья on 23.03.2016.
  */
-public class MonthProgress  extends Actor{
+public class MonthProgress  extends Actor implements Serializable{
     public static final int WIDTH = 150;
     public static final int HEIGHT = 30;
     public static final int RECTANGLE_BORDER = 3;

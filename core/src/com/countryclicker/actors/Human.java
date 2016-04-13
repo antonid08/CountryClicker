@@ -1,31 +1,29 @@
 package com.countryclicker.actors;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
+
+import java.io.Serializable;
 
 /**
  * Created by Илья on 29.02.2016.
  */
-public class Human extends Actor {
+public class Human extends Actor implements Serializable{
     public static final int WIDTH = 150;
     public static final int HEIGHT = 150;
 
 
-    TextureRegion region;
-
+    AssetsManager assetsManager;
     GameStage stage;
 
     public Human (GameStage stage){
         this.stage = stage;
-
-        region = new TextureRegion(new Texture(Gdx.files.internal("human.png")), 0, 0, 128, 128);
+        assetsManager = AssetsManager.getInstance();
 
         setPosition(Constants.HUMAN_X, Constants.HUMAN_Y);
         setSize(WIDTH, HEIGHT);
@@ -48,7 +46,7 @@ public class Human extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
      //  batch.setColor(1, 1, 1, parentAlpha);
-       batch.draw(region, getX(), getY(), getWidth(), getHeight());
+       batch.draw(assetsManager.getHumanRegion(), getX(), getY(), getWidth(), getHeight());
     }
 
  /*   public Actor hit (float x, float y) {

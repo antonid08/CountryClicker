@@ -10,14 +10,15 @@ import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
 import java.awt.Label;
+import java.io.Serializable;
 
 import javafx.scene.text.Font;
 
 /**
  * Created by Илья on 22.03.2016.
  */
-public class Money extends Actor {
-    private BitmapFont font;
+public class Money extends Actor implements Serializable{
+    private transient BitmapFont font;
 
     private GameStage stage;
 

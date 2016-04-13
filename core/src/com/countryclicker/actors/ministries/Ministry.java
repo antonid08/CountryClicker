@@ -14,10 +14,12 @@ import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 import com.countryclicker.utils.Observer;
 
+import java.io.Serializable;
+
 /**
  * Created by Илья on 23.03.2016.
  */
-abstract class Ministry extends Actor implements Observer{
+abstract class Ministry extends Actor implements Observer, Serializable{
 //View Constants
     final int WIDTH = 750;
     final int HEIGHT = 80;

@@ -11,6 +11,7 @@ import com.countryclicker.emuns.GameState;
 import com.countryclicker.managers.GameManager;
 import com.countryclicker.stages.GameStage;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by Илья on 27.03.2016.
  */
-public class Upgrades extends Table{
+public class Upgrades extends Table implements Serializable{
 
     private ArrayList<Upgrade> upgrades;
 

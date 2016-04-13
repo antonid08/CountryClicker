@@ -1,7 +1,9 @@
 package com.countryclicker.managers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /**
@@ -9,6 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
  */
 public class AssetsManager {
     private Skin skin;
+
+    private Texture mainTexture;
+
+    private TextureRegion bg;
+    private TextureRegion human;
+    private TextureRegion ministryBg;
+    private TextureRegion upgradeMinistryButton;
+    private TextureRegion upgradesButton;
 
     private static AssetsManager instance;
 
@@ -31,5 +41,9 @@ public class AssetsManager {
 
     public Skin getSkin(){
         return skin;
+    }
+
+    public TextureRegion getHumanRegion(){
+        return human;
     }
 }

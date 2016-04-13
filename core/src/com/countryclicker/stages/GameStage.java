@@ -17,11 +17,13 @@ import com.countryclicker.actors.upgrades.Upgrade;
 import com.countryclicker.actors.upgrades.Upgrades;
 import com.countryclicker.utils.Constants;
 
+import java.io.Serializable;
+
 
 /**
  * Created by Илья on 22.03.2016.
  */
-public class GameStage extends Stage {
+public class GameStage extends Stage implements Serializable {
     private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
 
@@ -33,23 +35,23 @@ public class GameStage extends Stage {
     private float timeFromPreviousMonth = 0;
 
 
-    private Money moneyLabel;
-    private MonthProgress monthProgress;
+    private  Money moneyLabel;
+    private  MonthProgress monthProgress;
 
-    private UpgradesButton upgradesButton;
+    private transient UpgradesButton upgradesButton;
 
-    private Human human;
+    private transient Human human;
 
-    private MonthMinistry[] ministries;
-    private ClickMinistry clickMinistry;
+    private transient MonthMinistry[] ministries;
+    private transient ClickMinistry clickMinistry;
 
-    private Upgrades upgrades;
+    private transient Upgrades upgrades;
 
-    private ScrollPane scroller;
-    private Table ministriesTable;
+    private transient ScrollPane scroller;
+    private transient Table ministriesTable;
 
     public GameStage(){
-        super(new ScalingViewport(Scaling.stretch, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
+        super(new ScalingViewport(Scaling.fit, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
                 new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
 
         seUpMinistries();

@@ -5,6 +5,8 @@ package com.countryclicker.utils;
  */
 public class Constants {
 
+    public static final String SAVE_FILE_NAME = "saved_game_state";
+
     //-------------------------------------------------------Positions and sizes----------------------------------------------------------------------//
     public static final int APP_WIDTH = 1024;
     public static final int APP_HEIGHT = 768;
