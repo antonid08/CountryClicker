@@ -47,4 +47,8 @@ public class Constants {
     public static final int[] COSTS_OF_MINISTRIES = {16, 180, 2000, 22000, 250000, 2750000, 30250000,
     300000000}; //every next we multiply ~11
 
+    //---------------------------------------------------------------Animation Block-------------------------------------------------//
+    public static final float HUMAN_HIT_ANIMATION_TIME = 0.5f;
+    public static final int HUMAN_HIT_ANIMATION_NUMBER_OF_FRAMES = 2;
+    public static final float HUMAN_ONE_FRAME_ANIMATION_LENGTH = HUMAN_HIT_ANIMATION_TIME / HUMAN_HIT_ANIMATION_NUMBER_OF_FRAMES;
 }
