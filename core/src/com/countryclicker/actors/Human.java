@@ -10,8 +10,6 @@ import com.countryclicker.utils.Constants;
 
 import java.io.Serializable;
 
-import javafx.stage.Stage;
-
 /**
  * Created by Илья on 29.02.2016.
  */

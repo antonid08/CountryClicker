@@ -32,6 +32,7 @@ public class Constants {
 
 
     public static final float COST_OF_UPGRADE_MINISTRY_COEF = 1.2f;
+    public static final float COST_OF_UPGRADE_MVD_MINISTRY_COEF = 2.1f;
 
     public static final int FIRST_MINISTRY_MONEY_PER_FIRST_MONTH = 5;
     public static final int FIRST_MINISTRY_MONEY_FOR_CLICK = 1;

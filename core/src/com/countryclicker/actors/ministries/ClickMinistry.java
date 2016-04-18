@@ -27,7 +27,7 @@ public class ClickMinistry extends Ministry{
         level++;
 
         calculateMoneyPerClick();
-        upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
+        upgradeCost *= Constants.COST_OF_UPGRADE_MVD_MINISTRY_COEF;
     }
 
     private void calculateMoneyPerClick(){
