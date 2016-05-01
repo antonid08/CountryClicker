@@ -29,7 +29,7 @@ public class GameStage extends Stage implements Serializable {
 
     private int moneyForMonth = 0;
     private int moneyPerClick = 1;
-    private int money = 100000;
+    private float money = 100000;
 
     private int lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
     private float timeFromPreviousMonth = 0;
@@ -69,6 +69,7 @@ public class GameStage extends Stage implements Serializable {
 
     private void seUpMinistries() {
         clickMinistry = new ClickMinistry(Constants.NAMES_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_MONEY_FOR_CLICK,
+                Constants.START_TIME_TO_KICK_MVD,
                 Constants.COSTS_OF_MINISTRIES[0], this);
 
         ministries = new MonthMinistry[7];
@@ -141,7 +142,7 @@ public class GameStage extends Stage implements Serializable {
         moneyForMonth += delta;
     }
 
-    public void updateMoney(int delta){
+    public void updateMoney(float delta){
         money += delta;
         Gdx.app.log("money", money + "");
     }
@@ -166,7 +167,7 @@ public class GameStage extends Stage implements Serializable {
         return moneyForMonth;
     }
 
-    public int getMoney(){
+    public float getMoney(){
         return money;
     }
 

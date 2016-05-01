@@ -41,6 +41,8 @@ public class Constants {
 
     public static final float MONEY_PER_MONTH_NEXT_MINISTRY_COEF = 8;
 
+    public static final float START_TIME_TO_KICK_MVD = 10;
+
     public static final String[] NAMES_OF_MINISTRIES = {"MVD", "JKH", "MinZdrav", "Ministerstvo kulturi",
     "Ministerstvo oboroni", "Ministerstvo obrazovaniya", "Ministerstvo po nalogam"
     };

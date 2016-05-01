@@ -29,7 +29,7 @@ abstract class Ministry extends Actor implements Observer, Serializable{
     final int INFO_PART_X = (int) getX() + MAIN_PART_WIDTH  + DISTANCE_BETWEEN_MAIN_AND_INFO_PART;
 
 //Mechanics part
-    int upgradeCost;
+    int lvlupCost;
     int level;
 
     float upgradeCoefficient; //if we buy upgrades, we increment upgrade coefficient and mult profit on this coef
@@ -44,9 +44,9 @@ abstract class Ministry extends Actor implements Observer, Serializable{
     TextureRegion update_icon_region;
     BitmapFont font;
 
-    public Ministry(String name, int upgradeCost, GameStage stage) {
+    public Ministry(String name, int lvlupCost, GameStage stage) {
         this.name = name;
-        this.upgradeCost = upgradeCost;
+        this.lvlupCost = lvlupCost;
         level = 0;
         upgradeCoefficient = 1;
 
@@ -80,16 +80,16 @@ abstract class Ministry extends Actor implements Observer, Serializable{
 
     public void onClick() {
         if (canUpgrade()){
-            stage.updateMoney(-upgradeCost);
-            upgrade();
+            stage.updateMoney(-lvlupCost);
+            lvlup();
         }
     }
 
     boolean canUpgrade(){
-        return stage.getMoney() >= upgradeCost;
+        return stage.getMoney() >= lvlupCost;
     }
 
-    abstract void upgrade();
+    abstract void lvlup();
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
@@ -110,7 +110,7 @@ abstract class Ministry extends Actor implements Observer, Serializable{
 
         batch.draw(region, INFO_PART_X, getY(), INFO_PART_WIDTH, getHeight());
         batch.draw(update_icon_region, INFO_PART_X + 10, getY() + 15, 20, 20);
-        font.draw(batch, upgradeCost + "$", INFO_PART_X + 60, getY() + 30);
+        font.draw(batch, lvlupCost + "$", INFO_PART_X + 60, getY() + 30);
         font.draw(batch, "Level: " + level, INFO_PART_X + 80, getY() + 60);
 
         batch.setColor(1, 1, 1, 1);

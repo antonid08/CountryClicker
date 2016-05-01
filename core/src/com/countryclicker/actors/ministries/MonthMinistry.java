@@ -27,12 +27,12 @@ public class MonthMinistry extends Ministry {
     }
 
     @Override
-    void upgrade() {
+    void lvlup() {
         level++;
 
         calculateMoneyPerMonth();
 
-        upgradeCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
+        lvlupCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }
 
     private void calculateMoneyPerMonth(){
