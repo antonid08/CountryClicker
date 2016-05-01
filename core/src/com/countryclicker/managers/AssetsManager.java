@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.countryclicker.utils.Constants;
 
 /**
@@ -25,6 +28,8 @@ public class AssetsManager {
     private TextureRegion upgradeMinistryButton;
     private TextureRegion upgradesButton;
 
+    private TextButton.TextButtonStyle buttonStyle;
+
     private static AssetsManager instance;
 
     public static AssetsManager getInstance(){
@@ -36,14 +41,21 @@ public class AssetsManager {
 
     public AssetsManager(){
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        mainTexture = new Texture(Gdx.files.internal("texture_atlas.png"));
+        mainTexture = new Texture(Gdx.files.internal("texture_pack.png"));
 
-        human = new TextureRegion(mainTexture, 0, 0, 300, 345);
+        human = new TextureRegion(mainTexture, Constants.HUMAN_TEXTURE_X, Constants.HUMAN_TEXTURE_Y,
+                Constants.HUMAN_TEXTURE_WIDTH, Constants.HUMAN_TEXTURE_HEIGHT);
         human_kicked = new TextureRegion(mainTexture, 300, 0, 300, 345);
 
         TextureRegion[] kickTextures = { human, human_kicked };
         humanAnimation = new Animation(Constants.HUMAN_ONE_FRAME_ANIMATION_LENGTH, kickTextures);
         humanAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+
+        bg = new TextureRegion(mainTexture, Constants.BACKGROUND_TEXTURE_X, Constants.BACKGROUND_TEXTURE_Y,
+                Constants.BACKGROUND_TEXTURE_WIDTH, Constants.BACKGROUND_TEXTURE_HEIGHT);
+
+        upgradesButton = new TextureRegion(mainTexture, Constants.BUTTON_TEXTURE_X, Constants.BUTTON_TEXTURE_Y,
+                Constants.BUTTON_TEXTURE_WIDTH, Constants.BUTTON_TEXTURE_HEIGHT);
 
        /* FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("garuda.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -54,6 +66,14 @@ public class AssetsManager {
 
     public Skin getSkin(){
         return skin;
+    }
+
+    public TextureRegion getBackground(){
+        return bg;
+    }
+
+    public TextButton.TextButtonStyle getButtonStyle(){
+        return buttonStyle;
     }
 
     public Animation getHumanAnimation(){

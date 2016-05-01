@@ -8,18 +8,12 @@ public class Constants {
     public static final String SAVE_FILE_NAME = "saved_game_state";
 
     //-------------------------------------------------------Positions and sizes----------------------------------------------------------------------//
-    public static final int APP_WIDTH = 1024;
+    public static final int APP_WIDTH = 1611;
     public static final int APP_HEIGHT = 768;
-
-
-    public static final int HUMAN_X = 50;
-    public static final int HUMAN_Y = 550;
 
     public static final int MONEY_LABEL_X = 50;
     public static final int MONEY_LABEL_Y = 730;
 
-    public static final int UPGRADES_BUTTON_X = 20;
-    public static final int UPGRADES_BUTTON_Y = 470;
 
     public static final int MONTH_PROGRESS_X = 240;
     public static final int MONTH_PROGRESS_Y = 710;
@@ -54,4 +48,19 @@ public class Constants {
     public static final float HUMAN_HIT_ANIMATION_TIME = 0.5f;
     public static final int HUMAN_HIT_ANIMATION_NUMBER_OF_FRAMES = 2;
     public static final float HUMAN_ONE_FRAME_ANIMATION_LENGTH = HUMAN_HIT_ANIMATION_TIME / HUMAN_HIT_ANIMATION_NUMBER_OF_FRAMES;
+
+    public static final int HUMAN_TEXTURE_X = 2661;
+    public static final int HUMAN_TEXTURE_Y =  140;
+    public static final int HUMAN_TEXTURE_WIDTH = 629;
+    public static final int HUMAN_TEXTURE_HEIGHT = 513;
+
+    public static final int BACKGROUND_TEXTURE_X = 0;
+    public static final int BACKGROUND_TEXTURE_Y = 0;
+    public static final int BACKGROUND_TEXTURE_WIDTH = 2660;
+    public static final int BACKGROUND_TEXTURE_HEIGHT = 1296;
+
+    public static final int BUTTON_TEXTURE_X = 2661;
+    public static final int BUTTON_TEXTURE_Y = 0;
+    public static final int BUTTON_TEXTURE_HEIGHT = 139;
+    public static final int BUTTON_TEXTURE_WIDTH = 549;
 }

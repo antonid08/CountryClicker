@@ -14,8 +14,12 @@ import java.io.Serializable;
  * Created by Илья on 29.02.2016.
  */
 public class Human extends Actor implements Serializable{
-    public static final int WIDTH = 150;
-    public static final int HEIGHT = 150;
+    private static final float COEF = 1.22f;
+    private static final int HEIGHT = 250;
+    private static final int WIDTH = (int)(HEIGHT * COEF);
+    private static final int X = 40;
+    private static final int Y = 420;
+
 
     enum State {
         NORMAL,
@@ -35,7 +39,7 @@ public class Human extends Actor implements Serializable{
         state = State.NORMAL;
         animationTime = 0;
 
-        setPosition(Constants.HUMAN_X, Constants.HUMAN_Y);
+        setPosition(X, Y);
         setSize(WIDTH, HEIGHT);
 
         setTouchable(Touchable.enabled);
@@ -57,7 +61,8 @@ public class Human extends Actor implements Serializable{
     @Override
     public void draw(Batch batch, float parentAlpha) {
      //  batch.setColor(1, 1, 1, parentAlpha);
-       batch.draw(assetsManager.getHumanAnimation().getKeyFrame(animationTime), getX(), getY(), getWidth(), getHeight());
+       //batch.draw(assetsManager.getHumanAnimation().getKeyFrame(animationTime), getX(), getY(), getWidth(), getHeight());
+        batch.draw(assetsManager.getHumanAnimation().getKeyFrame(0), getX(), getY(), getWidth(), getHeight());
     }
 
     @Override

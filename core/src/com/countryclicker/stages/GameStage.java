@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.countryclicker.actors.Background;
 import com.countryclicker.actors.hud.UpgradesButton;
 import com.countryclicker.actors.ministries.ClickMinistry;
 import com.countryclicker.actors.Human;
@@ -15,6 +16,7 @@ import com.countryclicker.actors.hud.Money;
 import com.countryclicker.actors.hud.MonthProgress;
 import com.countryclicker.actors.upgrades.Upgrade;
 import com.countryclicker.actors.upgrades.Upgrades;
+import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.utils.Constants;
 
 import java.io.Serializable;
@@ -34,9 +36,10 @@ public class GameStage extends Stage implements Serializable {
     private int lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
     private float timeFromPreviousMonth = 0;
 
+    private Background background;
 
-    private  Money moneyLabel;
-    private  MonthProgress monthProgress;
+    private Money moneyLabel;
+    private MonthProgress monthProgress;
 
     private transient UpgradesButton upgradesButton;
 
@@ -54,6 +57,8 @@ public class GameStage extends Stage implements Serializable {
         super(new ScalingViewport(Scaling.fit, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
                 new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
 
+        setUpBackground();
+
         seUpMinistries();
         setUpScroller();
 
@@ -66,6 +71,10 @@ public class GameStage extends Stage implements Serializable {
         setUpUpgradesButton();
     }
 
+    private void setUpBackground(){
+        background = new Background(this);
+        addActor(background);
+    }
 
     private void seUpMinistries() {
         clickMinistry = new ClickMinistry(Constants.NAMES_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_MONEY_FOR_CLICK,
@@ -125,7 +134,7 @@ public class GameStage extends Stage implements Serializable {
     }
 
     private void setUpUpgradesButton(){
-        upgradesButton = new UpgradesButton("Upgrades");
+        upgradesButton = new UpgradesButton("", AssetsManager.getInstance().getButtonStyle());
         addActor(upgradesButton);
     }
 
