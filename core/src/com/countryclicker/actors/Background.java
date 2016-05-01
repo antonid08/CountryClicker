@@ -3,6 +3,7 @@ package com.countryclicker.actors;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
@@ -10,7 +11,7 @@ import com.countryclicker.utils.Constants;
 /**
  * Created by Илья on 01.05.2016.
  */
-public class Background extends Actor {
+public class Background extends Image {
     private static final int WIDTH = Constants.APP_WIDTH;
     private static final int HEIGHT = Constants.APP_HEIGHT;
     private static final int X = 0;

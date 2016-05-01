@@ -134,7 +134,7 @@ public class GameStage extends Stage implements Serializable {
     }
 
     private void setUpUpgradesButton(){
-        upgradesButton = new UpgradesButton("", AssetsManager.getInstance().getButtonStyle());
+        upgradesButton = new UpgradesButton("Nalogi");
         addActor(upgradesButton);
     }
 

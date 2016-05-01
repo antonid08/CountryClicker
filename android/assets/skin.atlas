@@ -1,4 +1,4 @@
-uiskin.png
+skin.png
 size: 256,128
 format: RGBA8888
 filter: Linear,Linear
@@ -195,5 +195,19 @@ white
   xy: 129, 31
   size: 3, 3
   orig: 3, 3
+  offset: 0, 0
+  index: -1
+button-up
+  rotate: false
+  xy: 2661, 0
+  size: 549, 139
+  orig: 549, 139
+  offset: 0, 0
+  index: -1
+button-down
+  rotate: false
+  xy: 3210, 0
+  size: 549, 139
+  orig: 549, 139
   offset: 0, 0
   index: -1
