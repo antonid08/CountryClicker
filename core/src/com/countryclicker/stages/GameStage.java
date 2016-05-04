@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.countryclicker.actors.Background;
 import com.countryclicker.actors.hud.MainButton;
+import com.countryclicker.actors.hud.MinistriesTable;
 import com.countryclicker.actors.ministries.ClickMinistry;
 import com.countryclicker.actors.Human;
 import com.countryclicker.actors.ministries.MonthMinistry;
@@ -49,8 +50,6 @@ public class GameStage extends Stage implements Serializable {
 
     private transient Upgrades upgrades;
 
-    private transient ScrollPane scroller;
-    private transient Table ministriesTable;
 
     public GameStage(){
         super(new ScalingViewport(Scaling.fit, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
@@ -94,7 +93,7 @@ public class GameStage extends Stage implements Serializable {
     }
 
     public void setUpScroller(){
-        ministriesTable = new Table();
+        /*ministriesTable = new Table();
 
         ministriesTable.add(clickMinistry);
         ministriesTable.row().pad(15);
@@ -113,8 +112,8 @@ public class GameStage extends Stage implements Serializable {
         Table table = new Table();
         table.add(scroller).padTop(90).padLeft(180);
         table.setFillParent(true);
-
-        addActor(table);
+*/
+        addActor(new MinistriesTable(this));
     }
 
     private void setUpHuman(){
@@ -190,5 +189,14 @@ public class GameStage extends Stage implements Serializable {
 
     public Upgrade getUpgrade(int number){
         return upgrades.getUpgrades().get(number);
+    }
+
+    public ClickMinistry getClickMinistry(){
+        return clickMinistry;
+    }
+
+    public MonthMinistry[] getMonthMinistries(){
+        return ministries;
+
     }
 }
