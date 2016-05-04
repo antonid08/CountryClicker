@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * Created by Илья on 27.03.2016.
  */
-public class UpgradesButton extends TextButton implements Serializable{
+public class MainButton extends TextButton implements Serializable{
     private final float coef = 3.94f;
     private final int HEIGHT = 60;
     private final int WIDTH = (int)(HEIGHT * coef);
@@ -21,8 +21,8 @@ public class UpgradesButton extends TextButton implements Serializable{
     private GameManager gameManager;
     private AssetsManager assetsManager;
 
-    public UpgradesButton(String text) {
-        super(text, AssetsManager.getInstance().getMainSkin());
+    public MainButton(String text) {
+        super(text, AssetsManager.getInstance().getSkin());
         assetsManager = AssetsManager.getInstance();
 
         gameManager = GameManager.getInstance();

@@ -6,9 +6,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
@@ -19,7 +23,7 @@ import java.io.Serializable;
 /**
  * Created by Илья on 23.03.2016.
  */
-abstract class Ministry extends Actor implements Observer, Serializable{
+abstract class Ministry extends Table implements Observer, Serializable{
 //View Constants
     final int WIDTH = 750;
     final int HEIGHT = 80;
@@ -35,9 +39,13 @@ abstract class Ministry extends Actor implements Observer, Serializable{
     float upgradeCoefficient; //if we buy upgrades, we increment upgrade coefficient and mult profit on this coef
 
     String name;
-    String description;
+    String description = "ddsadsadsssssssssssssssssssssssssssssssssss";
 
     GameStage stage;
+
+    Button mainView;
+    Button lvlupButton;
+
 
 //Drawable part
     TextureRegion region;
@@ -45,7 +53,8 @@ abstract class Ministry extends Actor implements Observer, Serializable{
     BitmapFont font;
 
     public Ministry(String name, int lvlupCost, GameStage stage) {
-        this.name = name;
+        //setDebug(true);
+       this.name = name;
         this.lvlupCost = lvlupCost;
         level = 0;
         upgradeCoefficient = 1;
@@ -53,17 +62,36 @@ abstract class Ministry extends Actor implements Observer, Serializable{
         this.stage = stage;
 
         setTouchable(Touchable.enabled);
-        addListener(new InputListener() {
-            @Override
-            public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                onClick();
-                return true;
-            }
-        });
 
         setUpBounds();
         setUpView();
 
+    }
+
+    protected void setUpButtons(String numbers){
+        mainView = new Button(AssetsManager.getInstance().getSkin());
+        mainView.setTouchable(Touchable.disabled);
+
+       // mainView.setDebug(true);
+        mainView.add(name).left().top().expand().padLeft(50).padTop(10);
+        mainView.add(numbers).width(100).center();
+        mainView.row();
+        mainView.add(description).left().padLeft(50).padBottom(10);
+
+
+
+        add(mainView).size(WIDTH, HEIGHT);
+
+        lvlupButton = new Button(AssetsManager.getInstance().getSkin());
+        lvlupButton.add(String.valueOf(lvlupCost));
+        lvlupButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                onClick();
+            }
+        });
+
+        add(lvlupButton).size(INFO_PART_WIDTH, HEIGHT);
     }
 
     private void setUpBounds(){
@@ -90,7 +118,7 @@ abstract class Ministry extends Actor implements Observer, Serializable{
     }
 
     abstract void lvlup();
-
+/*
     @Override
     public void draw(Batch batch, float parentAlpha) {
         //Main part
@@ -114,7 +142,7 @@ abstract class Ministry extends Actor implements Observer, Serializable{
         font.draw(batch, "Level: " + level, INFO_PART_X + 80, getY() + 60);
 
         batch.setColor(1, 1, 1, 1);
-    }
+    }*/
 
     @Override
     public void updateCoefficient(float value) {

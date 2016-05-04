@@ -18,12 +18,13 @@ public class MonthMinistry extends Ministry {
 
     public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, GameStage stage){
         super(name, upgradeCost, stage);
-
+        setUpButtons(String.valueOf(moneyPerMonth));
 
         this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
 
 
         description = "Adds money every month";
+
     }
 
     @Override
@@ -46,15 +47,6 @@ public class MonthMinistry extends Ministry {
         return moneyPerMonthOnFirstLevel;
     }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-
-        if (level != 0){
-            font.draw(batch, (int) moneyPerMonth + "$", getX() + 500, getY() + 60);
-        }
-
-    }
 
     @Override
     public void updateCoefficient(float value) {

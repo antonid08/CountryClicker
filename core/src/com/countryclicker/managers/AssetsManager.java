@@ -16,7 +16,6 @@ import com.countryclicker.utils.Constants;
  */
 public class AssetsManager {
     private Skin skin;
-    private Skin mainSkin;
 
     private Texture mainTexture;
 
@@ -41,8 +40,7 @@ public class AssetsManager {
     }
 
     public AssetsManager(){
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
-        mainSkin = new Skin(Gdx.files.internal("skin.json"));
+        skin = new Skin(Gdx.files.internal("skin.json"));
 
         mainTexture = new Texture(Gdx.files.internal("skin.png"));
 
@@ -82,7 +80,5 @@ public class AssetsManager {
     public Animation getHumanAnimation(){
         return humanAnimation;
     }
-    public Skin getMainSkin(){
-        return mainSkin;
-    }
+
 }

@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.countryclicker.actors.Background;
-import com.countryclicker.actors.hud.UpgradesButton;
+import com.countryclicker.actors.hud.MainButton;
 import com.countryclicker.actors.ministries.ClickMinistry;
 import com.countryclicker.actors.Human;
 import com.countryclicker.actors.ministries.MonthMinistry;
@@ -16,7 +16,6 @@ import com.countryclicker.actors.hud.Money;
 import com.countryclicker.actors.hud.MonthProgress;
 import com.countryclicker.actors.upgrades.Upgrade;
 import com.countryclicker.actors.upgrades.Upgrades;
-import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.utils.Constants;
 
 import java.io.Serializable;
@@ -41,7 +40,7 @@ public class GameStage extends Stage implements Serializable {
     private Money moneyLabel;
     private MonthProgress monthProgress;
 
-    private transient UpgradesButton upgradesButton;
+    private transient MainButton mainButton;
 
     private transient Human human;
 
@@ -134,8 +133,8 @@ public class GameStage extends Stage implements Serializable {
     }
 
     private void setUpUpgradesButton(){
-        upgradesButton = new UpgradesButton("Nalogi");
-        addActor(upgradesButton);
+        mainButton = new MainButton("Nalogi");
+        addActor(mainButton);
     }
 
     private void setUpUpgrades(){
