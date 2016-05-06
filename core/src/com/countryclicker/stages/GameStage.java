@@ -3,16 +3,12 @@ package com.countryclicker.stages;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.countryclicker.actors.Background;
 import com.countryclicker.actors.hud.MainButton;
 import com.countryclicker.actors.hud.MinistriesTable;
-import com.countryclicker.actors.ministries.ClickMinistry;
 import com.countryclicker.actors.Human;
-import com.countryclicker.actors.ministries.MonthMinistry;
 import com.countryclicker.actors.hud.Money;
 import com.countryclicker.actors.hud.MonthProgress;
 import com.countryclicker.actors.upgrades.Upgrade;
@@ -45,8 +41,6 @@ public class GameStage extends Stage implements Serializable {
 
     private transient Human human;
 
-    private transient MonthMinistry[] ministries;
-    private transient ClickMinistry clickMinistry;
 
     private transient Upgrades upgrades;
 
@@ -54,11 +48,8 @@ public class GameStage extends Stage implements Serializable {
     public GameStage(){
         super(new ScalingViewport(Scaling.fit, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
                 new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
-
         setUpBackground();
 
-        seUpMinistries();
-        setUpScroller();
 
         setUpMoney();
         setUpMonthProgress();
@@ -67,6 +58,8 @@ public class GameStage extends Stage implements Serializable {
 
         setUpUpgrades();
         setUpUpgradesButton();
+
+        setUpMinistries();
     }
 
     private void setUpBackground(){
@@ -74,45 +67,9 @@ public class GameStage extends Stage implements Serializable {
         addActor(background);
     }
 
-    private void seUpMinistries() {
-        clickMinistry = new ClickMinistry(Constants.NAMES_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_MONEY_FOR_CLICK,
-                Constants.START_TIME_TO_KICK_MVD,
-                Constants.COSTS_OF_MINISTRIES[0], this);
-
-        ministries = new MonthMinistry[7];
-
-        ministries[0] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH,
-                Constants.COSTS_OF_MINISTRIES[1], this);
-
-        for (int i = 1; i < ministries.length - 1; i++){
-            ministries[i] = new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i + 1], ministries[i - 1].getFirstLevelMoneyPerMonth()
-                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i + 1], this);
-        }
 
 
-    }
-
-    public void setUpScroller(){
-        /*ministriesTable = new Table();
-
-        ministriesTable.add(clickMinistry);
-        ministriesTable.row().pad(15);
-
-        for (int i = 0; i <ministries.length; i++){
-            ministriesTable.add(ministries[i]);
-            ministriesTable.row().pad(15);
-        }
-
-
-        scroller = new ScrollPane(ministriesTable);
-
-        scroller.setFadeScrollBars(false);
-        scroller.setOverscroll(false, false);
-
-        Table table = new Table();
-        table.add(scroller).padTop(90).padLeft(180);
-        table.setFillParent(true);
-*/
+    public void setUpMinistries(){
         addActor(new MinistriesTable(this));
     }
 
@@ -132,18 +89,14 @@ public class GameStage extends Stage implements Serializable {
     }
 
     private void setUpUpgradesButton(){
-        mainButton = new MainButton("Nalogi");
+        mainButton = new MainButton("Nalogi", this);
         addActor(mainButton);
     }
 
     private void setUpUpgrades(){
         upgrades = new Upgrades(this);
         addActor(upgrades);
-
-        clickMinistry.registerObserverToUpgrade(0);
-        ministries[0].registerObserverToUpgrade(1);
     }
-
 
     public void updateMoneyForMonth(int delta){
         moneyForMonth += delta;
@@ -187,16 +140,13 @@ public class GameStage extends Stage implements Serializable {
         return moneyPerClick;
     }
 
+    public Upgrades getUpgrades(){
+        return upgrades;
+    }
     public Upgrade getUpgrade(int number){
         return upgrades.getUpgrades().get(number);
     }
 
-    public ClickMinistry getClickMinistry(){
-        return clickMinistry;
-    }
 
-    public MonthMinistry[] getMonthMinistries(){
-        return ministries;
 
-    }
 }

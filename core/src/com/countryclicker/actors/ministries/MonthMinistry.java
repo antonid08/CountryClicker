@@ -16,8 +16,9 @@ public class MonthMinistry extends Ministry {
     private int moneyPerMonthOnFirstLevel;
 
 
-    public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, GameStage stage){
-        super(name, upgradeCost, stage);
+    public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, int numbersOfUpgrades,
+                         GameStage stage){
+        super(name, upgradeCost, numbersOfUpgrades, stage);
         setUpButtons(String.valueOf(moneyPerMonth));
 
         this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;

@@ -1,10 +1,12 @@
 package com.countryclicker.actors.hud;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.countryclicker.emuns.GameState;
 import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.managers.GameManager;
+import com.countryclicker.stages.GameStage;
 
 import java.io.Serializable;
 
@@ -19,13 +21,14 @@ public class MainButton extends TextButton implements Serializable{
     private final int Y = 350;
 
     private GameManager gameManager;
-    private AssetsManager assetsManager;
+    private GameStage stage;
 
-    public MainButton(String text) {
+    public MainButton(String text, GameStage stage) {
         super(text, AssetsManager.getInstance().getSkin());
-        assetsManager = AssetsManager.getInstance();
 
         gameManager = GameManager.getInstance();
+
+        this.stage = stage;
 
         addListener(new InputListener() {
             @Override
@@ -45,5 +48,6 @@ public class MainButton extends TextButton implements Serializable{
 
     private void onClick(){
         gameManager.setGameState(GameState.SHOWING_UPGRADES);
+        stage.getUpgrades().setVisible(true);
     }
 }

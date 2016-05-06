@@ -1,8 +1,5 @@
 package com.countryclicker.actors;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.stages.GameStage;
@@ -19,11 +16,11 @@ public class Background extends Image {
 
 
     GameStage stage;
-    AssetsManager assetsManager;
 
     public Background(GameStage stage){
+        super(AssetsManager.getInstance().getBackground());
         this.stage = stage;
-        assetsManager = AssetsManager.getInstance();
+
         setUpBounds();
     }
 
@@ -32,10 +29,7 @@ public class Background extends Image {
         setY(Y);
         setWidth(WIDTH);
         setHeight(HEIGHT);
+
     }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        batch.draw(assetsManager.getBackground(), getX(), getY(), getWidth(), getHeight());
-    }
 }

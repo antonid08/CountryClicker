@@ -1,18 +1,18 @@
 package com.countryclicker.actors.upgrades;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.countryclicker.emuns.GameState;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.countryclicker.actors.hud.MainButton;
+import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.managers.GameManager;
 import com.countryclicker.stages.GameStage;
+import com.countryclicker.utils.Constants;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -33,10 +33,10 @@ public class Upgrades extends Table implements Serializable{
         region = new TextureRegion(new Texture(Gdx.files.internal("ministry_background.png")), 0, 0, 50, 50);
 
         setUpUpgrades(stage);
-        setUpScroller();
+        setUpScroller(stage);
     }
 
-    @Override
+/*    @Override
     public void draw(Batch batch, float parentAlpha) {
         if (gameManager.getGameState() != GameState.SHOWING_UPGRADES){
             return;
@@ -44,7 +44,7 @@ public class Upgrades extends Table implements Serializable{
 
         batch.draw(region, 30, 50, 100, 100);
         super.draw(batch, parentAlpha);
-    }
+    }*/
 
     private void setUpUpgrades(GameStage stage){
         upgrades = new ArrayList<Upgrade>();
@@ -53,12 +53,24 @@ public class Upgrades extends Table implements Serializable{
         upgrades.add(new Upgrade("Vvesti nalog na musor", 2000, 5, stage));
     }
 
-    private void setUpScroller(){
+    private void setUpScroller(GameStage stage){
         Table upgradesTable = new Table();
 
-        upgradesTable.add(upgrades.get(0));
+        upgradesTable.setDebug(true);
+        setDebug(true);
+
+        upgradesTable.setFillParent(true);
+        upgradesTable.add(upgrades.get(0)).maxHeight(50).maxWidth(100);
         upgradesTable.row().pad(15);
 
+        upgradesTable.add(upgrades.get(1));
+        upgradesTable.row().pad(15);
+        upgradesTable.add(upgrades.get(1));
+        upgradesTable.row().pad(15);
+        upgradesTable.add(upgrades.get(1));
+        upgradesTable.row().pad(15);
+        upgradesTable.add(upgrades.get(1));
+        upgradesTable.row().pad(15);
         upgradesTable.add(upgrades.get(1));
         upgradesTable.row().pad(15);
 
@@ -67,11 +79,31 @@ public class Upgrades extends Table implements Serializable{
         scroller.setFadeScrollBars(false);
         scroller.setOverscroll(false, false);
 
-        add(scroller)/*.size(100, 50)*/;
-        setFillParent(true);
+        setBackground(new TextureRegionDrawable(AssetsManager.getInstance().getStandartButton()));
+        add(scroller).size(100, 50);
+//        setFillParent(true);
+        setSize(700, 700);
+        setPosition((Constants.APP_WIDTH - getWidth()) / 2, (Constants.APP_HEIGHT - getHeight()) / 2);
 
-        //upgradesTable.setDebug(true);
-       // setDebug(true);
+        setVisible(false);
+
+       /* Table ministriesTable = new Table();
+        ministriesTable.add(stage.getClickMinistry());
+        ministriesTable.row().pad(15);
+
+        for (int i = 0; i < stage.getMonthMinistries().length; i++){
+            ministriesTable.add(stage.getMonthMinistries()[i]);
+            ministriesTable.row().pad(15);
+        }
+
+
+        ScrollPane scroller = new ScrollPane(ministriesTable);
+
+        scroller.setFadeScrollBars(false);
+        scroller.setOverscroll(false, false);
+
+        add(scroller);
+        setFillParent(true);*/
     }
 
     public ArrayList<Upgrade> getUpgrades(){

@@ -1,16 +1,12 @@
 package com.countryclicker.actors.ministries;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.countryclicker.managers.AssetsManager;
@@ -52,9 +48,9 @@ abstract class Ministry extends Table implements Observer, Serializable{
     TextureRegion update_icon_region;
     BitmapFont font;
 
-    public Ministry(String name, int lvlupCost, GameStage stage) {
+    public Ministry(String name, int lvlupCost, int numbersOfUpgrades, GameStage stage) {
         //setDebug(true);
-       this.name = name;
+        this.name = name;
         this.lvlupCost = lvlupCost;
         level = 0;
         upgradeCoefficient = 1;
@@ -65,7 +61,7 @@ abstract class Ministry extends Table implements Observer, Serializable{
 
         setUpBounds();
         setUpView();
-
+        registerObserverToUpgrade(numbersOfUpgrades);
     }
 
     protected void setUpButtons(String numbers){
@@ -118,38 +114,13 @@ abstract class Ministry extends Table implements Observer, Serializable{
     }
 
     abstract void lvlup();
-/*
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        //Main part
-        if (level == 0) {
-            batch.setColor(Color.GRAY);
-        }
-        batch.draw(region, getX(), getY(), MAIN_PART_WIDTH, getHeight());
-        font.draw(batch, name, getX() + 20, getY() + 60);
-        font.draw(batch, description, getX() + 20, getY() + 30);
-
-        batch.setColor(1, 1, 1, 1);
-
-        //Info part
-        if (!canUpgrade()){
-            batch.setColor(Color.GRAY);
-        }
-
-        batch.draw(region, INFO_PART_X, getY(), INFO_PART_WIDTH, getHeight());
-        batch.draw(update_icon_region, INFO_PART_X + 10, getY() + 15, 20, 20);
-        font.draw(batch, lvlupCost + "$", INFO_PART_X + 60, getY() + 30);
-        font.draw(batch, "Level: " + level, INFO_PART_X + 80, getY() + 60);
-
-        batch.setColor(1, 1, 1, 1);
-    }*/
 
     @Override
     public void updateCoefficient(float value) {
         upgradeCoefficient *= value;
     }
 
-    public void registerObserverToUpgrade(int numberOfUpgrade){
-        stage.getUpgrade(numberOfUpgrade).registerObserver(this);
+    protected void registerObserverToUpgrade(int number){
+        stage.getUpgrade(number).registerObserver(this);
     }
 }

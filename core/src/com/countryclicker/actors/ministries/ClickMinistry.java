@@ -1,5 +1,6 @@
 package com.countryclicker.actors.ministries;
 
+import com.countryclicker.actors.upgrades.Upgrade;
 import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
@@ -14,8 +15,8 @@ public class ClickMinistry extends Ministry {
     private float timeFromPrevKick;
 
     public ClickMinistry(String name, int moneyPerKickOnFirstLevel, float timeToKick,
-                         int lvlupCost, GameStage stage) {
-        super(name, lvlupCost, stage);
+                         int lvlupCost, int numberOfUpgrades, GameStage stage) {
+        super(name, lvlupCost, numberOfUpgrades, stage);
         setUpButtons(String.valueOf(moneyPerKick));
 
         this.timeToKick = timeToKick;

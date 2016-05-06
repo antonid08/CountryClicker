@@ -26,9 +26,7 @@ public class AssetsManager {
     private TextureRegion human_kicked;
     private TextureRegion ministryBg;
     private TextureRegion upgradeMinistryButton;
-    private TextureRegion upgradesButton;
-
-    private TextButton.TextButtonStyle buttonStyle;
+    private TextureRegion standartButton;
 
     private static AssetsManager instance;
 
@@ -55,7 +53,7 @@ public class AssetsManager {
         bg = new TextureRegion(mainTexture, Constants.BACKGROUND_TEXTURE_X, Constants.BACKGROUND_TEXTURE_Y,
                 Constants.BACKGROUND_TEXTURE_WIDTH, Constants.BACKGROUND_TEXTURE_HEIGHT);
 
-        upgradesButton = new TextureRegion(mainTexture, Constants.BUTTON_TEXTURE_X, Constants.BUTTON_TEXTURE_Y,
+        standartButton = new TextureRegion(mainTexture, Constants.BUTTON_TEXTURE_X, Constants.BUTTON_TEXTURE_Y,
                 Constants.BUTTON_TEXTURE_WIDTH, Constants.BUTTON_TEXTURE_HEIGHT);
 
        /* FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("garuda.ttf"));
@@ -73,10 +71,9 @@ public class AssetsManager {
         return bg;
     }
 
-    public TextButton.TextButtonStyle getButtonStyle(){
-        return buttonStyle;
+    public TextureRegion getStandartButton(){
+        return standartButton;
     }
-
     public Animation getHumanAnimation(){
         return humanAnimation;
     }
