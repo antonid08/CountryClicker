@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.countryclicker.controller.GameController;
 import com.countryclicker.managers.AssetsManager;
 
 /**
@@ -26,13 +25,7 @@ public class HumanView extends Actor {
         setSize(WIDTH, HEIGHT);
 
         setTouchable(Touchable.enabled);
-        addListener(new InputListener() {
-            @Override
-            public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                stage.getController().humanClicked();
-                return true;
-            }
-        });
+
 
     }
 

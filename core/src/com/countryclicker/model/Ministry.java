@@ -1,27 +1,13 @@
 package com.countryclicker.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.countryclicker.managers.AssetsManager;
-import com.countryclicker.view.GameStage;
-import com.countryclicker.utils.Constants;
 import com.countryclicker.utils.Observer;
-
-import java.io.Serializable;
 
 /**
  * Created by Илья on 23.03.2016.
  */
-public abstract class Ministry implements Observer{
+public abstract class Ministry implements Observer {
 
-//Mechanics part
+    //Mechanics part
     protected int lvlupCost;
     protected int level;
 
@@ -52,18 +38,30 @@ public abstract class Ministry implements Observer{
         }
     }*/
 
-    boolean canUpgrade(){
+    boolean canUpgrade() {
         return world.getMoney() >= lvlupCost;
     }
 
     abstract void lvlup();
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getLvlupCost() {
+        return lvlupCost;
+    }
 
     @Override
     public void updateCoefficient(float value) {
         upgradeCoefficient *= value;
     }
 
-    protected void registerObserverToUpgrade(int number){
+    protected void registerObserverToUpgrade(int number) {
         world.getUpgrade(number).registerObserver(this);
     }
 }

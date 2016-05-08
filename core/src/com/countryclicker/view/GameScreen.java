@@ -4,6 +4,7 @@ package com.countryclicker.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.countryclicker.presenter.GamePresenter;
 import com.countryclicker.utils.Constants;
 
 
@@ -11,12 +12,14 @@ import com.countryclicker.utils.Constants;
  * Created by Илья on 29.02.2016.
  */
 public class GameScreen implements Screen {
+    private GamePresenter presenter;
 
-    private GameStage gameStage;
 
-    public GameScreen(GameStage stage) {
+    public GameScreen() {
+        presenter = new GamePresenter();
+
         Gdx.app.log("GameScreen", "Attached");
- /*       try {
+ /*     try {
             File saveFile = new File(Constants.SAVE_FILE_NAME);
             if (saveFile.exists()) {
                 FileInputStream fis = new FileInputStream(Constants.SAVE_FILE_NAME);
@@ -30,22 +33,21 @@ public class GameScreen implements Screen {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }*/
-        gameStage = stage;
-        Gdx.input.setInputProcessor(gameStage);
+        Gdx.input.setInputProcessor(presenter.getStage());
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(227, 227, 227, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameStage.act(delta);
-        gameStage.draw();
+        presenter.update(delta);
+
     }
 
     @Override
     public void resize(int width, int height) {
         Gdx.app.log("GameScreen", "resizing");
-        gameStage.getViewport().update(Constants.APP_WIDTH, Constants.APP_HEIGHT, false);
+        presenter.getStage().getViewport().update(Constants.APP_WIDTH, Constants.APP_HEIGHT, false);
     }
 
     @Override
