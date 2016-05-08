@@ -19,7 +19,7 @@ import java.io.Serializable;
 /**
  * Created by Илья on 23.03.2016.
  */
-abstract class Ministry implements Observer{
+public abstract class Ministry implements Observer{
 
 //Mechanics part
     protected int lvlupCost;

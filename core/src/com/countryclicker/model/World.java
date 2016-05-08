@@ -59,16 +59,23 @@ public class World {
     }
 
     public void update(float delta){
-        ((ClickMinistry)ministries.get(0)).update(delta);
+        updateComponents(delta);
+        calculateTimeMonth(delta);
+        notifySubscribers();
+    }
+
+    private void updateComponents(float delta){
+        human.update(delta);
+        ((ClickMinistry) ministries.get(0)).update(delta);
+    }
+
+    private void calculateTimeMonth(float delta){
         timeFromPreviousMonth += delta;
         if (timeFromPreviousMonth >= lengthOfMonth){
             timeFromPreviousMonth = 0;
             money += moneyForMonth;
         }
-        notifySubscribers();
     }
-
-
     private void notifySubscriber(ModelSubscriber subscriber) {
         assert subscriber != null;
         subscriber.modelChanged(this);
@@ -109,6 +116,10 @@ public class World {
         Gdx.app.log("money", money + "");
     }
 
+    public Ministry getMinistry(int index){
+        return ministries.get(index);
+    }
+
     public Upgrade getUpgrade(int index){
         return upgrades.get(index);
     }
@@ -117,7 +128,9 @@ public class World {
         return money;
     }
 
-
+    public Human getHuman(){
+        return human;
+    }
 
 
 }

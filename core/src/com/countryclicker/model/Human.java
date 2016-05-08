@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Human{
 
-    enum State {
+    public enum State {
         NORMAL,
         KICKED
     }
@@ -19,7 +19,7 @@ public class Human{
 
     private World world;
 
-    private State state;
+    public State state;  //TODO TRY TO MAKE IT PRIVATE
     private float animationTime;
 
     public Human (World world){
@@ -29,19 +29,7 @@ public class Human{
         this.world = world;
     }
 
-    public void onClick(){
-        state = State.KICKED;
-        world.updateMoney(moneyPerClick);
-    }
-
-/*    @Override
-    public void draw(Batch batch, float parentAlpha) {
-     //  batch.setColor(1, 1, 1, parentAlpha);
-       //batch.draw(assetsManager.getHumanAnimation().getKeyFrame(animationTime), getX(), getY(), getWidth(), getHeight());
-        batch.draw(assetsManager.getHumanAnimation().getKeyFrame(0), getX(), getY(), getWidth(), getHeight());
-    }*/
-
-    public void act(float delta) {
+    public void update(float delta) {
         if (state == State.KICKED) {
             animationTime += delta;
             if (animationTime > Constants.HUMAN_HIT_ANIMATION_TIME) {
@@ -51,6 +39,13 @@ public class Human{
         }
     }
 
+    public int getMoneyPerClick(){
+        return moneyPerClick;
+    }
+
+    public float getAnimationTime(){ //DO NOT REMOVE!!
+        return animationTime;
+    }
  /*   public Actor hit (float x, float y) {
         return x > 0 && x < getWidth() && y > 0 && y < getHeight() ? this : null;
     }*/

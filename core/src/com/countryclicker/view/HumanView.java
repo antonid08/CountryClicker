@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.countryclicker.controller.GameController;
 import com.countryclicker.managers.AssetsManager;
 
 /**
@@ -16,8 +17,10 @@ public class HumanView extends Actor {
     private static final int X = 40;
     private static final int Y = 420;
 
+    private final GameStage stage;
 
-    public HumanView (GameStage stage){
+    public HumanView (final GameStage stage){
+        this.stage = stage;
 
         setPosition(X, Y);
         setSize(WIDTH, HEIGHT);
@@ -26,7 +29,7 @@ public class HumanView extends Actor {
         addListener(new InputListener() {
             @Override
             public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                /* call controller;s method onClickHuman */
+                stage.getController().humanClicked();
                 return true;
             }
         });
@@ -44,20 +47,11 @@ public class HumanView extends Actor {
     public void draw(Batch batch, float parentAlpha) {
      //  batch.setColor(1, 1, 1, parentAlpha);
        //batch.draw(assetsManager.getHumanAnimation().getKeyFrame(animationTime), getX(), getY(), getWidth(), getHeight());
-        batch.draw(AssetsManager.getInstance().getHumanAnimation().getKeyFrame(0), getX(), getY(), getWidth(), getHeight());
+        batch.draw(AssetsManager.getInstance().getHumanAnimation().
+                getKeyFrame(/*stage.getWorld().getHuman().getAnimationTime()*/0),
+                getX(), getY(), getWidth(), getHeight());
     }
 
-    @Override
-    public void act(float delta) {
-        /* call controller's method humanAct */
 
-        /*if (state == State.KICKED) {
-            animationTime += delta;
-            if (animationTime > Constants.HUMAN_HIT_ANIMATION_TIME) {
-                state = State.NORMAL;
-                animationTime = 0;
-            }
-        }*/
-    }
 
 }

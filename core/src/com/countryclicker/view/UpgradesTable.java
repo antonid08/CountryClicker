@@ -1,6 +1,5 @@
 package com.countryclicker.view;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -29,7 +28,7 @@ public class UpgradesTable extends Table {
         super.draw(batch, parentAlpha);
     }*/
 
-    private void setUpUpgrades(GameStage stage){
+    private void setUpUpgrades(GameStage stage) {
         /*it is not here. i need initialise it in Model */
         /*upgrades = new ArrayList<Upgrade>();
 
@@ -37,7 +36,7 @@ public class UpgradesTable extends Table {
         upgrades.add(new Upgrade("Vvesti nalog na musor", 2000, 5, stage));*/
     }
 
-    private void setUpScroller(GameStage stage){
+    private void setUpScroller(GameStage stage) {
         Table upgradesTable = new Table();
 
         upgradesTable.setDebug(true);

@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.countryclicker.managers.AssetsManager;
+import com.countryclicker.model.Ministry;
 import com.countryclicker.utils.Constants;
 
 /**
@@ -19,11 +20,9 @@ public class MinistryView  extends Table {
     //View Constants
     final int WIDTH = 750;
     final int HEIGHT = 80;
-    final int MAIN_PART_WIDTH = 550;
-    final int DISTANCE_BETWEEN_MAIN_AND_INFO_PART = 50;
     final int INFO_PART_WIDTH = 150;
 
-
+    private Ministry dataSource;
 
     Button mainView;
     Button lvlupButton;
@@ -33,26 +32,27 @@ public class MinistryView  extends Table {
     TextureRegion update_icon_region;
     BitmapFont font;
 
-    public MinistryView() {
-        //setDebug(true);
+    private int numberOfMinistry;
 
+    public MinistryView(int numberOfMinistry) {
+        //setDebug(true);
+        this.numberOfMinistry = numberOfMinistry;
 
         setTouchable(Touchable.enabled);
-
+        setUpButtons();
         setUpBounds();
         setUpView();
     }
 
-    protected void setUpButtons(String numbers){
+    protected void setUpButtons(){
         mainView = new Button(AssetsManager.getInstance().getSkin());
         mainView.setTouchable(Touchable.disabled);
 
        // mainView.setDebug(true);
-        mainView.add(/*get name from controller*/).left().top().expand().padLeft(50).padTop(10);
-        mainView.add(numbers).width(100).center();
+        mainView.add().left().top().expand().padLeft(50).padTop(10);
+        //mainView.add(numbers).width(100).center();
         mainView.row();
-        mainView.add(/*get descrtiption from controller*/).left().padLeft(50).padBottom(10);
-
+        mainView.add().left().padLeft(50).padBottom(10);
 
 
         add(mainView).size(WIDTH, HEIGHT);

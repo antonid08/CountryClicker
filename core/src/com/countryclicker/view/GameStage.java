@@ -30,6 +30,7 @@ public class GameStage extends Stage implements ModelSubscriber {
     private HumanView humanView;
 
     private final GameController controller;
+    private World world;
 
     public GameStage(GameController controller) {
         super(new ScalingViewport(Scaling.fit, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
@@ -63,9 +64,13 @@ public class GameStage extends Stage implements ModelSubscriber {
         return controller;
     }
 
+    public World getWorld(){
+        return  world;
+    }
 
     @Override
     public void modelChanged(World world) {
+        this.world = world;
         Gdx.app.log("kek", String.valueOf(world.getMoney()));
     }
 
