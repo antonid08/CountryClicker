@@ -1,4 +1,4 @@
-package com.countryclicker.actors.ministries;
+package com.countryclicker.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,58 +10,37 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.countryclicker.managers.AssetsManager;
-import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
-import com.countryclicker.utils.Observer;
-
-import java.io.Serializable;
 
 /**
- * Created by Илья on 23.03.2016.
+ * Created by Илья on 06.05.2016.
  */
-abstract class Ministry extends Table implements Observer, Serializable{
-//View Constants
+public class MinistryView  extends Table {
+    //View Constants
     final int WIDTH = 750;
     final int HEIGHT = 80;
     final int MAIN_PART_WIDTH = 550;
     final int DISTANCE_BETWEEN_MAIN_AND_INFO_PART = 50;
     final int INFO_PART_WIDTH = 150;
-    final int INFO_PART_X = (int) getX() + MAIN_PART_WIDTH  + DISTANCE_BETWEEN_MAIN_AND_INFO_PART;
 
-//Mechanics part
-    int lvlupCost;
-    int level;
 
-    float upgradeCoefficient; //if we buy upgrades, we increment upgrade coefficient and mult profit on this coef
-
-    String name;
-    String description = "ddsadsadsssssssssssssssssssssssssssssssssss";
-
-    GameStage stage;
 
     Button mainView;
     Button lvlupButton;
 
 
-//Drawable part
     TextureRegion region;
     TextureRegion update_icon_region;
     BitmapFont font;
 
-    public Ministry(String name, int lvlupCost, int numbersOfUpgrades, GameStage stage) {
+    public MinistryView() {
         //setDebug(true);
-        this.name = name;
-        this.lvlupCost = lvlupCost;
-        level = 0;
-        upgradeCoefficient = 1;
 
-        this.stage = stage;
 
         setTouchable(Touchable.enabled);
 
         setUpBounds();
         setUpView();
-        registerObserverToUpgrade(numbersOfUpgrades);
     }
 
     protected void setUpButtons(String numbers){
@@ -69,21 +48,21 @@ abstract class Ministry extends Table implements Observer, Serializable{
         mainView.setTouchable(Touchable.disabled);
 
        // mainView.setDebug(true);
-        mainView.add(name).left().top().expand().padLeft(50).padTop(10);
+        mainView.add(/*get name from controller*/).left().top().expand().padLeft(50).padTop(10);
         mainView.add(numbers).width(100).center();
         mainView.row();
-        mainView.add(description).left().padLeft(50).padBottom(10);
+        mainView.add(/*get descrtiption from controller*/).left().padLeft(50).padBottom(10);
 
 
 
         add(mainView).size(WIDTH, HEIGHT);
 
         lvlupButton = new Button(AssetsManager.getInstance().getSkin());
-        lvlupButton.add(String.valueOf(lvlupCost));
+        lvlupButton.add(String.valueOf(/*get lvlupCost from controller*/));
         lvlupButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                onClick();
+                /* call controller's onThisButtonClick method */;
             }
         });
 
@@ -102,25 +81,11 @@ abstract class Ministry extends Table implements Observer, Serializable{
     }
 
 
-    public void onClick() {
+    /*public void onClick() {
         if (canUpgrade()){
             stage.updateMoney(-lvlupCost);
             lvlup();
         }
-    }
+    }*/
 
-    boolean canUpgrade(){
-        return stage.getMoney() >= lvlupCost;
-    }
-
-    abstract void lvlup();
-
-    @Override
-    public void updateCoefficient(float value) {
-        upgradeCoefficient *= value;
-    }
-
-    protected void registerObserverToUpgrade(int number){
-        stage.getUpgrade(number).registerObserver(this);
-    }
 }

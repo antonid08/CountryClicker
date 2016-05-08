@@ -1,18 +1,13 @@
-package com.countryclicker.actors.hud;
+package com.countryclicker.model;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.countryclicker.managers.AssetsManager;
-import com.countryclicker.managers.GameManager;
-import com.countryclicker.stages.GameStage;
+import com.countryclicker.view.GameStage;
 import com.countryclicker.utils.Constants;
 
-import java.awt.Label;
 import java.io.Serializable;
-
-import javafx.scene.text.Font;
 
 /**
  * Created by Илья on 22.03.2016.

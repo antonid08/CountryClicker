@@ -1,18 +1,16 @@
-package com.countryclicker.actors.hud;
+package com.countryclicker.view;
 
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.countryclicker.emuns.GameState;
 import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.managers.GameManager;
-import com.countryclicker.view.GameStage;
 
-import java.io.Serializable;
+import org.w3c.dom.Text;
 
 /**
- * Created by Илья on 27.03.2016.
+ * Created by Илья on 06.05.2016.
  */
-public class MainButton extends TextButton implements Serializable{
+public class UpgradesButton extends TextButton {
     private final float coef = 3.94f;
     private final int HEIGHT = 60;
     private final int WIDTH = (int)(HEIGHT * coef);
@@ -22,7 +20,7 @@ public class MainButton extends TextButton implements Serializable{
     private GameManager gameManager;
     private GameStage stage;
 
-    public MainButton(String text, GameStage stage) {
+    public UpgradesButton(String text, GameStage stage) {
         super(text, AssetsManager.getInstance().getSkin());
 
         gameManager = GameManager.getInstance();
@@ -32,7 +30,7 @@ public class MainButton extends TextButton implements Serializable{
         addListener(new InputListener() {
             @Override
             public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                onClick();
+                /* call controller's method onClickThisButton */
                 return true;
             }
         });
@@ -44,9 +42,9 @@ public class MainButton extends TextButton implements Serializable{
         setSize(WIDTH, HEIGHT);
         setPosition(X, Y);
     }
-
+/*
     private void onClick(){
         gameManager.setGameState(GameState.SHOWING_UPGRADES);
         stage.getUpgrades().setVisible(true);
-    }
+    }*/
 }

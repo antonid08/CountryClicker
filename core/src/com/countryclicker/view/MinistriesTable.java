@@ -1,13 +1,8 @@
-package com.countryclicker.actors.hud;
+package com.countryclicker.view;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.countryclicker.actors.ministries.ClickMinistry;
-import com.countryclicker.actors.ministries.MonthMinistry;
-import com.countryclicker.stages.GameStage;
-import com.countryclicker.utils.Constants;
+import com.countryclicker.model.ClickMinistry;
+import com.countryclicker.model.MonthMinistry;
 
 
 /**
@@ -28,7 +23,10 @@ public class MinistriesTable extends Table{
         setUpBounds();
 
         this.stage = stage;
-        setUpMinistries();
+
+        //TODO in table create view for each ministry
+
+     /*   setUpMinistries();
 
         Table ministriesTable = new Table();
         ministriesTable.add(clickMinistry);
@@ -46,11 +44,11 @@ public class MinistriesTable extends Table{
         scroller.setOverscroll(false, false);
 
         add(scroller).padTop(90).padLeft(300);
-        setFillParent(true);
+        setFillParent(true);*/
     }
 
 
-     private void setUpMinistries() {
+/*     private void setUpMinistries() {
         clickMinistry = new ClickMinistry(Constants.NAMES_OF_MINISTRIES[0], Constants.FIRST_MINISTRY_MONEY_FOR_CLICK,
                 Constants.START_TIME_TO_KICK_MVD,
                 Constants.COSTS_OF_MINISTRIES[0], 0, stage);
@@ -65,7 +63,7 @@ public class MinistriesTable extends Table{
                     * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i + 1],
                     1, stage);
         }
-    }
+    }*/
     private void setUpBounds(){
         setPosition(X, Y);
     }

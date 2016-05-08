@@ -1,18 +1,14 @@
-package com.countryclicker.screens;
+package com.countryclicker.view;
 
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.countryclicker.stages.GameStage;
 import com.countryclicker.utils.Constants;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
@@ -41,7 +37,6 @@ public class GameScreen implements Screen {
         }*/
         gameStage = new GameStage();
         Gdx.input.setInputProcessor(gameStage);
-
     }
 
     @Override

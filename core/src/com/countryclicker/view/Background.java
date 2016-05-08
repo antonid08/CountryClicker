@@ -1,8 +1,8 @@
-package com.countryclicker.actors;
+package com.countryclicker.view;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.countryclicker.managers.AssetsManager;
-import com.countryclicker.stages.GameStage;
+import com.countryclicker.view.GameStage;
 import com.countryclicker.utils.Constants;
 
 /**
