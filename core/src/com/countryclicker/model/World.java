@@ -3,8 +3,6 @@ package com.countryclicker.model;
 import com.badlogic.gdx.Gdx;
 import com.countryclicker.utils.Constants;
 import com.countryclicker.utils.ModelSubscriber;
-import com.countryclicker.utils.Observable;
-import com.countryclicker.utils.Observer;
 
 import java.util.ArrayList;
 
@@ -12,7 +10,7 @@ import java.util.ArrayList;
  * Created by Илья on 07.05.2016.
  */
 
-public class World  {
+public class World {
 
     private int moneyForMonth = 0;
     private float money = 100000;
@@ -20,18 +18,21 @@ public class World  {
     private int lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
     private float timeFromPreviousMonth = 0;
 
-    private  ArrayList<ModelSubscriber> subscribers;
+    private ArrayList<ModelSubscriber> subscribers;
 
     private Human human;
     private ArrayList<Ministry> ministries;
     private ArrayList<Upgrade> upgrades;
 
-    public World(){
+    public World() {
+        subscribers = new ArrayList<ModelSubscriber>();
+
         human = new Human(this);
+        setUpUpgrades();
         setUpMinistries();
     }
 
-    private void setUpMinistries(){
+    private void setUpMinistries() {
         ministries = new ArrayList<Ministry>();
 
 
@@ -43,11 +44,28 @@ public class World  {
         ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH,
                 Constants.COSTS_OF_MINISTRIES[1], 1, this));
 
-        for (int i = 1; i < Constants.NUMBER_OF_MINISTRIES - 1; i++){
-            ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i + 1], ((MonthMinistry)ministries.get(i - 1)).getFirstLevelMoneyPerMonth()
+        for (int i = 2; i < Constants.NUMBER_OF_MINISTRIES - 1; i++) {
+            ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i + 1], ((MonthMinistry) ministries.get(i - 1)).getFirstLevelMoneyPerMonth()
                     * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i + 1],
                     1, this));
         }
+    }
+
+    private void setUpUpgrades(){
+       upgrades = new ArrayList<Upgrade>();
+
+       upgrades.add(new Upgrade("Pizdit silnee", 1000, 3, this));
+       upgrades.add(new Upgrade("Vvesti nalog na musor", 2000, 5, this));
+    }
+
+    public void update(float delta){
+        ((ClickMinistry)ministries.get(0)).update(delta);
+        timeFromPreviousMonth += delta;
+        if (timeFromPreviousMonth >= lengthOfMonth){
+            timeFromPreviousMonth = 0;
+            money += moneyForMonth;
+        }
+        notifySubscribers();
     }
 
 
@@ -63,7 +81,7 @@ public class World  {
     }
 
     public void registerObserver(ModelSubscriber subscriber) {
-        if (subscriber== null)
+        if (subscriber == null)
             throw new NullPointerException("Empty observer");
         if (subscribers.contains(subscriber))
             throw new IllegalArgumentException("Repeated subscribe: " +
@@ -81,52 +99,25 @@ public class World  {
         subscribers.remove(subscriber);
     }
 
-    public void notifyObservers() {
 
-    }
-
-    public void updateMoneyForMonth(int delta){
+    public void updateMoneyForMonth(int delta) {
         moneyForMonth += delta;
     }
 
-    public void updateMoney(float delta){
+    public void updateMoney(float delta) {
         money += delta;
         Gdx.app.log("money", money + "");
     }
 
-    public void updateTimeFromPreviousMonth(float delta){
-        timeFromPreviousMonth += delta;
+    public Upgrade getUpgrade(int index){
+        return upgrades.get(index);
     }
 
-    public void setTimeFromPreviousMonth(float value){
-        timeFromPreviousMonth = value;
-    }
-
-    public float getTimeFromPreviousMonth(){
-        return timeFromPreviousMonth;
-    }
-
-    public int getLengthOfMonth(){
-        return lengthOfMonth;
-    }
-
-    public int getMoneyForMonth(){
-        return moneyForMonth;
-    }
-
-    public float getMoney(){
+    public float getMoney() {
         return money;
     }
 
 
 
-/*
-    public Upgrades getUpgrades(){
-        return upgrades;
-    }
-    public Upgrade getUpgrade(int number){
-        return upgrades.getUpgrades().get(number);
-    }
-*/
 
 }

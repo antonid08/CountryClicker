@@ -14,7 +14,7 @@ import java.io.Serializable;
  * Created by Илья on 23.03.2016.
  */
 public class MonthProgress  extends Actor implements Serializable{
-    public static final int WIDTH = 150;
+  /*  public static final int WIDTH = 150;
     public static final int HEIGHT = 30;
     public static final int RECTANGLE_BORDER = 3;
     public static final int RECTANGLE_HEIGHT = HEIGHT - RECTANGLE_BORDER * 2;
@@ -73,6 +73,6 @@ public class MonthProgress  extends Actor implements Serializable{
         progressRectangleHeight = RECTANGLE_HEIGHT;
         progressRectangleWidthMax = RECTANGLE_WIDTH_MAX;
     }
-
+*/
 
 }

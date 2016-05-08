@@ -1,6 +1,5 @@
 package com.countryclicker.model;
 
-import com.countryclicker.view.GameStage;
 import com.countryclicker.utils.Constants;
 
 /**
@@ -35,7 +34,7 @@ public class ClickMinistry extends Ministry {
 
     private void calculateTimeToKick() {
         timeToKick = Constants.START_TIME_TO_KICK_MVD / level;
-        stage.setMoneyPerClick((int) moneyPerKick);
+        //stage.setMoneyPerClick((int) moneyPerKick);
     }
 
     /*@Override
@@ -48,7 +47,7 @@ public class ClickMinistry extends Ministry {
 
     }*/
 
-    public void act(float delta) {
+    public void update(float delta) {
         timeFromPrevKick += delta;
         if (timeFromPrevKick > timeToKick) {
             timeFromPrevKick = 0;

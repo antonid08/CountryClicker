@@ -1,30 +1,23 @@
 package com.countryclicker.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.countryclicker.controller.GameController;
 import com.countryclicker.managers.AssetsManager;
+import com.countryclicker.model.World;
 import com.countryclicker.utils.Constants;
-
-import java.io.Serializable;
+import com.countryclicker.utils.ModelSubscriber;
 
 
 /**
  * Created by Илья on 22.03.2016.
  */
-public class GameStage extends Stage implements Serializable {
+public class GameStage extends Stage implements ModelSubscriber {
     private static final int VIEWPORT_WIDTH = Constants.APP_WIDTH;
     private static final int VIEWPORT_HEIGHT = Constants.APP_HEIGHT;
-
-/*
-    private int moneyForMonth = 0;
-    private int moneyPerClick = 1;
-    private float money = 100000;
-
-    private int lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
-    private float timeFromPreviousMonth = 0;
-*/
 
     private Background background;
 
@@ -32,16 +25,19 @@ public class GameStage extends Stage implements Serializable {
     private MonthView monthProgress;
     private MinistriesTable ministriesTable;
     private UpgradesTable upgradesTable;
-    private  UpgradesButton upgradesButton;
+    private UpgradesButton upgradesButton;
 
-    private  HumanView humanView;
+    private HumanView humanView;
 
+    private final GameController controller;
 
-
-
-    public GameStage(){
+    public GameStage(GameController controller) {
         super(new ScalingViewport(Scaling.fit, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
                 new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
+
+        this.controller = controller;
+        subscribeToModel();
+
         background = new Background(this);
         ministriesTable = new MinistriesTable(this);
         upgradesButton = new UpgradesButton("Upgrades", this);
@@ -59,5 +55,22 @@ public class GameStage extends Stage implements Serializable {
         addActor(moneyLabel);
     }
 
+    private void subscribeToModel(){
+        controller.getWorld().registerObserver(this);
+    }
 
+    public GameController getController(){
+        return controller;
+    }
+
+
+    @Override
+    public void modelChanged(World world) {
+        Gdx.app.log("kek", String.valueOf(world.getMoney()));
+    }
+
+    @Override
+    public void act(float delta) {
+        controller.update(delta);
+    }
 }

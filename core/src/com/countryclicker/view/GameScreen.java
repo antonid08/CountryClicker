@@ -6,11 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.countryclicker.utils.Constants;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-
 
 /**
  * Created by Илья on 29.02.2016.
@@ -19,7 +14,7 @@ public class GameScreen implements Screen {
 
     private GameStage gameStage;
 
-    public GameScreen() {
+    public GameScreen(GameStage stage) {
         Gdx.app.log("GameScreen", "Attached");
  /*       try {
             File saveFile = new File(Constants.SAVE_FILE_NAME);
@@ -35,7 +30,7 @@ public class GameScreen implements Screen {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }*/
-        gameStage = new GameStage();
+        gameStage = stage;
         Gdx.input.setInputProcessor(gameStage);
     }
 
@@ -61,7 +56,7 @@ public class GameScreen implements Screen {
     @Override
     public void hide() {
         Gdx.app.log("GameScreen", "hide called");
-        try {
+/*        try {
             File saveFile = new File(Constants.SAVE_FILE_NAME);
             if (!saveFile.exists()) {
                 saveFile.createNewFile();
@@ -75,7 +70,7 @@ public class GameScreen implements Screen {
             oos.close();
         } catch (IOException e){
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     @Override

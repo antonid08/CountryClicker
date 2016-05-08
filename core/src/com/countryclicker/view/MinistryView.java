@@ -58,7 +58,7 @@ public class MinistryView  extends Table {
         add(mainView).size(WIDTH, HEIGHT);
 
         lvlupButton = new Button(AssetsManager.getInstance().getSkin());
-        lvlupButton.add(String.valueOf(/*get lvlupCost from controller*/));
+        lvlupButton.add(String.valueOf(2/*get lvlupCost from controller*/));
         lvlupButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
