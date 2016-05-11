@@ -30,13 +30,12 @@ public abstract class Ministry implements Observer {
     }
 
 
-    //TODO to controller
-/*    public void onClick() {
+    public void tryLvlUp() {
         if (canUpgrade()){
-            stage.updateMoney(-lvlupCost);
+            world.updateMoney(-lvlupCost);
             lvlup();
         }
-    }*/
+    }
 
     boolean canUpgrade() {
         return world.getMoney() >= lvlupCost;

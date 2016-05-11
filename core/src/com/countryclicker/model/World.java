@@ -95,6 +95,10 @@ public class World {
         return upgrades.get(index);
     }
 
+    public ArrayList<Upgrade> getUpgrades(){
+        return upgrades;
+    }
+
     public float getMoney() {
         return money;
     }

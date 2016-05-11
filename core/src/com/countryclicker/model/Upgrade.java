@@ -72,6 +72,14 @@ public class Upgrade extends Button implements Observable {
     private boolean canBuy() {
         return world.getMoney() >= cost;
     }
+
+    public boolean tryBuy(){
+        if (canBuy()) {
+            buy();
+            return true;
+        }
+        return false;
+    }
 /*
     @Override
     public void draw(Batch batch, float parentAlpha) {

@@ -4,94 +4,78 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.countryclicker.managers.AssetsManager;
+import com.countryclicker.model.Upgrade;
 import com.countryclicker.utils.Constants;
+
+import java.util.ArrayList;
 
 /**
  * Created by Илья on 07.05.2016.
  */
 public class UpgradesTable extends Table {
+    private final int WIDTH = 400;
+    private final int HEIGHT = 400;
 
-    public UpgradesTable(GameStage stage) {
+    private ArrayList<UpgradeView> upgradeViews;
+
+    private Table upgradesTable;
+    private ScrollPane scroller;
 
 
-        setUpUpgrades(stage);
-        setUpScroller(stage);
+    public UpgradesTable(ArrayList<Upgrade> upgradesInfo) {
+        setUpUpgrades(upgradesInfo);
+        setUpBounds();
+        setUpScroller();
     }
 
-/*    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        if (gameManager.getGameState() != GameState.SHOWING_UPGRADES){
-            return;
+    private void setUpUpgrades(ArrayList<Upgrade> upgradesInfo) {
+        upgradeViews = new ArrayList<UpgradeView>();
+        for (Upgrade upgradeInfo : upgradesInfo) {
+            upgradeViews.add(new UpgradeView(upgradeInfo));
         }
-
-        batch.draw(region, 30, 50, 100, 100);
-        super.draw(batch, parentAlpha);
-    }*/
-
-    private void setUpUpgrades(GameStage stage) {
-        /*it is not here. i need initialise it in Model */
-        /*upgrades = new ArrayList<Upgrade>();
-
-        upgrades.add(new Upgrade("Pizdit silnee", 1000, 3, stage));
-        upgrades.add(new Upgrade("Vvesti nalog na musor", 2000, 5, stage));*/
     }
 
-    private void setUpScroller(GameStage stage) {
-        Table upgradesTable = new Table();
-
-        upgradesTable.setDebug(true);
-        setDebug(true);
-
-        upgradesTable.setFillParent(true);
-        /*get upgrades from model and create views here*/
-
-        /*upgradesTable.add(upgrades.get(0)).maxHeight(50).maxWidth(100);
-        upgradesTable.row().pad(15);
-
-        upgradesTable.add(upgrades.get(1));
-        upgradesTable.row().pad(15);
-        upgradesTable.add(upgrades.get(1));
-        upgradesTable.row().pad(15);
-        upgradesTable.add(upgrades.get(1));
-        upgradesTable.row().pad(15);
-        upgradesTable.add(upgrades.get(1));
-        upgradesTable.row().pad(15);
-        upgradesTable.add(upgrades.get(1));
-        upgradesTable.row().pad(15);*/
-
-        ScrollPane scroller = new ScrollPane(upgradesTable);
-
-        scroller.setFadeScrollBars(false);
-        scroller.setOverscroll(false, false);
-
+    private void setUpBounds() {
         setBackground(new TextureRegionDrawable(AssetsManager.getInstance().getStandartButton()));
-        add(scroller).size(100, 50);
-//        setFillParent(true);
-        setSize(700, 700);
+        setSize(WIDTH, HEIGHT);
         setPosition((Constants.APP_WIDTH - getWidth()) / 2, (Constants.APP_HEIGHT - getHeight()) / 2);
+    }
 
-        setVisible(false);
+    private void setUpScroller() {
+        //setDebug(true);
 
-       /* Table ministriesTable = new Table();
-        ministriesTable.add(stage.getClickMinistry());
-        ministriesTable.row().pad(15);
+        upgradesTable = new Table();
 
-        for (int i = 0; i < stage.getMonthMinistries().length; i++){
-            ministriesTable.add(stage.getMonthMinistries()[i]);
-            ministriesTable.row().pad(15);
+        for (UpgradeView view : upgradeViews) {
+            upgradesTable.add(view).size(300, 70).padBottom(20);
+            upgradesTable.row();
         }
 
-
-        ScrollPane scroller = new ScrollPane(ministriesTable);
+        scroller = new ScrollPane(upgradesTable);
 
         scroller.setFadeScrollBars(false);
         scroller.setOverscroll(false, false);
 
-        add(scroller);
-        setFillParent(true);*/
+        add(scroller).size(300, 150);
+        setVisible(false);
+    }
+
+    public void removeUpgradeView(int number) {
+        try {
+            upgradeViews.remove(number);
+            clear();
+            setUpScroller();
+            setVisible(true);
+        } catch (IndexOutOfBoundsException e){
+            clear();
+        }
     }
 
     /*public ArrayList<Upgrade> getUpgrades(){
         return upgrades;
     }*/
+
+    public UpgradeView getUpgradeView(int number) {
+        return upgradeViews.get(number);
+    }
 }

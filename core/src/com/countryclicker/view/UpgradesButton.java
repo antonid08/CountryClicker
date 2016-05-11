@@ -27,13 +27,7 @@ public class UpgradesButton extends TextButton {
 
         this.stage = stage;
 
-        addListener(new InputListener() {
-            @Override
-            public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                /* call controller's method onClickThisButton */
-                return true;
-            }
-        });
+
 
         setUpBounds();
     }

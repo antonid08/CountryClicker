@@ -20,7 +20,7 @@ public class MinistriesTable extends Table{
     private ArrayList<MinistryView> ministryViews;
 
     public MinistriesTable(ArrayList<Ministry> ministriesInfo){
-        setDebug(true);
+        //setDebug(true);
         setUpBounds();
 
         setUpMinistryViews(ministriesInfo);
@@ -34,7 +34,6 @@ public class MinistriesTable extends Table{
         Table ministriesTable = new Table();
 
         for (int i = 0; i < ministryViews.size(); i++){
-            Gdx.app.log("kek", ministryViews.size()+"");
             ministriesTable.add(ministryViews.get(i));
             ministriesTable.row().pad(15);
         }
@@ -58,5 +57,9 @@ public class MinistriesTable extends Table{
 
     private void setUpBounds(){
         setPosition(X, Y);
+    }
+
+    public MinistryView getMinistryView(int number){
+        return ministryViews.get(number);
     }
 }

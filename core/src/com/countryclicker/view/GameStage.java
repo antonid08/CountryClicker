@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.model.Ministry;
+import com.countryclicker.model.Upgrade;
 import com.countryclicker.utils.Constants;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class GameStage extends Stage {
 
     private HumanView humanView;
 
-    public GameStage(ArrayList<Ministry> ministriesInfo) {
+    public GameStage(ArrayList<Ministry> ministriesInfo, ArrayList<Upgrade> upgradesInfo) {
         super(new ScalingViewport(Scaling.fit, VIEWPORT_WIDTH, VIEWPORT_HEIGHT,
                 new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT)));
 
@@ -36,7 +37,7 @@ public class GameStage extends Stage {
         background = new Background(this);
         ministriesTable = new MinistriesTable(ministriesInfo);
         upgradesButton = new UpgradesButton("Upgrades", this);
-        upgradesTable = new UpgradesTable(this);
+        upgradesTable = new UpgradesTable(upgradesInfo);
         monthProgress = new MonthView(0, 10, 1, false, AssetsManager.getInstance().getSkin());
         humanView = new HumanView(this);
         moneyLabel = new MoneyLabel();
@@ -53,5 +54,21 @@ public class GameStage extends Stage {
 
     public HumanView getHumanView() {
         return humanView;
+    }
+
+    public UpgradesButton getUpgradesButton(){
+        return upgradesButton;
+    }
+
+    public UpgradesTable getUpgradesTable(){
+        return upgradesTable;
+    }
+
+    public MinistryView getMinistryView(int number){
+        return ministriesTable.getMinistryView(number);
+    }
+
+    public UpgradeView getUpgradeView(int number){
+        return upgradesTable.getUpgradeView(number);
     }
 }
