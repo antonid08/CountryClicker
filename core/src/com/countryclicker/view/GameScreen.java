@@ -4,8 +4,16 @@ package com.countryclicker.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.countryclicker.model.World;
 import com.countryclicker.presenter.GamePresenter;
 import com.countryclicker.utils.Constants;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 
 /**
@@ -16,23 +24,20 @@ public class GameScreen implements Screen {
 
 
     public GameScreen() {
-        presenter = new GamePresenter();
+        try{
+            long prevTime = loadTime();
+            long currentTime = System.currentTimeMillis();
+
+            long diffTimeInSeconds = (currentTime - prevTime) / 1000;
+            presenter = new GamePresenter(loadGame(), diffTimeInSeconds);
+            Gdx.app.log("GameScreen", "Loaded");
+        }
+        catch (Exception e){
+            presenter = new GamePresenter();
+        }
 
         Gdx.app.log("GameScreen", "Attached");
- /*     try {
-            File saveFile = new File(Constants.SAVE_FILE_NAME);
-            if (saveFile.exists()) {
-                FileInputStream fis = new FileInputStream(Constants.SAVE_FILE_NAME);
-                ObjectInputStream oin = new ObjectInputStream(fis);
-                gameStage = (GameStage) oin.readObject();
-            } else {
-                gameStage = new GameStage();
-            }
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
+
         Gdx.input.setInputProcessor(presenter.getStage());
     }
 
@@ -57,22 +62,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
+        saveGame();
         Gdx.app.log("GameScreen", "hide called");
-/*        try {
-            File saveFile = new File(Constants.SAVE_FILE_NAME);
-            if (!saveFile.exists()) {
-                saveFile.createNewFile();
-            }
-
-            FileOutputStream outputStream = new FileOutputStream(Constants.SAVE_FILE_NAME);
-            ObjectOutputStream oos = new ObjectOutputStream(outputStream);
-
-            oos.writeObject(gameStage);
-            oos.flush();
-            oos.close();
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }*/
     }
 
     @Override
@@ -91,4 +82,73 @@ public class GameScreen implements Screen {
         Gdx.app.log("GameScreen", "exit");
     }
 
+    private void saveGame(){
+        saveTime();
+        try {
+            File saveFile = new File(Constants.SAVE_FILE_NAME);
+            if (!saveFile.exists()) {
+                saveFile.createNewFile();
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(Constants.SAVE_FILE_NAME);
+            ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+
+            oos.writeObject(presenter.getWorld());
+            oos.flush();
+            oos.close();
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void saveTime(){
+        try{
+            File saveFile = new File(Constants.TIME_FILE_NAME);
+            if (!saveFile.exists()) {
+                saveFile.createNewFile();
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(Constants.TIME_FILE_NAME);
+            ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+
+            oos.writeObject(System.currentTimeMillis());
+            oos.flush();
+            oos.close();
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    private long loadTime(){
+        try {
+            File saveFile = new File(Constants.TIME_FILE_NAME);
+            if (saveFile.exists()) {
+                FileInputStream fis = new FileInputStream(Constants.TIME_FILE_NAME);
+                ObjectInputStream oin = new ObjectInputStream(fis);
+                return (Long) oin.readObject();
+            }
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+             e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+    private World loadGame(){
+        try {
+            File saveFile = new File(Constants.SAVE_FILE_NAME);
+            if (saveFile.exists()) {
+                FileInputStream fis = new FileInputStream(Constants.SAVE_FILE_NAME);
+                ObjectInputStream oin = new ObjectInputStream(fis);
+                return (World) oin.readObject();
+            }
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+             e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -3,13 +3,14 @@ package com.countryclicker.model;
 import com.badlogic.gdx.Gdx;
 import com.countryclicker.utils.Constants;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Илья on 07.05.2016.
  */
 
-public class World {
+public class World implements Serializable{
 
     private int moneyForMonth = 0;
     private float money = Constants.START_MONEY;
@@ -95,6 +96,14 @@ public class World {
     public void updateMoney(float delta) {
         money += delta;
         Gdx.app.log("money", money + "");
+    }
+
+    public void calculateMoneyFromPrevStat(long diffTime){
+        long monthes = diffTime / lengthOfMonth;
+        money += moneyForMonth * monthes;
+
+        long mvdKicks = (long)(diffTime / ((ClickMinistry) ministries.get(0)).getTimeToKick());
+        money += mvdKicks * ((ClickMinistry) ministries.get(0)).getMoneyPerKick();
     }
 
     public Ministry getMinistry(int index){

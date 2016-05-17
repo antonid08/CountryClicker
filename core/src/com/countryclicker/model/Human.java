@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by Илья on 29.02.2016.
  */
-public class Human{
+public class Human implements Serializable{
 
     public enum State {
         NORMAL,

@@ -2,10 +2,12 @@ package com.countryclicker.model;
 
 import com.countryclicker.utils.Observer;
 
+import java.io.Serializable;
+
 /**
  * Created by Илья on 23.03.2016.
  */
-public abstract class Ministry implements Observer {
+public abstract class Ministry implements Observer, Serializable {
 
     protected int lvlupCost;
     protected int level;

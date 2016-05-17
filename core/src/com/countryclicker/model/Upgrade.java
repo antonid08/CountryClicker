@@ -6,12 +6,13 @@ import com.countryclicker.utils.Observable;
 import com.countryclicker.utils.Observer;
 import com.countryclicker.view.GameStage;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Илья on 27.03.2016.
  */
-public class Upgrade extends Button implements Observable {
+public class Upgrade extends Button implements Observable, Serializable {
     private final int WIDTH = 50;
     private final int HEIGHT = 50;
 

@@ -6,6 +6,7 @@ package com.countryclicker.utils;
 public class Constants {
 
     public static final String SAVE_FILE_NAME = "saved_game_state";
+    public static final String TIME_FILE_NAME = "time";
 
     public static final int START_MONEY = 1123000;
     public static final int PERCENT_FOR_PATRIOT = 2;

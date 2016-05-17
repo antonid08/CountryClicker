@@ -22,6 +22,16 @@ public class GamePresenter {
         setUpListeners();
     }
 
+    public GamePresenter(World world, long diffTime){
+        this.world = world;
+        stage = new GameStage(world.getMinistries(), world.getUpgrades());
+
+        world.calculateMoneyFromPrevStat(diffTime);
+
+        setUpValuesForViews();
+        setUpListeners();
+    }
+
     public void update(float delta) {
         world.update(delta);
 
@@ -126,6 +136,10 @@ public class GamePresenter {
     private void humanClicked() {
         world.getHuman().state = Human.State.KICKED;
         world.updateMoney(world.getHuman().getMoneyPerClick());
+    }
+
+    public World getWorld(){
+        return world;
     }
 
     public GameStage getStage() {

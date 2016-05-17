@@ -64,4 +64,12 @@ public class ClickMinistry extends Ministry {
         float patriotsCoef = world.getPatriots() / 100 * Constants.PERCENT_FOR_PATRIOT;
         moneyPerKick += moneyPerKick * patriotsCoef;
     }
+
+    public float getTimeToKick(){
+        return timeToKick;
+    }
+
+    public float getMoneyPerKick(){
+        return moneyPerKick;
+    }
 }
