@@ -2,6 +2,7 @@ package com.countryclicker.presenter;
 
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.countryclicker.model.Human;
+import com.countryclicker.model.Ministry;
 import com.countryclicker.model.World;
 import com.countryclicker.view.GameStage;
 
@@ -17,14 +18,39 @@ public class GamePresenter {
         world = new World();
         stage = new GameStage(world.getMinistries(), world.getUpgrades());
 
+        setUpValuesForViews();
         setUpListeners();
     }
 
     public void update(float delta) {
         world.update(delta);
 
+        updateMoneyLabel((int)world.getMoney());
+        updatePatriotsLabel(world.getPatriots());
+
         stage.act(delta);
         stage.draw();
+    }
+
+    private void updatePatriotsLabel(int value){
+        stage.getPatriotsLabel().setText("Patriots: " + world.getPatriots());
+    }
+
+    private void updateMoneyLabel(float value){
+        String toShow = String.format("Money: %.2f", value);
+
+        if (value > 1000000 && value < 1000000000){
+            toShow = String.format("Money: %.2fM", value / 1000000);
+        }
+        if (value > 1000000000 && value < 1000000000000f){
+            toShow = String.format("Money: %.2fM", value / 1000000000);
+        }
+
+        stage.getMoneyLabel().setText(toShow);
+    }
+
+    private void setUpValuesForViews(){
+        updateMoneyLabel((int) world.getMoney());
     }
 
     private void setUpListeners() {
@@ -44,9 +70,17 @@ public class GamePresenter {
             }
         });
 
+        stage.getPatrionsButton().addListener(new InputListener() {
+            @Override
+            public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
+                patriotsButtonClicked();
+                return true;
+            }
+        });
+
         for (int counter = 0; counter < world.getMinistries().size(); counter++) {
             final int numberOfMinistry = counter;
-            stage.getMinistryView(counter).addListener(new InputListener() {
+            stage.getMinistryView(counter).getLvlUpButton().addListener(new InputListener() {
                 @Override
                 public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
                     ministryClicked(numberOfMinistry);
@@ -82,6 +116,13 @@ public class GamePresenter {
         stage.getUpgradesTable().setVisible(!stage.getUpgradesTable().isVisible());
     }
 
+    private void patriotsButtonClicked(){
+        world.buyPatriots();
+        for(int counter = 0; counter < world.getMinistries().size(); counter++){
+            stage.getMinistryView(counter).updateInfo(world.getMinistry(counter)); //add number of ministry
+        }
+    }
+
     private void humanClicked() {
         world.getHuman().state = Human.State.KICKED;
         world.updateMoney(world.getHuman().getMoneyPerClick());
@@ -91,7 +132,4 @@ public class GamePresenter {
         return stage;
     }
 
-    public World getWorld() {
-        return world;
-    }
 }

@@ -1,6 +1,5 @@
 package com.countryclicker.model;
 
-import com.countryclicker.view.GameStage;
 import com.countryclicker.utils.Constants;
 
 
@@ -8,21 +7,27 @@ import com.countryclicker.utils.Constants;
  * Created by Илья on 29.02.2016.
  */
 public class MonthMinistry extends Ministry {
-//Mechanics part
+    //Mechanics part
     private float moneyPerMonth;
 
     private int moneyPerMonthOnFirstLevel;
 
 
     public MonthMinistry(String name, int moneyPerMonthOnFirstLevel, int upgradeCost, int numbersOfUpgrades,
-                         World world){
+                         World world) {
         super(name, upgradeCost, numbersOfUpgrades, world);
 
         this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
 
 
         description = "Adds money every month";
+    }
 
+    @Override
+    public void reset(){
+        super.reset();
+        float patriotsCoef = world.getPatriots() / 100 * Constants.PERCENT_FOR_PATRIOT;
+        moneyPerMonth = moneyPerMonthOnFirstLevel * patriotsCoef;
     }
 
     @Override
@@ -34,10 +39,12 @@ public class MonthMinistry extends Ministry {
         lvlupCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }
 
-    private void calculateMoneyPerMonth(){
+    private void calculateMoneyPerMonth() {
         float oldMoneyPerMonth = moneyPerMonth;
+        float patriotsCoef = world.getPatriots() / 100 * Constants.PERCENT_FOR_PATRIOT;
 
         moneyPerMonth = level * moneyPerMonthOnFirstLevel * upgradeCoefficient;
+        moneyPerMonth += moneyPerMonth * patriotsCoef;
         world.updateMoneyForMonth((int) (moneyPerMonth - oldMoneyPerMonth));
     }
 

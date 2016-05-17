@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.countryclicker.managers.AssetsManager;
@@ -36,6 +37,8 @@ public class MinistryView extends Table {
     }
 
     protected void setUpButtons(Ministry ministryInfo) {
+        Button.ButtonStyle mainButonStyle = new Button.ButtonStyle();
+        //mainButonStyle.up()
         mainView = new Button(AssetsManager.getInstance().getSkin());
         mainView.setTouchable(Touchable.disabled);
 
@@ -63,5 +66,7 @@ public class MinistryView extends Table {
         setSize(WIDTH, HEIGHT);
     }
 
-
+    public Button getLvlUpButton(){
+        return lvlupButton;
+    }
 }

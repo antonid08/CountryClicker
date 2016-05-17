@@ -7,19 +7,17 @@ import com.countryclicker.utils.Observer;
  */
 public abstract class Ministry implements Observer {
 
-    //Mechanics part
     protected int lvlupCost;
     protected int level;
 
     protected float upgradeCoefficient; //if we buy upgrades, we increment upgrade coefficient and mult profit on this coef
 
     String name;
-    String description = "ddsadsadsssssssssssssssssssssssssssssssssss";
+    String description;
 
     World world;
 
     public Ministry(String name, int lvlupCost, int numbersOfUpgrades, World world) {
-        //setDebug(true);
         this.world = world;
         this.name = name;
         this.lvlupCost = lvlupCost;
@@ -62,5 +60,10 @@ public abstract class Ministry implements Observer {
 
     protected void registerObserverToUpgrade(int number) {
         world.getUpgrade(number).registerObserver(this);
+    }
+
+    public void reset(){
+        level = 0;
+        upgradeCoefficient = 1;
     }
 }

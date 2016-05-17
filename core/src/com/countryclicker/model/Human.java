@@ -39,6 +39,7 @@ public class Human{
         }
     }
 
+
     public int getMoneyPerClick(){
         return moneyPerClick;
     }

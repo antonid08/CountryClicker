@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class World {
 
     private int moneyForMonth = 0;
-    private float money = 100000;
+    private float money = Constants.START_MONEY;
+    private int patriots = 0;
 
     private int lengthOfMonth = Constants.START_LENGTH_OF_MONTH;
     private float timeFromPreviousMonth = 0;
@@ -55,9 +56,9 @@ public class World {
        upgrades.add(new Upgrade("Vvesti nalog na musor", 2000, 5, this));
     }
 
-    public void update(float delta){
+    public boolean update(float delta){
         updateComponents(delta);
-        calculateTimeMonth(delta);
+        return calculateTimeMonth(delta);
     }
 
     private void updateComponents(float delta){
@@ -65,14 +66,27 @@ public class World {
         ((ClickMinistry) ministries.get(0)).update(delta);
     }
 
-    private void calculateTimeMonth(float delta){
+    private boolean calculateTimeMonth(float delta){
         timeFromPreviousMonth += delta;
         if (timeFromPreviousMonth >= lengthOfMonth){
             timeFromPreviousMonth = 0;
             money += moneyForMonth;
+            return true;
         }
+        return false;
     }
 
+    public void buyPatriots(){
+        patriots += money / 100 * 2; //2% from money
+        reset();
+    }
+
+    public void reset(){
+        money = 0;
+        for (Ministry ministry: ministries){
+            ministry.reset();
+        }
+    }
 
     public void updateMoneyForMonth(int delta) {
         moneyForMonth += delta;
@@ -99,7 +113,7 @@ public class World {
         return upgrades;
     }
 
-    public float getMoney() {
+    public float getMoney(){
         return money;
     }
 
@@ -107,5 +121,7 @@ public class World {
         return human;
     }
 
-
+    public int getPatriots(){
+        return patriots;
+    }
 }

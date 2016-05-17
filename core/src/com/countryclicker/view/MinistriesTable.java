@@ -55,6 +55,8 @@ public class MinistriesTable extends Table{
         }
     }
 
+
+
     private void setUpBounds(){
         setPosition(X, Y);
     }

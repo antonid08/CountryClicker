@@ -8,17 +8,22 @@ import com.countryclicker.utils.Constants;
 public class ClickMinistry extends Ministry {
 
     private final int moneyPerKickOnFirstLevel;
+    private final float timeToKickOnFirstLevel;
+
     private float moneyPerKick;
     private float timeToKick;
     private float timeFromPrevKick;
 
-    public ClickMinistry(String name, int moneyPerKickOnFirstLevel, float timeToKick,
+    public ClickMinistry(String name, int moneyPerKickOnFirstLevel, float timeToKickOnFirstLevel,
                          int lvlupCost, int numberOfUpgrades, World world) {
         super(name, lvlupCost, numberOfUpgrades, world);
 
-        this.timeToKick = timeToKick;
         this.moneyPerKickOnFirstLevel = moneyPerKickOnFirstLevel;
-        moneyPerKick = 1;
+        this. timeToKickOnFirstLevel = timeToKickOnFirstLevel;
+
+        timeToKick = timeToKickOnFirstLevel;
+        moneyPerKick = moneyPerKickOnFirstLevel;
+
         timeFromPrevKick = 0;
 
         description = "Increment you money per click";
@@ -34,18 +39,7 @@ public class ClickMinistry extends Ministry {
 
     private void calculateTimeToKick() {
         timeToKick = Constants.START_TIME_TO_KICK_MVD / level;
-        //stage.setMoneyPerClick((int) moneyPerKick);
     }
-
-    /*@Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-
-        if (level != 0) {
-            font.draw(batch, (int) moneyPerKick + "$", getX() + 500, getY() + 60);
-        }
-
-    }*/
 
     public void update(float delta) {
         timeFromPrevKick += delta;
@@ -56,8 +50,18 @@ public class ClickMinistry extends Ministry {
     }
 
     @Override
+    public void reset(){
+        super.reset();
+        float patriotsCoef = world.getPatriots() / 100 * Constants.PERCENT_FOR_PATRIOT;
+        moneyPerKick = moneyPerKickOnFirstLevel * patriotsCoef;
+        timeToKick = timeToKickOnFirstLevel;
+    }
+
+    @Override
     public void updateCoefficient(float value) {
         super.updateCoefficient(value);
         moneyPerKick = upgradeCoefficient;
+        float patriotsCoef = world.getPatriots() / 100 * Constants.PERCENT_FOR_PATRIOT;
+        moneyPerKick += moneyPerKick * patriotsCoef;
     }
 }
