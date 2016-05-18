@@ -25,6 +25,10 @@ task dist(type: Jar) {
     }
 }
 
+dependencies {
+    compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+}
+
 dist.dependsOn classes
 
 eclipse {

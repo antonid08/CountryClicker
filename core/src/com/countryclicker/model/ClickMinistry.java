@@ -26,7 +26,8 @@ public class ClickMinistry extends Ministry {
 
         timeFromPrevKick = 0;
 
-        description = "Increment you money per click";
+        description = "Выбивает деньги из граждан";
+        info = moneyPerKick / timeToKick + "$ в сек";
     }
 
     @Override
@@ -35,6 +36,7 @@ public class ClickMinistry extends Ministry {
 
         calculateTimeToKick();
         lvlupCost *= Constants.COST_OF_UPGRADE_MVD_MINISTRY_COEF;
+        info = moneyPerKick / timeToKick + "$ в сек";
     }
 
     private void calculateTimeToKick() {

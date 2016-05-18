@@ -13,7 +13,7 @@ public class StandartButton extends TextButton {
 
 
     public StandartButton(String text, float x, float y) {
-        super(text, AssetsManager.getInstance().getSkin());
+        super(text, AssetsManager.getInstance().getStandartButtonStyle());
         setUpBounds(x, y);
     }
 

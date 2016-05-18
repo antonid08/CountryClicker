@@ -44,7 +44,7 @@ public class MinistriesTable extends Table{
         scroller.setFadeScrollBars(false);
         scroller.setOverscroll(false, false);
 
-        add(scroller).padTop(90).padLeft(300);
+        add(scroller).padTop(90).padLeft(430);
         setFillParent(true);
     }
 

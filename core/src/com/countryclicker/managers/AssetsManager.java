@@ -1,16 +1,24 @@
 package com.countryclicker.managers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.countryclicker.utils.Constants;
 
 /**
  * Created by Илья on 22.03.2016.
  */
 public class AssetsManager {
+    private static final String FONT_CHARACTERS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|/?:-+=()*&.;,{}´`'<>";
+
     private static AssetsManager instance;
     private Skin skin;
     private Texture mainTexture;
@@ -22,7 +30,47 @@ public class AssetsManager {
     private TextureRegion upgradeMinistryButton;
     private TextureRegion standartButton;
 
+    private TextButton.TextButtonStyle standartButtonStyle;
+    private Button.ButtonStyle ministryStyle;
+
+    private BitmapFont standartFont;
+    private BitmapFont ministryHeaderFont;
+    private BitmapFont ministryDescriptionFont;
+
     public AssetsManager() {
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("skin.atlas"));
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Days.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.characters = FONT_CHARACTERS;
+
+        parameter.size = 16;
+        parameter.color = Color.GOLDENROD;
+        standartFont = generator.generateFont(parameter); // font size 12 pixels
+
+        parameter.color = Color.WHITE;
+
+        parameter.size = 30;
+        ministryHeaderFont = generator.generateFont(parameter);
+
+        parameter.size = 23;
+        ministryDescriptionFont = generator.generateFont(parameter);
+
+        generator.dispose(); // don't forget to dispose to avoid memory leaks!
+
+
+        Skin mainSkin = new Skin();
+        mainSkin.addRegions(atlas);
+
+        standartButtonStyle = new TextButton.TextButtonStyle(mainSkin.getDrawable("button-up"),
+                mainSkin.getDrawable("button_down"), mainSkin.getDrawable("button-up"),
+                standartFont);
+
+        ministryStyle = new Button.ButtonStyle(mainSkin.getDrawable("opened_ministry"),
+                mainSkin.getDrawable("opened_ministry"), mainSkin.getDrawable("opened_ministry"));
+
+
+
         skin = new Skin(Gdx.files.internal("skin.json"));
 
         mainTexture = new Texture(Gdx.files.internal("skin.png"));
@@ -41,11 +89,8 @@ public class AssetsManager {
         standartButton = new TextureRegion(mainTexture, Constants.BUTTON_TEXTURE_X, Constants.BUTTON_TEXTURE_Y,
                 Constants.BUTTON_TEXTURE_WIDTH, Constants.BUTTON_TEXTURE_HEIGHT);
 
-       /* FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("garuda.ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 12;
-        BitmapFont font12 = generator.generateFont(parameter); // font size 12 pixels
-        generator.dispose(); // don't forget to dispose to avoid memory leaks!*/
+
+
     }
 
     public static AssetsManager getInstance() {
@@ -71,4 +116,17 @@ public class AssetsManager {
         return humanAnimation;
     }
 
+    public Button.ButtonStyle getMinistryButtonStyle(){
+        return getMinistryButtonStyle();
+    }
+
+    public TextButton.TextButtonStyle getStandartButtonStyle(){
+        return standartButtonStyle;
+    }
+    public BitmapFont getMinistryHeaderFont(){
+        return ministryHeaderFont;
+    }
+    public BitmapFont getMinistryDescriptionFont(){
+        return ministryDescriptionFont;
+    }
 }

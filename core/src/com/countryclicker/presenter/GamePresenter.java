@@ -43,17 +43,17 @@ public class GamePresenter {
     }
 
     private void updatePatriotsLabel(int value){
-        stage.getPatriotsLabel().setText("Patriots: " + world.getPatriots());
+        stage.getPatriotsLabel().setText("Патриоты: " + world.getPatriots());
     }
 
     private void updateMoneyLabel(float value){
-        String toShow = String.format("Money: %.2f", value);
+        String toShow = String.format("$ %.2f", value);
 
         if (value > 1000000 && value < 1000000000){
-            toShow = String.format("Money: %.2fM", value / 1000000);
+            toShow = String.format("$ %.2fM", value / 1000000);
         }
         if (value > 1000000000 && value < 1000000000000f){
-            toShow = String.format("Money: %.2fM", value / 1000000000);
+            toShow = String.format("$ %.2fM", value / 1000000000);
         }
 
         stage.getMoneyLabel().setText(toShow);

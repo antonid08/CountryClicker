@@ -13,8 +13,8 @@ import java.util.ArrayList;
  * Created by Илья on 07.05.2016.
  */
 public class UpgradesTable extends Table {
-    private final int WIDTH = 400;
-    private final int HEIGHT = 400;
+    private final int WIDTH = 800;
+    private final int HEIGHT = 600;
 
     private ArrayList<UpgradeView> upgradeViews;
 
@@ -47,7 +47,7 @@ public class UpgradesTable extends Table {
         upgradesTable = new Table();
 
         for (UpgradeView view : upgradeViews) {
-            upgradesTable.add(view).size(300, 70).padBottom(20);
+            upgradesTable.add(view).size(550, 125).padBottom(20);
             upgradesTable.row();
         }
 
@@ -56,7 +56,7 @@ public class UpgradesTable extends Table {
         scroller.setFadeScrollBars(false);
         scroller.setOverscroll(false, false);
 
-        add(scroller).size(300, 150);
+        add(scroller).size(550, 470);
         setVisible(false);
     }
 

@@ -41,8 +41,9 @@ public class Constants {
 
     public static final float START_TIME_TO_KICK_MVD = 10;
 
-    public static final String[] NAMES_OF_MINISTRIES = {"MVD", "JKH", "MinZdrav", "Ministerstvo kulturi",
-    "Ministerstvo oboroni", "Ministerstvo obrazovaniya", "Ministerstvo po nalogam"
+    public static final String[] NAMES_OF_MINISTRIES = {"Министерство внутренних дел", "Жилищно-коммунальное хозяйство",
+            "Министерство здравоохранения", "Министерство культуры", "Министерство обороны", "Министерство образования",
+            "Министерство по налогам"
     };
 
     public static final int[] COSTS_OF_MINISTRIES = {16, 180, 2000, 22000, 250000, 2750000, 30250000,

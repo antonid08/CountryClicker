@@ -10,15 +10,15 @@ import com.countryclicker.utils.Constants;
 /**
  * Created by Илья on 06.05.2016.
  */
-public class MonthView extends ProgressBar {
+public class MonthView{
     public static final int WIDTH = 150;
     public static final int HEIGHT = 30;
     public static final int RECTANGLE_BORDER = 3;
 
 
     public MonthView(float min, float max, float stepSize, boolean vertical, Skin skin) {
-        super(min, max, stepSize, vertical, skin);
-        setUpBounds();
+        //super(min, max, stepSize, vertical, skin);
+    //    setUpBounds();
 //        setUpView();
 
     }
@@ -36,11 +36,11 @@ public class MonthView extends ProgressBar {
                 stage.getLengthOfMonth();
     }*/
 
-    private void setUpBounds(){
+    /*private void setUpBounds(){
         setSize(WIDTH, HEIGHT);
         setPosition(Constants.MONTH_PROGRESS_X, Constants.MONTH_PROGRESS_Y);
 
-    }
+    }*/
 
 /*
     private void setUpView(){

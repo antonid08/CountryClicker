@@ -21,15 +21,17 @@ public class Upgrade extends Button implements Observable, Serializable {
     private ArrayList<Observer> obserservingMinistries;
 
     private String name;
+    private String desctiption;
     private float coefficient;
     private float timeEllapsingCoefficient;
     private float cost;
     private boolean isBought;
 
 
-    public Upgrade(String name, float cost, float coefficient, World world) {
+    public Upgrade(String name, String description, float cost, float coefficient, World world) {
         super(AssetsManager.getInstance().getSkin());
         this.name = name;
+        this.desctiption = description;
         this.cost = cost;
         this.coefficient = coefficient;
 
@@ -103,5 +105,21 @@ public class Upgrade extends Button implements Observable, Serializable {
         for (Observer ministry : obserservingMinistries) {
             ministry.updateCoefficient(coefficient);
         }
+    }
+
+    public String getName(){
+        return  name;
+    }
+
+    public float getCoefficient(){
+        return coefficient;
+    }
+
+    public String getDescription(){
+        return desctiption;
+    }
+
+    public int getCost(){
+        return (int) cost;
     }
 }

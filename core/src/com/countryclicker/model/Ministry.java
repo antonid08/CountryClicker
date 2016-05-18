@@ -14,8 +14,11 @@ public abstract class Ministry implements Observer, Serializable {
 
     protected float upgradeCoefficient; //if we buy upgrades, we increment upgrade coefficient and mult profit on this coef
 
+    private int lvlupCostOnFirstLvl;
+
     String name;
     String description;
+    String info;
 
     World world;
 
@@ -23,6 +26,7 @@ public abstract class Ministry implements Observer, Serializable {
         this.world = world;
         this.name = name;
         this.lvlupCost = lvlupCost;
+        this.lvlupCostOnFirstLvl = lvlupCost;
         level = 0;
         upgradeCoefficient = 1;
 
@@ -67,5 +71,10 @@ public abstract class Ministry implements Observer, Serializable {
     public void reset(){
         level = 0;
         upgradeCoefficient = 1;
+        lvlupCost = lvlupCostOnFirstLvl;
+    }
+
+    public String getInfo(){
+        return info;
     }
 }

@@ -1,5 +1,6 @@
 package com.countryclicker.view;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -41,8 +42,8 @@ public class GameStage extends Stage {
 
         background = new Background(this);
         ministriesTable = new MinistriesTable(ministriesInfo);
-        upgradesButton = new StandartButton("Upgrades", 70, 350);
-        patrionsButton = new StandartButton("Patriots", 70, 270);
+        upgradesButton = new StandartButton("Улучшения", 70, 350);
+        patrionsButton = new StandartButton("Посадить министров", 70, 270);
 
 
         upgradesTable = new UpgradesTable(upgradesInfo);
@@ -50,17 +51,18 @@ public class GameStage extends Stage {
         humanView = new HumanView(this);
 
 
-        moneyLabel = new Label("", AssetsManager.getInstance().getSkin());
-        moneyLabel.setPosition(100, 700);
-        patriotsLabel = new Label("", AssetsManager.getInstance().getSkin());
-        patriotsLabel.setPosition(300, 700);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(AssetsManager.getInstance().getMinistryDescriptionFont(), Color.GOLDENROD);
+        moneyLabel = new Label("", labelStyle);
+        moneyLabel.setPosition(40, 730);
+        patriotsLabel = new Label("", labelStyle);
+        patriotsLabel.setPosition(40, 700);
 
         addActor(background);
         addActor(ministriesTable);
         addActor(upgradesButton);
         addActor(patrionsButton);
         addActor(upgradesTable);
-        addActor(monthProgress);
+        //addActor(monthProgress);
         addActor(humanView);
         addActor(moneyLabel);
         addActor(patriotsLabel);

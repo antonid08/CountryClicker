@@ -19,8 +19,8 @@ public class MonthMinistry extends Ministry {
 
         this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
 
-
-        description = "Adds money every month";
+        description = "Приносит деньги в казну каждый месяц.";
+        info = moneyPerMonthOnFirstLevel + "$/месяц";
     }
 
     @Override
@@ -36,6 +36,7 @@ public class MonthMinistry extends Ministry {
 
         calculateMoneyPerMonth();
 
+        info = moneyPerMonth + "$/месяц";
         lvlupCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }
 

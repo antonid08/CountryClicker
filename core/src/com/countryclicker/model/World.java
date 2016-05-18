@@ -51,10 +51,14 @@ public class World implements Serializable{
     }
 
     private void setUpUpgrades(){
-       upgrades = new ArrayList<Upgrade>();
+        upgrades = new ArrayList<Upgrade>();
 
-       upgrades.add(new Upgrade("Pizdit silnee", 1000, 3, this));
-       upgrades.add(new Upgrade("Vvesti nalog na musor", 2000, 5, this));
+        upgrades.add(new Upgrade("Стальные дубинки в МВД", "Увеличивает прибыль за удар МВД", 1000, 2, this));
+        upgrades.add(new Upgrade("Налог на вынос мусора", "Увеличивает месячную прибыль ЖКХ", 5000, 2, this));
+        upgrades.add(new Upgrade("Налог на смерть", "Увеличивает месячную прибыль Мин. Здрав.", 15000, 3, this));
+        upgrades.add(new Upgrade("Налог на жизнь", "Увеличивает месячную прибыль Мин. Здрав.", 30000, 5, this));
+        upgrades.add(new Upgrade("Раскрыть дело Оборонсервиса", "Увеличивает прибыль Мин. Обороны", 30000, 5, this));
+        upgrades.add(new Upgrade("Придумывать новые налоги.", "Увеличивает прибыль Мин. Налогов", 60000, 2, this));
     }
 
     public boolean update(float delta){
@@ -87,6 +91,9 @@ public class World implements Serializable{
         for (Ministry ministry: ministries){
             ministry.reset();
         }
+
+        upgrades.clear();
+        setUpUpgrades();
     }
 
     public void updateMoneyForMonth(int delta) {
