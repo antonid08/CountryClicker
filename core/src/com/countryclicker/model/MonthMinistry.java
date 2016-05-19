@@ -19,15 +19,23 @@ public class MonthMinistry extends Ministry {
 
         this.moneyPerMonthOnFirstLevel = moneyPerMonthOnFirstLevel;
 
+        moneyPerMonth = 0;
+
         description = "Приносит деньги в казну каждый месяц.";
-        info = moneyPerMonthOnFirstLevel + "$/месяц";
+        info = moneyPerMonth + "$/месяц";
     }
 
     @Override
     public void reset(){
         super.reset();
-        float patriotsCoef = world.getPatriots() / 100 * Constants.PERCENT_FOR_PATRIOT;
-        moneyPerMonth = moneyPerMonthOnFirstLevel * patriotsCoef;
+        level = 0;
+        world.updateMoneyForMonth(-(int)moneyPerMonth);
+        moneyPerMonth = 0;
+        calculateMoneyPerMonth();
+      /*  float patriotsCoef = world.getPatriots() / 100 * Constants.PERCENT_FOR_PATRIOT;
+        moneyPerMonth = moneyPerMonthOnFirstLevel * upgradeCoefficient;
+        moneyPerMonth += moneyPerMonth * patriotsCoef;
+        info = moneyPerMonth + "$/месяц";*/
     }
 
     @Override
@@ -35,8 +43,6 @@ public class MonthMinistry extends Ministry {
         level++;
 
         calculateMoneyPerMonth();
-
-        info = moneyPerMonth + "$/месяц";
         lvlupCost *= Constants.COST_OF_UPGRADE_MINISTRY_COEF;
     }
 
@@ -47,6 +53,7 @@ public class MonthMinistry extends Ministry {
         moneyPerMonth = level * moneyPerMonthOnFirstLevel * upgradeCoefficient;
         moneyPerMonth += moneyPerMonth * patriotsCoef;
         world.updateMoneyForMonth((int) (moneyPerMonth - oldMoneyPerMonth));
+        info = moneyPerMonth + "$/месяц";
     }
 
     public int getFirstLevelMoneyPerMonth() {

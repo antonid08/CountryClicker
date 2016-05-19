@@ -7,6 +7,8 @@ import com.countryclicker.model.Human;
 import com.countryclicker.model.Ministry;
 import com.countryclicker.model.World;
 import com.countryclicker.view.GameStage;
+import com.countryclicker.view.MinistryView;
+import com.countryclicker.view.UpgradeView;
 
 /**
  * Created by Илья on 06.05.2016.
@@ -38,7 +40,7 @@ public class GamePresenter {
         world.update(delta);
 
         updateMoneyLabel((int)world.getMoney());
-        updatePatriotsLabel(world.getPatriots());
+        updatePatriotsLabel();
 
         checkIsMinistriesAvailable();
 
@@ -58,7 +60,7 @@ public class GamePresenter {
         }
     }
 
-    private void updatePatriotsLabel(int value){
+    private void updatePatriotsLabel(){
         stage.getPatriotsLabel().setText("Патриоты: " + world.getPatriots());
     }
 
@@ -115,6 +117,10 @@ public class GamePresenter {
             });
         }
 
+        setUpUpgradesListeners();
+    }
+
+    private void setUpUpgradesListeners(){
         for (int counter = 0; counter < world.getUpgrades().size(); counter++) {
             final int numberOfUpgrade = counter;
             stage.getUpgradeView(counter).addListener(new InputListener() {
@@ -132,8 +138,21 @@ public class GamePresenter {
     }
 
     private void upgradeClicked(int number){
-        if(world.getUpgrade(number).tryBuy()){
+        if (world.getUpgrade(number).tryBuy()){
             stage.getUpgradesTable().removeUpgradeView(number);
+            updateMinistries();
+            world.getUpgrades().remove(number);
+
+            for (UpgradeView view: stage.getUpgradesTable().getUpgradeViews()){
+                view.clearListeners();
+            }
+            setUpUpgradesListeners();
+        }
+    }
+
+    private void updateMinistries(){
+        for (int counter = 0; counter < world.getMinistries().size(); counter++){
+            stage.getMinistryView(counter).updateInfo(world.getMinistry(counter));
         }
     }
 

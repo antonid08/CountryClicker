@@ -93,7 +93,9 @@ public class GameStage extends Stage {
     public MinistryView getMinistryView(int number){
         return ministriesTable.getMinistryView(number);
     }
-
+    public ArrayList<MinistryView> getMinistryViews(){
+        return ministriesTable.getMinistryViews();
+    }
     public UpgradeView getUpgradeView(int number){
         return upgradesTable.getUpgradeView(number);
     }

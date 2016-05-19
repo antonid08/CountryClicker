@@ -30,7 +30,9 @@ public abstract class Ministry implements Observer, Serializable {
         level = 0;
         upgradeCoefficient = 1;
 
-        registerObserverToUpgrade(numbersOfUpgrades);
+        if (numbersOfUpgrades < world.getUpgrades().size()){
+            registerObserverToUpgrade(numbersOfUpgrades);
+        }
     }
 
 

@@ -74,7 +74,9 @@ public class UpgradesTable extends Table {
     /*public ArrayList<Upgrade> getUpgrades(){
         return upgrades;
     }*/
-
+    public ArrayList<UpgradeView> getUpgradeViews(){
+        return upgradeViews;
+    }
     public UpgradeView getUpgradeView(int number) {
         return upgradeViews.get(number);
     }

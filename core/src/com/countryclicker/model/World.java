@@ -42,12 +42,22 @@ public class World implements Serializable{
 
         ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[1], Constants.FIRST_MINISTRY_MONEY_PER_FIRST_MONTH,
                 Constants.COSTS_OF_MINISTRIES[1], 1, this));
+        ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[2], ((MonthMinistry) ministries.get(1)).getFirstLevelMoneyPerMonth()
+                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF,
+                Constants.COSTS_OF_MINISTRIES[2], 2, this));
+        ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[3], ((MonthMinistry) ministries.get(2)).getFirstLevelMoneyPerMonth()
+                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF,
+                Constants.COSTS_OF_MINISTRIES[3], 10, this));
+        ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[4], ((MonthMinistry) ministries.get(3)).getFirstLevelMoneyPerMonth()
+                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF,
+                Constants.COSTS_OF_MINISTRIES[4], 3, this));
+        ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[5], ((MonthMinistry) ministries.get(4)).getFirstLevelMoneyPerMonth()
+                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF,
+                Constants.COSTS_OF_MINISTRIES[5], 10, this));
+        ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[6], ((MonthMinistry) ministries.get(5)).getFirstLevelMoneyPerMonth()
+                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF,
+                Constants.COSTS_OF_MINISTRIES[6], 4, this));
 
-        for (int i = 2; i < Constants.NUMBER_OF_MINISTRIES; i++) {
-            ministries.add(new MonthMinistry(Constants.NAMES_OF_MINISTRIES[i], ((MonthMinistry) ministries.get(i - 1)).getFirstLevelMoneyPerMonth()
-                    * (int) Constants.MONEY_PER_MONTH_NEXT_MINISTRY_COEF, Constants.COSTS_OF_MINISTRIES[i],
-                    1, this));
-        }
     }
 
     private void setUpUpgrades(){
@@ -56,12 +66,12 @@ public class World implements Serializable{
         upgrades.add(new Upgrade("Стальные дубинки в МВД", "Увеличивает прибыль за удар МВД", 1000, 2, this));
         upgrades.add(new Upgrade("Налог на вынос мусора", "Увеличивает месячную прибыль ЖКХ", 5000, 2, this));
         upgrades.add(new Upgrade("Налог на смерть", "Увеличивает месячную прибыль Мин. Здрав.", 15000, 3, this));
-        upgrades.add(new Upgrade("Налог на жизнь", "Увеличивает месячную прибыль Мин. Здрав.", 30000, 5, this));
         upgrades.add(new Upgrade("Раскрыть дело Оборонсервиса", "Увеличивает прибыль Мин. Обороны", 30000, 5, this));
         upgrades.add(new Upgrade("Придумывать новые налоги.", "Увеличивает прибыль Мин. Налогов", 60000, 2, this));
     }
 
     public boolean update(float delta){
+        Gdx.app.log("mfm", "Money for month: " + moneyForMonth);
         updateComponents(delta);
         return calculateTimeMonth(delta);
     }

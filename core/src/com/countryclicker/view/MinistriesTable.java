@@ -1,11 +1,8 @@
 package com.countryclicker.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.countryclicker.model.ClickMinistry;
 import com.countryclicker.model.Ministry;
-import com.countryclicker.model.MonthMinistry;
 
 import java.util.ArrayList;
 
@@ -13,27 +10,23 @@ import java.util.ArrayList;
 /**
  * Created by Илья on 04.05.2016.
  */
-public class MinistriesTable extends Table{
+public class MinistriesTable extends Table {
     private static final float X = 00;
     private static final float Y = 00;
 
     private ArrayList<MinistryView> ministryViews;
 
-    public MinistriesTable(ArrayList<Ministry> ministriesInfo){
-        //setDebug(true);
+    public MinistriesTable(ArrayList<Ministry> ministriesInfo) {
         setUpBounds();
 
         setUpMinistryViews(ministriesInfo);
         setUpTableAndScroller();
-        //TODO in table create view for each ministry
-
-
     }
 
-    private void setUpTableAndScroller(){
+    private void setUpTableAndScroller() {
         Table ministriesTable = new Table();
 
-        for (int i = 0; i < ministryViews.size(); i++){
+        for (int i = 0; i < ministryViews.size(); i++) {
             ministriesTable.add(ministryViews.get(i));
             ministriesTable.row().pad(15);
         }
@@ -48,20 +41,22 @@ public class MinistriesTable extends Table{
         setFillParent(true);
     }
 
-    private void setUpMinistryViews(ArrayList<Ministry> ministriesInfo){
+    private void setUpMinistryViews(ArrayList<Ministry> ministriesInfo) {
         ministryViews = new ArrayList<MinistryView>();
-        for(Ministry ministryInfo: ministriesInfo){
+        for (Ministry ministryInfo : ministriesInfo) {
             ministryViews.add(new MinistryView(ministryInfo));
         }
     }
 
 
-
-    private void setUpBounds(){
+    private void setUpBounds() {
         setPosition(X, Y);
     }
 
-    public MinistryView getMinistryView(int number){
+    public ArrayList<MinistryView> getMinistryViews(){
+        return ministryViews;
+    }
+    public MinistryView getMinistryView(int number) {
         return ministryViews.get(number);
     }
 }
