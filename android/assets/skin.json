@@ -7,11 +7,12 @@
   black: { a: 1, b: 0, g: 0, r: 0 },
 },
   com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-  default: { down: button_down, up: button-up },
-  ministry: { down: closed_ministry, up: closed_ministry }
+  default: { down: button-down, up: button-up },
+  ministry: { down: closed_ministry, up: closed_ministry },
+  lvlup: {  down: lvlup_button_down, up: lvlup_button_up }
 },
   com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-  default: { down: button_down, up: button-up, font: default-font, fontColor: white},
+  default: { down: button-down, up: button-up, font: default-font, fontColor: white},
 },
   com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
   default: { font: default-font, fontColor: white }

@@ -122,4 +122,8 @@ public class Upgrade extends Button implements Observable, Serializable {
     public int getCost(){
         return (int) cost;
     }
+
+    public String getInfo(){
+        return "x" + coefficient;
+    }
 }

@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.model.Ministry;
 
@@ -46,22 +45,24 @@ public class MinistryView extends Table {
         Label info = new Label(ministryInfo.getInfo(), descriptionStyle);
         mainView.add(info).right().padRight(10);
         mainView.row();
+
+        Label lvlupCost = new Label("Улучшить: " + ministryInfo.getLvlupCost() + "$", descriptionStyle);
+        mainView.add(lvlupCost).right().padRight(10);
+        mainView.row();
+
         Label description = new Label(ministryInfo.getDescription(), descriptionStyle);
         mainView.add(description).left().padLeft(50).padBottom(10); //Description cell
 
-
-
         add(mainView).size(WIDTH, HEIGHT);
 
-        lvlupButton = new Button(AssetsManager.getInstance().getSkin());
-        lvlupButton.add(String.valueOf(ministryInfo.getLvlupCost()));
+        lvlupButton = new Button(AssetsManager.getInstance().getSkin(), "lvlup");
 
         add(lvlupButton).size(INFO_PART_WIDTH, HEIGHT);
     }
 
     public void updateInfo(Ministry ministryInfo) {
-        ((Label) ((Button) getChildren().get(1)).getChildren().get(0)).
-                setText(String.valueOf(ministryInfo.getLvlupCost()));
+        /*((Label) ((Button) getChildren().get(1)).getChildren().get(0)).
+                setText(String.valueOf(ministryInfo.getLvlupCost()));*/
     }
 
     private void setUpBounds() {

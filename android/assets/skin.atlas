@@ -1,47 +1,82 @@
 
-main_pack.png
+skin.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 background
   rotate: false
-  xy: 0, 0
+  xy: 1, 597
   size: 2660, 1296
   orig: 2660, 1296
   offset: 0, 0
   index: -1
 closed_ministry
   rotate: false
-  xy: 2662, 796
+  xy: 1, 95
   size: 1597, 500
   orig: 1597, 500
   offset: 0, 0
   index: -1
 opened_ministry
   rotate: false
-  xy: 2662, 295
+  xy: 1600, 96
   size: 1597, 499
   orig: 1597, 499
   offset: 0, 0
   index: -1
 human
   rotate: false
-  xy: 4261, 783
+  xy: 2663, 1380
   size: 629, 513
   orig: 629, 513
   offset: 0, 0
   index: -1
-button-up
+button-down
   rotate: false
-  xy: 2662, 154
+  xy: 2663, 1239
   size: 549, 139
   orig: 549, 139
   offset: 0, 0
   index: -1
-button_down
+button-up
   rotate: false
-  xy: 4261, 642
+  xy: 2663, 1098
   size: 549, 139
   orig: 549, 139
+  offset: 0, 0
+  index: -1
+lvlup_button_down
+  rotate: false
+  xy: 2663, 901
+  size: 225, 195
+  orig: 225, 195
+  offset: 0, 0
+  index: -1
+lvlup_button_up
+  rotate: false
+  xy: 2663, 704
+  size: 225, 195
+  orig: 225, 195
+  offset: 0, 0
+  index: -1
+progress_bar_background
+  rotate: false
+  xy: 1, 48
+  size: 300, 45
+  orig: 300, 45
+  offset: 0, 0
+  index: -1
+progress_bar_border
+  rotate: false
+  xy: 2890, 1051
+  size: 300, 45
+  orig: 300, 45
+  offset: 0, 0
+  index: -1
+progress_bar_progress
+  rotate: false
+  xy: 1, 1
+  size: 300, 45
+  orig: 300, 45
   offset: 0, 0
   index: -1

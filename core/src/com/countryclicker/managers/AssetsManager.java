@@ -21,21 +21,16 @@ public class AssetsManager {
 
     private static AssetsManager instance;
     private Skin skin;
-    private Texture mainTexture;
-    private Animation humanAnimation;
-    private TextureRegion bg;
-    private TextureRegion human;
-    private TextureRegion human_kicked;
-    private TextureRegion ministryBg;
-    private TextureRegion upgradeMinistryButton;
-    private TextureRegion standartButton;
 
     private TextButton.TextButtonStyle standartButtonStyle;
     private Button.ButtonStyle ministryStyle;
+    private Button.ButtonStyle lvlupButtonStyle;
 
     private BitmapFont standartFont;
     private BitmapFont ministryHeaderFont;
     private BitmapFont ministryDescriptionFont;
+    private BitmapFont upgradeHeaderFont;
+    private BitmapFont upgradeDescriptionFont;
 
     public AssetsManager() {
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("skin.atlas"));
@@ -56,6 +51,12 @@ public class AssetsManager {
         parameter.size = 23;
         ministryDescriptionFont = generator.generateFont(parameter);
 
+        parameter.size = 25;
+        upgradeHeaderFont = generator.generateFont(parameter);
+
+        parameter.size = 18;
+        upgradeDescriptionFont = generator.generateFont(parameter);
+
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
 
 
@@ -63,34 +64,18 @@ public class AssetsManager {
         mainSkin.addRegions(atlas);
 
         standartButtonStyle = new TextButton.TextButtonStyle(mainSkin.getDrawable("button-up"),
-                mainSkin.getDrawable("button_down"), mainSkin.getDrawable("button-up"),
+                mainSkin.getDrawable("button-down"), mainSkin.getDrawable("button-up"),
                 standartFont);
 
         ministryStyle = new Button.ButtonStyle(mainSkin.getDrawable("opened_ministry"),
                 mainSkin.getDrawable("opened_ministry"), mainSkin.getDrawable("opened_ministry"));
 
+        lvlupButtonStyle = new Button.ButtonStyle(mainSkin.getDrawable("lvlup_button_up"),
+                mainSkin.getDrawable("lvlup_button_down"), mainSkin.getDrawable("lvlup_button_up"));
+
 
 
         skin = new Skin(Gdx.files.internal("skin.json"));
-
-        mainTexture = new Texture(Gdx.files.internal("skin.png"));
-
-        human = new TextureRegion(mainTexture, Constants.HUMAN_TEXTURE_X, Constants.HUMAN_TEXTURE_Y,
-                Constants.HUMAN_TEXTURE_WIDTH, Constants.HUMAN_TEXTURE_HEIGHT);
-        human_kicked = new TextureRegion(mainTexture, 300, 0, 300, 345);
-
-        TextureRegion[] kickTextures = {human, human_kicked};
-        humanAnimation = new Animation(Constants.HUMAN_ONE_FRAME_ANIMATION_LENGTH, kickTextures);
-        humanAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
-
-        bg = new TextureRegion(mainTexture, Constants.BACKGROUND_TEXTURE_X, Constants.BACKGROUND_TEXTURE_Y,
-                Constants.BACKGROUND_TEXTURE_WIDTH, Constants.BACKGROUND_TEXTURE_HEIGHT);
-
-        standartButton = new TextureRegion(mainTexture, Constants.BUTTON_TEXTURE_X, Constants.BUTTON_TEXTURE_Y,
-                Constants.BUTTON_TEXTURE_WIDTH, Constants.BUTTON_TEXTURE_HEIGHT);
-
-
-
     }
 
     public static AssetsManager getInstance() {
@@ -104,18 +89,12 @@ public class AssetsManager {
         return skin;
     }
 
-    public TextureRegion getBackground() {
-        return bg;
-    }
 
-    public TextureRegion getStandartButton() {
-        return standartButton;
-    }
 
-    public Animation getHumanAnimation() {
-        return humanAnimation;
-    }
 
+    public Button.ButtonStyle getLvlupButtonStyle() {
+        return lvlupButtonStyle;
+    }
     public Button.ButtonStyle getMinistryButtonStyle(){
         return getMinistryButtonStyle();
     }
@@ -128,5 +107,11 @@ public class AssetsManager {
     }
     public BitmapFont getMinistryDescriptionFont(){
         return ministryDescriptionFont;
+    }
+    public BitmapFont getUpgradeHeaderFont(){
+        return upgradeHeaderFont;
+    }
+    public BitmapFont getUpgradeDescriptionFont(){
+        return upgradeDescriptionFont;
     }
 }

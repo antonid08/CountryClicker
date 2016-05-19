@@ -18,7 +18,7 @@ public class Background extends Image {
     GameStage stage;
 
     public Background(GameStage stage){
-        super(AssetsManager.getInstance().getBackground());
+        super(AssetsManager.getInstance().getSkin().getDrawable("background"));
         this.stage = stage;
 
         setUpBounds();

@@ -1,5 +1,6 @@
 package com.countryclicker.presenter;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.countryclicker.model.Human;
 import com.countryclicker.model.Ministry;
@@ -104,8 +105,12 @@ public class GamePresenter {
             stage.getUpgradeView(counter).addListener(new InputListener() {
                 @Override
                 public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                    upgradeClicked(numberOfUpgrade);
                     return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    upgradeClicked(numberOfUpgrade);
                 }
             });
         }

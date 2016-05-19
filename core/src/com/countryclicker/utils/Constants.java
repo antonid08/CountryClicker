@@ -53,19 +53,4 @@ public class Constants {
     public static final float HUMAN_HIT_ANIMATION_TIME = 0.5f;
     public static final int HUMAN_HIT_ANIMATION_NUMBER_OF_FRAMES = 2;
     public static final float HUMAN_ONE_FRAME_ANIMATION_LENGTH = HUMAN_HIT_ANIMATION_TIME / HUMAN_HIT_ANIMATION_NUMBER_OF_FRAMES;
-
-    public static final int HUMAN_TEXTURE_X = 2661;
-    public static final int HUMAN_TEXTURE_Y =  140;
-    public static final int HUMAN_TEXTURE_WIDTH = 629;
-    public static final int HUMAN_TEXTURE_HEIGHT = 513;
-
-    public static final int BACKGROUND_TEXTURE_X = 0;
-    public static final int BACKGROUND_TEXTURE_Y = 0;
-    public static final int BACKGROUND_TEXTURE_WIDTH = 2660;
-    public static final int BACKGROUND_TEXTURE_HEIGHT = 1296;
-
-    public static final int BUTTON_TEXTURE_X = 2661;
-    public static final int BUTTON_TEXTURE_Y = 0;
-    public static final int BUTTON_TEXTURE_HEIGHT = 139;
-    public static final int BUTTON_TEXTURE_WIDTH = 549;
 }

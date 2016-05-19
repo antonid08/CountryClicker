@@ -36,7 +36,7 @@ public class UpgradesTable extends Table {
     }
 
     private void setUpBounds() {
-        setBackground(new TextureRegionDrawable(AssetsManager.getInstance().getStandartButton()));
+        setBackground(AssetsManager.getInstance().getSkin().getDrawable("button-up"));
         setSize(WIDTH, HEIGHT);
         setPosition((Constants.APP_WIDTH - getWidth()) / 2, (Constants.APP_HEIGHT - getHeight()) / 2);
     }
