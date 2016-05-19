@@ -2,6 +2,7 @@ package com.countryclicker.presenter;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.countryclicker.model.Human;
 import com.countryclicker.model.Ministry;
 import com.countryclicker.model.World;
@@ -39,8 +40,22 @@ public class GamePresenter {
         updateMoneyLabel((int)world.getMoney());
         updatePatriotsLabel(world.getPatriots());
 
+        checkIsMinistriesAvailable();
+
         stage.act(delta);
         stage.draw();
+    }
+
+    private void checkIsMinistriesAvailable(){
+        for (int counter = 0; counter < world.getMinistries().size(); counter++){
+            if (world.getMinistry(counter).canUpgrade()){
+                stage.getMinistryView(counter).getLvlUpButton().setTouchable(Touchable.enabled);
+                stage.getMinistryView(counter).getLvlUpButton().setColor(1, 1, 1, 1f);
+            } else {
+                stage.getMinistryView(counter).getLvlUpButton().setTouchable(Touchable.disabled);
+                stage.getMinistryView(counter).getLvlUpButton().setColor(1, 1, 1, 0.3f);
+            }
+        }
     }
 
     private void updatePatriotsLabel(int value){

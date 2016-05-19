@@ -41,7 +41,7 @@ public abstract class Ministry implements Observer, Serializable {
         }
     }
 
-    boolean canUpgrade() {
+    public boolean canUpgrade() {
         return world.getMoney() >= lvlupCost;
     }
 
