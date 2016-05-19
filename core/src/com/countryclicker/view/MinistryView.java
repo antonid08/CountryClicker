@@ -61,8 +61,10 @@ public class MinistryView extends Table {
     }
 
     public void updateInfo(Ministry ministryInfo) {
-        /*((Label) ((Button) getChildren().get(1)).getChildren().get(0)).
-                setText(String.valueOf(ministryInfo.getLvlupCost()));*/
+        ((Label) ((Button) getChildren().get(0)).getChildren().get(1)). //info label
+                setText(ministryInfo.getInfo());
+        ((Label) ((Button) getChildren().get(0)).getChildren().get(2)). //lvlup cost label
+                setText("Улучшить: " + ministryInfo.getLvlupCost() + "$");
     }
 
     private void setUpBounds() {
