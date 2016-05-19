@@ -31,7 +31,7 @@ public class MinistryView extends Table {
     }
 
     protected void setUpButtons(Ministry ministryInfo) {
-        mainView = new Button(AssetsManager.getInstance().getSkin(), "ministry");
+        mainView = new Button(AssetsManager.getInstance().getSkin(), "opened-ministry");
 
         Label.LabelStyle headerStyle = new Label.LabelStyle(AssetsManager.getInstance().getMinistryHeaderFont(), Color.GOLDENROD);
         Label.LabelStyle descriptionStyle = new Label.LabelStyle(AssetsManager.getInstance().getMinistryDescriptionFont(), Color.GOLDENROD);
@@ -72,5 +72,8 @@ public class MinistryView extends Table {
 
     public Button getLvlUpButton() {
         return lvlupButton;
+    }
+    public Button getMainView() {
+        return mainView;
     }
 }

@@ -1,46 +1,53 @@
 package com.countryclicker.view;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.countryclicker.utils.Constants;
+import com.countryclicker.managers.AssetsManager;
 
 /**
  * Created by Илья on 06.05.2016.
  */
-public class MonthView{
-    public static final int WIDTH = 150;
-    public static final int HEIGHT = 30;
-    public static final int RECTANGLE_BORDER = 3;
+public class MonthView extends Actor {
+    private final int WIDTH = 200;
+    private final int HEIGHT = 30;
+    private final int X = 500;
+    private final int Y = 700;
+
+    private int progressWidth = 0;
 
 
-    public MonthView(float min, float max, float stepSize, boolean vertical, Skin skin) {
-        //super(min, max, stepSize, vertical, skin);
-    //    setUpBounds();
+    public MonthView() {
+        setUpBounds();
 //        setUpView();
-
-    }
-
-/*    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        batch.draw(region, getX(),getY(),getWidth(),getHeight());
-        batch.draw(progresRectangle, progressRectangleX, progressRectangleY, progressRectangleWidth,
-                progressRectangleHeight);
     }
 
     @Override
+    public void draw(Batch batch, float parentAlpha) {
+        AssetsManager.getInstance().getSkin().getDrawable("progress_bar_background").draw(batch,
+                getX(), getY(), getWidth(), getHeight());
+        AssetsManager.getInstance().getSkin().getDrawable("progress_bar_border").draw(batch,
+                getX(), getY(), getWidth(), getHeight());
+        AssetsManager.getInstance().getSkin().getDrawable("progress_bar_progress").draw(batch,
+                getX(), getY(), progressWidth, getHeight());
+        /*batch.draw(region, getX(),getY(),getWidth(),getHeight());
+        batch.draw(progresRectangle, progressRectangleX, progressRectangleY, progressRectangleWidth,
+                progressRectangleHeight);*/
+    }
+
+/*    @Override
     public void act(float delta) {
         progressRectangleWidth = progressRectangleWidthMax * stage.getTimeFromPreviousMonth() /
                 stage.getLengthOfMonth();
     }*/
 
-    /*private void setUpBounds(){
+    private void setUpBounds() {
         setSize(WIDTH, HEIGHT);
-        setPosition(Constants.MONTH_PROGRESS_X, Constants.MONTH_PROGRESS_Y);
+        setPosition(X, Y);
+    }
 
-    }*/
+    public void setProgressWidth(int value) {
+        progressWidth = value;
+    }
 
 /*
     private void setUpView(){

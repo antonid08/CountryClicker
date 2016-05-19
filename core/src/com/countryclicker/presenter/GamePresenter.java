@@ -3,6 +3,8 @@ package com.countryclicker.presenter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.model.Human;
 import com.countryclicker.model.Ministry;
 import com.countryclicker.model.World;
@@ -41,12 +43,13 @@ public class GamePresenter {
 
         updateMoneyLabel((int)world.getMoney());
         updatePatriotsLabel();
-
+        updateMonthView(delta);
         checkIsMinistriesAvailable();
 
         stage.act(delta);
         stage.draw();
     }
+
 
     private void checkIsMinistriesAvailable(){
         for (int counter = 0; counter < world.getMinistries().size(); counter++){
@@ -58,6 +61,11 @@ public class GamePresenter {
                 stage.getMinistryView(counter).getLvlUpButton().setColor(1, 1, 1, 0.3f);
             }
         }
+    }
+
+    private void updateMonthView(float delta){
+        stage.getMonthProgress().setProgressWidth((int) (stage.getMonthProgress().getWidth() * world.getTimeFromPreviousMonth() /
+                world.getLengthOfMonth()));
     }
 
     private void updatePatriotsLabel(){
@@ -158,6 +166,10 @@ public class GamePresenter {
 
     private void ministryClicked(int number) {
         world.getMinistry(number).tryLvlUp();
+     //   if (world.getMinistry(number).getLevel() == 1){
+//            Button.ButtonStyle newStyle = new
+      //      stage.getMinistryView(number).getMainView().setStyle(AssetsManager.getInstance().getMinistryButtonStyle());
+        //}
         stage.getMinistryView(number).updateInfo(world.getMinistry(number));
     }
 
@@ -169,6 +181,7 @@ public class GamePresenter {
         world.buyPatriots();
         for(int counter = 0; counter < world.getMinistries().size(); counter++){
             stage.getMinistryView(counter).updateInfo(world.getMinistry(counter)); //add number of ministry
+            stage.getMinistryView(counter).getMainView().setSkin(AssetsManager.getInstance().getSkin());
         }
     }
 

@@ -61,6 +61,10 @@ public abstract class Ministry implements Observer, Serializable {
         return lvlupCost;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
     @Override
     public void updateCoefficient(float value) {
         upgradeCoefficient *= value;

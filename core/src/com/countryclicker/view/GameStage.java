@@ -43,11 +43,11 @@ public class GameStage extends Stage {
         background = new Background(this);
         ministriesTable = new MinistriesTable(ministriesInfo);
         upgradesButton = new StandartButton("Улучшения", 70, 350);
-        patrionsButton = new StandartButton("Посадить министров", 70, 270);
+        patrionsButton = new StandartButton("Рестарт", 70, 270);
 
 
         upgradesTable = new UpgradesTable(upgradesInfo);
-        monthProgress = new MonthView(0, 10, 1, false, AssetsManager.getInstance().getSkin());
+        monthProgress = new MonthView();
         humanView = new HumanView(this);
 
 
@@ -62,7 +62,7 @@ public class GameStage extends Stage {
         addActor(upgradesButton);
         addActor(patrionsButton);
         addActor(upgradesTable);
-        //addActor(monthProgress);
+        addActor(monthProgress);
         addActor(humanView);
         addActor(moneyLabel);
         addActor(patriotsLabel);
@@ -98,5 +98,9 @@ public class GameStage extends Stage {
     }
     public UpgradeView getUpgradeView(int number){
         return upgradesTable.getUpgradeView(number);
+    }
+
+    public MonthView getMonthProgress(){
+        return monthProgress;
     }
 }

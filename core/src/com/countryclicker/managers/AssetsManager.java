@@ -24,6 +24,7 @@ public class AssetsManager {
 
     private TextButton.TextButtonStyle standartButtonStyle;
     private Button.ButtonStyle ministryStyle;
+    private Button.ButtonStyle openedMinistryStyle;
     private Button.ButtonStyle lvlupButtonStyle;
 
     private BitmapFont standartFont;
@@ -70,6 +71,9 @@ public class AssetsManager {
         ministryStyle = new Button.ButtonStyle(mainSkin.getDrawable("opened_ministry"),
                 mainSkin.getDrawable("opened_ministry"), mainSkin.getDrawable("opened_ministry"));
 
+        openedMinistryStyle = new Button.ButtonStyle(mainSkin.getDrawable("opened_ministry"),
+                mainSkin.getDrawable("opened_ministry"), mainSkin.getDrawable("opened_ministry"));
+
         lvlupButtonStyle = new Button.ButtonStyle(mainSkin.getDrawable("lvlup_button_up"),
                 mainSkin.getDrawable("lvlup_button_down"), mainSkin.getDrawable("lvlup_button_up"));
 
@@ -96,7 +100,7 @@ public class AssetsManager {
         return lvlupButtonStyle;
     }
     public Button.ButtonStyle getMinistryButtonStyle(){
-        return getMinistryButtonStyle();
+        return ministryStyle;
     }
 
     public TextButton.TextButtonStyle getStandartButtonStyle(){

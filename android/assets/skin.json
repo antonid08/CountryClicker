@@ -9,6 +9,7 @@
   com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
   default: { down: button-down, up: button-up },
   ministry: { down: closed_ministry, up: closed_ministry },
+  opened-ministry: { down: opened_ministry, up: opened_ministry },
   lvlup: {  down: lvlup_button_down, up: lvlup_button_up }
 },
   com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {

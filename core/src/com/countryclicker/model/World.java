@@ -64,9 +64,9 @@ public class World implements Serializable{
         upgrades = new ArrayList<Upgrade>();
 
         upgrades.add(new Upgrade("Стальные дубинки в МВД", "Увеличивает прибыль за удар МВД", 1000, 2, this));
-        upgrades.add(new Upgrade("Налог на вынос мусора", "Увеличивает месячную прибыль ЖКХ", 5000, 2, this));
-        upgrades.add(new Upgrade("Налог на смерть", "Увеличивает месячную прибыль Мин. Здрав.", 15000, 3, this));
-        upgrades.add(new Upgrade("Раскрыть дело Оборонсервиса", "Увеличивает прибыль Мин. Обороны", 30000, 5, this));
+        upgrades.add(new Upgrade("Налог на мусор", "Увеличивает месячную прибыль ЖКХ", 5000, 2, this));
+        upgrades.add(new Upgrade("Налог на болезни", "Увеличивает месячную прибыль Мин. Здрав.", 15000, 3, this));
+        upgrades.add(new Upgrade("Разрешить продажу оружия", "Увеличивает прибыль Мин. Обороны", 30000, 5, this));
         upgrades.add(new Upgrade("Придумывать новые налоги.", "Увеличивает прибыль Мин. Налогов", 60000, 2, this));
     }
 
@@ -149,5 +149,13 @@ public class World implements Serializable{
 
     public int getPatriots(){
         return patriots;
+    }
+
+    public float getTimeFromPreviousMonth(){
+        return timeFromPreviousMonth;
+    }
+
+    public int getLengthOfMonth(){
+        return lengthOfMonth;
     }
 }
