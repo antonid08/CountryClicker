@@ -135,6 +135,7 @@ public class GameStage extends Stage implements View {
 
     @Override
     public void act(float delta) {
+        super.act(delta);
         presenter.update(delta);
     }
 

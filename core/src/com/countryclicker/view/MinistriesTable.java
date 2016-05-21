@@ -1,7 +1,11 @@
 package com.countryclicker.view;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.model.Ministry;
 import com.countryclicker.utils.Constants;
 
@@ -24,9 +28,13 @@ public class MinistriesTable extends Table {
         setUpTableAndScroller();
     }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+    }
+
     private void setUpTableAndScroller() {
         Table ministriesTable = new Table();
-        setDebug(true);
         for (int i = 0; i < ministryViews.size(); i++) {
             ministriesTable.add(ministryViews.get(i));
             ministriesTable.row().pad(15);
