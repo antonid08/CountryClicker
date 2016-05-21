@@ -17,15 +17,15 @@ public class UpgradeView extends Button {
     private final int HEIGHT = 125;
 
 
-    public UpgradeView(Upgrade upgradeInfo){
+    public UpgradeView(/*Upgrade upgradeInfo*/){
         super(AssetsManager.getInstance().getSkin());
 
-        setUpView(upgradeInfo);
+        //setUpView(upgradeInfo);
         setUpBounds();
     }
 
 
-    private void setUpView(Upgrade upgradeInfo){
+    public void setUpView(Upgrade upgradeInfo){
         Label.LabelStyle headerStyle = new Label.LabelStyle(AssetsManager.getInstance().getUpgradeHeaderFont(),
                 Color.GOLDENROD);
         Label header = new Label(upgradeInfo.getName(), headerStyle);

@@ -22,15 +22,15 @@ public class MinistryView extends Table {
     Button lvlupButton;
 
 
-    public MinistryView(Ministry ministryInfo) {
+    public MinistryView(/*Ministry ministryInfo*/) {
         //setDebug(true);
 
         setTouchable(Touchable.enabled);
-        setUpButtons(ministryInfo);
+        //setUpButtons(/*ministryInfo*/);
         setUpBounds();
     }
 
-    protected void setUpButtons(Ministry ministryInfo) {
+    public void setUpButtons(Ministry ministryInfo) {
         mainView = new Button(AssetsManager.getInstance().getSkin(), "opened-ministry");
 
         Label.LabelStyle headerStyle = new Label.LabelStyle(AssetsManager.getInstance().getMinistryHeaderFont(), Color.GOLDENROD);
@@ -45,7 +45,7 @@ public class MinistryView extends Table {
         mainView.add(info).right().padRight(10);
         mainView.row();
 
-        Label lvlupCost = new Label("Улучшить: " + ministryInfo.getLvlupCost() + "$", descriptionStyle);
+        Label lvlupCost = new Label("Улучшить: " + ministryInfo.getLvlupCost() +" $", descriptionStyle);
         mainView.add(lvlupCost).right().padRight(10);
         mainView.row();
 

@@ -28,6 +28,7 @@ public class Constants {
 
     //------------------------------------------------------------End of positions and sizes------------------------------------------------------------//
     public static final int NUMBER_OF_MINISTRIES = 7;
+    public static final int NUMBER_OF_UPGRADES = 5;
 
     public static final float COST_OF_UPGRADE_MINISTRY_COEF = 1.2f;
     public static final float COST_OF_UPGRADE_MVD_MINISTRY_COEF = 2.1f;

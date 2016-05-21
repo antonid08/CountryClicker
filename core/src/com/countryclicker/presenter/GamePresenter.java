@@ -1,201 +1,147 @@
 package com.countryclicker.presenter;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.model.Human;
-import com.countryclicker.model.Ministry;
 import com.countryclicker.model.World;
-import com.countryclicker.view.GameStage;
-import com.countryclicker.view.MinistryView;
-import com.countryclicker.view.UpgradeView;
+import com.countryclicker.utils.Constants;
+import com.countryclicker.view.View;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 /**
  * Created by Илья on 06.05.2016.
  */
 public class GamePresenter {
     private World world;
-    private GameStage stage;
+    private View view;
 
 
-    public GamePresenter() {
-        world = new World();
-        stage = new GameStage(world.getMinistries(), world.getUpgrades());
+    public GamePresenter(View view) {
+        this.view = view;
 
-        setUpValuesForViews();
-        setUpListeners();
+        world = loadGame();
+        if (world == null) {
+            world = new World();
+        }
+
+        view.setUpMinistryViews(world.getMinistries());
+        view.setUpUpgradeViews(world.getUpgrades());
+        //stage = new GameStage(world.getMinistries(), world.getUpgrades());
+
     }
 
-    public GamePresenter(World world, long diffTime){
-        this.world = world;
-        stage = new GameStage(world.getMinistries(), world.getUpgrades());
 
-        world.calculateMoneyFromPrevStat(diffTime);
-
-        setUpValuesForViews();
-        setUpListeners();
+    private World loadGame() {
+        try {
+            File saveFile = new File(Constants.SAVE_FILE_NAME);
+            if (saveFile.exists()) {
+                FileInputStream fis = new FileInputStream(Constants.SAVE_FILE_NAME);
+                ObjectInputStream oin = new ObjectInputStream(fis);
+                return (World) oin.readObject();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void update(float delta) {
         world.update(delta);
 
-        updateMoneyLabel((int)world.getMoney());
-        updatePatriotsLabel();
-        updateMonthView(delta);
+        view.updateMoneyLabel((int) world.getMoney());
+        view.updatePatriotsLabel(world.getPatriots());
+        updateMonthView();
         checkIsMinistriesAvailable();
 
-        stage.act(delta);
-        stage.draw();
+        //       stage.act(delta);
+        //      stage.draw();
     }
 
 
-    private void checkIsMinistriesAvailable(){
-        for (int counter = 0; counter < world.getMinistries().size(); counter++){
-            if (world.getMinistry(counter).canUpgrade()){
-                stage.getMinistryView(counter).getLvlUpButton().setTouchable(Touchable.enabled);
-                stage.getMinistryView(counter).getLvlUpButton().setColor(1, 1, 1, 1f);
-            } else {
-                stage.getMinistryView(counter).getLvlUpButton().setTouchable(Touchable.disabled);
-                stage.getMinistryView(counter).getLvlUpButton().setColor(1, 1, 1, 0.3f);
-            }
-        }
-    }
-
-    private void updateMonthView(float delta){
-        stage.getMonthProgress().setProgressWidth((int) (stage.getMonthProgress().getWidth() * world.getTimeFromPreviousMonth() /
-                world.getLengthOfMonth()));
-    }
-
-    private void updatePatriotsLabel(){
-        stage.getPatriotsLabel().setText("Патриоты: " + world.getPatriots());
-    }
-
-    private void updateMoneyLabel(float value){
-        String toShow = String.format("$ %.2f", value);
-
-        if (value > 1000000 && value < 1000000000){
-            toShow = String.format("$ %.2fM", value / 1000000);
-        }
-        if (value > 1000000000 && value < 1000000000000f){
-            toShow = String.format("$ %.2fM", value / 1000000000);
-        }
-
-        stage.getMoneyLabel().setText(toShow);
-    }
-
-    private void setUpValuesForViews(){
-        updateMoneyLabel((int) world.getMoney());
-    }
-
-    private void setUpListeners() {
-        stage.getHumanView().addListener(new InputListener() {
-            @Override
-            public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                humanClicked();
-                return true;
-            }
-        });
-
-        stage.getUpgradesButton().addListener(new InputListener() {
-            @Override
-            public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                upgradesButtonClicked();
-                return true;
-            }
-        });
-
-        stage.getPatrionsButton().addListener(new InputListener() {
-            @Override
-            public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                patriotsButtonClicked();
-                return true;
-            }
-        });
-
+    private void checkIsMinistriesAvailable() {
         for (int counter = 0; counter < world.getMinistries().size(); counter++) {
-            final int numberOfMinistry = counter;
-            stage.getMinistryView(counter).getLvlUpButton().addListener(new InputListener() {
-                @Override
-                public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                    ministryClicked(numberOfMinistry);
-                    return true;
-                }
-            });
-        }
-
-        setUpUpgradesListeners();
-    }
-
-    private void setUpUpgradesListeners(){
-        for (int counter = 0; counter < world.getUpgrades().size(); counter++) {
-            final int numberOfUpgrade = counter;
-            stage.getUpgradeView(counter).addListener(new InputListener() {
-                @Override
-                public boolean touchDown(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    upgradeClicked(numberOfUpgrade);
-                }
-            });
+            if (world.getMinistry(counter).canUpgrade()) {
+                view.setLvlupButtonIsAvaliable(counter, true);
+            } else {
+                view.setLvlupButtonIsAvaliable(counter, false);
+            }
         }
     }
 
-    private void upgradeClicked(int number){
-        if (world.getUpgrade(number).tryBuy()){
-            stage.getUpgradesTable().removeUpgradeView(number);
+    private void updateMonthView() {
+        view.setMonthProgressWidth(world.getTimeFromPreviousMonth() /
+                world.getLengthOfMonth());
+/*        stage.getMonthProgress().setProgressWidth((int) (stage.getMonthProgress().getWidth() * world.getTimeFromPreviousMonth() /
+                world.getLengthOfMonth()));*/
+    }
+
+    private void updatePatriotsLabel() {
+        view.updatePatriotsLabel(world.getPatriots());
+/*        stage.getPatriotsLabel().setText("Патриоты: " + world.getPatriots());*/
+    }
+
+
+    public void upgradeClicked(int number) {
+        if (world.getUpgrade(number).tryBuy()) {
+            //stage.getUpgradesTable().removeUpgradeView(number);
+            view.removeUpgradeView(number);
             updateMinistries();
             world.getUpgrades().remove(number);
 
-            for (UpgradeView view: stage.getUpgradesTable().getUpgradeViews()){
+            /*for (UpgradeView view : stage.getUpgradesTable().getUpgradeViews()) {
                 view.clearListeners();
             }
-            setUpUpgradesListeners();
+            setUpUpgradesListeners();*/
+            view.refreshUpgradesListeners();
         }
     }
 
-    private void updateMinistries(){
-        for (int counter = 0; counter < world.getMinistries().size(); counter++){
-            stage.getMinistryView(counter).updateInfo(world.getMinistry(counter));
+    private void updateMinistries() {
+        for (int counter = 0; counter < world.getMinistries().size(); counter++) {
+            view.updateMinistryView(counter, world.getMinistry(counter));
+            //stage.getMinistryView(counter).updateInfo(world.getMinistry(counter));
         }
     }
 
-    private void ministryClicked(int number) {
+    public void ministryClicked(int number) {
         world.getMinistry(number).tryLvlUp();
-     //   if (world.getMinistry(number).getLevel() == 1){
+        //   if (world.getMinistry(number).getLevel() == 1){
 //            Button.ButtonStyle newStyle = new
-      //      stage.getMinistryView(number).getMainView().setStyle(AssetsManager.getInstance().getMinistryButtonStyle());
+        //      stage.getMinistryView(number).getMainView().setStyle(AssetsManager.getInstance().getMinistryButtonStyle());
         //}
-        stage.getMinistryView(number).updateInfo(world.getMinistry(number));
+        view.updateMinistryView(number, world.getMinistry(number));
+//        stage.getMinistryView(number).updateInfo(world.getMinistry(number));
     }
 
-    private void upgradesButtonClicked() {
-        stage.getUpgradesTable().setVisible(!stage.getUpgradesTable().isVisible());
+    public void upgradesButtonClicked() {
+        view.changeUpgradesTableVisibility();
+        //stage.getUpgradesTable().setVisible(!stage.getUpgradesTable().isVisible());
     }
 
-    private void patriotsButtonClicked(){
+    public void patriotsButtonClicked() {
         world.buyPatriots();
-        for(int counter = 0; counter < world.getMinistries().size(); counter++){
-            stage.getMinistryView(counter).updateInfo(world.getMinistry(counter)); //add number of ministry
-            stage.getMinistryView(counter).getMainView().setSkin(AssetsManager.getInstance().getSkin());
+        for (int counter = 0; counter < world.getMinistries().size(); counter++) {
+            view.updateMinistryView(counter, world.getMinistry(counter));
+            //stage.getMinistryView(counter).updateInfo(world.getMinistry(counter)); //add number of ministry
+            //stage.getMinistryView(counter).getMainView().setSkin(AssetsManager.getInstance().getSkin());
         }
     }
 
-    private void humanClicked() {
+    public void humanClicked() {
         world.getHuman().state = Human.State.KICKED;
         world.updateMoney(world.getHuman().getMoneyPerClick());
     }
 
-    public World getWorld(){
+    public World getWorld() {
         return world;
     }
 
-    public GameStage getStage() {
+    /*public GameStage getStage() {
         return stage;
-    }
+    }*/
 
 }

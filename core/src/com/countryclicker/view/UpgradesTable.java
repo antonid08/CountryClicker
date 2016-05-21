@@ -22,16 +22,16 @@ public class UpgradesTable extends Table {
     private ScrollPane scroller;
 
 
-    public UpgradesTable(ArrayList<Upgrade> upgradesInfo) {
-        setUpUpgrades(upgradesInfo);
+    public UpgradesTable(/*ArrayList<Upgrade> upgradesInfo*/) {
+        setUpUpgradeViews(/*upgradesInfo*/);
         setUpBounds();
         setUpScroller();
     }
 
-    private void setUpUpgrades(ArrayList<Upgrade> upgradesInfo) {
+    public void setUpUpgradeViews(/*ArrayList<Upgrade> upgradesInfo*/) {
         upgradeViews = new ArrayList<UpgradeView>();
-        for (Upgrade upgradeInfo : upgradesInfo) {
-            upgradeViews.add(new UpgradeView(upgradeInfo));
+        for (int i = 0; i < Constants.NUMBER_OF_UPGRADES; i++/*Upgrade upgradeInfo : upgradesInfo*/) {
+            upgradeViews.add(new UpgradeView(/*upgradeInfo*/));
         }
     }
 
@@ -68,6 +68,12 @@ public class UpgradesTable extends Table {
             setVisible(true);
         } catch (IndexOutOfBoundsException e){
             clear();
+        }
+    }
+
+    public void setUpUpgradesInfo(ArrayList<Upgrade> upgradesInfo){
+        for (int counter = 0; counter < upgradesInfo.size(); counter++){
+            upgradeViews.get(counter).setUpView(upgradesInfo.get(counter));
         }
     }
 
