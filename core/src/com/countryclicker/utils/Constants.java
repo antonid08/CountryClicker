@@ -8,7 +8,7 @@ public class Constants {
     public static final String SAVE_FILE_NAME = "saved_game_state";
     public static final String TIME_FILE_NAME = "time";
 
-    public static final int START_MONEY = 10000;
+    public static final int START_MONEY = 100;
     public static final int PERCENT_FOR_PATRIOT = 2;
 
     //-------------------------------------------------------Positions and sizes----------------------------------------------------------------------//
@@ -34,7 +34,7 @@ public class Constants {
     public static final float COST_OF_UPGRADE_MVD_MINISTRY_COEF = 2.1f;
 
     public static final int FIRST_MINISTRY_MONEY_PER_FIRST_MONTH = 5;
-    public static final int FIRST_MINISTRY_MONEY_FOR_CLICK = 1;
+    public static final int FIRST_MINISTRY_MONEY_FOR_CLICK = 6;
 
     public static final int START_LENGTH_OF_MONTH = 4; //in seconds
 
@@ -47,8 +47,8 @@ public class Constants {
             "Министерство магии"
     };
 
-    public static final int[] COSTS_OF_MINISTRIES = {16, 180, 2000, 22000, 250000, 2750000, 30250000,
-    300000000}; //every next we multiply ~11
+    public static final int[] COSTS_OF_MINISTRIES = {16, 180, 500, 4000, 30000, 80000, 140000,
+    300000}; //every next we multiply ~11
 
     //---------------------------------------------------------------Animation Block-------------------------------------------------//
     public static final float HUMAN_HIT_ANIMATION_TIME = 0.5f;

@@ -1,17 +1,16 @@
 package com.countryclicker.managers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.countryclicker.utils.Constants;
 
 /**
  * Created by Илья on 22.03.2016.
@@ -32,6 +31,7 @@ public class AssetsManager {
     private BitmapFont ministryDescriptionFont;
     private BitmapFont upgradeHeaderFont;
     private BitmapFont upgradeDescriptionFont;
+
 
     public AssetsManager() {
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("skin.atlas"));
@@ -78,7 +78,6 @@ public class AssetsManager {
                 mainSkin.getDrawable("lvlup_button_down"), mainSkin.getDrawable("lvlup_button_up"));
 
 
-
         skin = new Skin(Gdx.files.internal("skin.json"));
     }
 
@@ -94,28 +93,32 @@ public class AssetsManager {
     }
 
 
-
-
     public Button.ButtonStyle getLvlupButtonStyle() {
         return lvlupButtonStyle;
     }
-    public Button.ButtonStyle getMinistryButtonStyle(){
+
+    public Button.ButtonStyle getMinistryButtonStyle() {
         return ministryStyle;
     }
 
-    public TextButton.TextButtonStyle getStandartButtonStyle(){
+    public TextButton.TextButtonStyle getStandartButtonStyle() {
         return standartButtonStyle;
     }
-    public BitmapFont getMinistryHeaderFont(){
+
+    public BitmapFont getMinistryHeaderFont() {
         return ministryHeaderFont;
     }
-    public BitmapFont getMinistryDescriptionFont(){
+
+    public BitmapFont getMinistryDescriptionFont() {
         return ministryDescriptionFont;
     }
-    public BitmapFont getUpgradeHeaderFont(){
+
+    public BitmapFont getUpgradeHeaderFont() {
         return upgradeHeaderFont;
     }
-    public BitmapFont getUpgradeDescriptionFont(){
+
+    public BitmapFont getUpgradeDescriptionFont() {
         return upgradeDescriptionFont;
     }
+
 }

@@ -3,7 +3,9 @@ package com.countryclicker.init;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
+import com.countryclicker.managers.AssetsManager;
 import com.countryclicker.model.World;
 import com.countryclicker.presenter.GamePresenter;
 import com.countryclicker.utils.Constants;
@@ -29,6 +31,10 @@ public class GameScreen implements Screen {
         Gdx.app.log("GameScreen", "Attached");
 
         Gdx.input.setInputProcessor(stage);
+
+        AssetsManager.getInstance().getMainTheme().play();
+
+        Music kek = AssetsManager.getInstance().getMainTheme();
     }
 
     @Override
