@@ -1,6 +1,8 @@
 package com.countryclicker.model;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.countryclicker.model.Strategy.CalculateCostOfKick;
+import com.countryclicker.model.Strategy.DoubleKick;
+import com.countryclicker.model.Strategy.MissKick;
 import com.countryclicker.utils.Constants;
 
 import java.io.Serializable;
@@ -9,6 +11,10 @@ import java.io.Serializable;
  * Created by Илья on 29.02.2016.
  */
 public class Human implements Serializable{
+    public CalculateCostOfKick calc;
+    private DoubleKick dk;
+    private MissKick mk;
+
 
     public enum State {
         NORMAL,
@@ -23,6 +29,10 @@ public class Human implements Serializable{
     private float animationTime;
 
     public Human (World world){
+        dk = new DoubleKick();
+        mk  = new MissKick();
+        calc = mk;
+
         state = State.NORMAL;
         animationTime = 0;
 
@@ -39,6 +49,15 @@ public class Human implements Serializable{
         }
     }
 
+
+    public float getMoneyForKick(int number){
+        if (number % 2 == 0) {
+            calc = dk;
+        }else{
+            calc = mk;
+        }
+        return calc.calculate();
+    }
 
     public int getMoneyPerClick(){
         return moneyPerClick;

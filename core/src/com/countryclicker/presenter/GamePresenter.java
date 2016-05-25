@@ -132,8 +132,9 @@ public class GamePresenter {
     }
 
     public void humanClicked() {
-        world.getHuman().state = Human.State.KICKED;
-        world.updateMoney(world.getHuman().getMoneyPerClick());
+    /*    world.getHuman().state = Human.State.KICKED;
+        world.updateMoney(world.getHuman().getMoneyPerClick());*/
+        world.humanKicked();
     }
 
     public World getWorld() {

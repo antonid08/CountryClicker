@@ -106,6 +106,11 @@ public class World implements Serializable{
         setUpUpgrades();
     }
 
+    int counter = 0;
+    public void humanKicked(){
+        money += human.getMoneyForKick(counter++);
+    }
+
     public void updateMoneyForMonth(int delta) {
         moneyForMonth += delta;
     }

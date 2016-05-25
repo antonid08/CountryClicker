@@ -31,10 +31,6 @@ public class GameScreen implements Screen {
         Gdx.app.log("GameScreen", "Attached");
 
         Gdx.input.setInputProcessor(stage);
-
-        AssetsManager.getInstance().getMainTheme().play();
-
-        Music kek = AssetsManager.getInstance().getMainTheme();
     }
 
     @Override
